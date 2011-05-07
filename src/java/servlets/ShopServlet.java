@@ -22,7 +22,9 @@ public class ShopServlet extends HttpServlet {
     private static String jdbcURL = null;
     private static String detailPage=null;
     private static String redirectPage = null;
+    private static String productPage = null;
     private CompListBean compList = null;
+    private ProductListBean prodList = null;
     /** Initializes the servlet.
      */
     public void init(ServletConfig config) throws ServletException {
@@ -32,6 +34,7 @@ public class ShopServlet extends HttpServlet {
 	// in web.xml
 
         showPage = config.getInitParameter("SHOW_PAGE");
+        productPage = config.getInitParameter("PRODUCT_PAGE");
         checkoutPage = config.getInitParameter("CHECKOUT_PAGE");
         thankyouPage = config.getInitParameter("THANKYOU_PAGE");
         byePage = config.getInitParameter("BYE_PAGE");
@@ -49,12 +52,21 @@ public class ShopServlet extends HttpServlet {
         catch(Exception e){
             throw new ServletException(e);
         }
-
+        
+        try{
+            prodList = new ProductListBean(jdbcURL);
+        }
+        catch(Exception e){
+            throw new ServletException(e);
+        }
+        
+        
         // servletContext is the same as scope Application
 	// store the complist in application scope
 
          ServletContext sc = getServletContext();
          sc.setAttribute("compList",compList);
+         sc.setAttribute("productList", prodList);
      }
     
     /** Destroys the servlet.
@@ -88,8 +100,13 @@ public class ShopServlet extends HttpServlet {
 	// find out what to do based on the attribute "action"
 	// no action or show
 
-        if(request.getParameter("action") == null || 
-           request.getParameter("action").equals("show")){
+        if(request.getParameter("action") == null ){
+            rd = request.getRequestDispatcher(productPage); 
+            rd.forward(request,response);
+            
+        }
+            
+        else if (request.getParameter("action").equals("show")){
 	    
             // A request dispatcher that's connected to the page.
 	    
@@ -97,17 +114,17 @@ public class ShopServlet extends HttpServlet {
             rd.forward(request,response);
         }
 
-	// add a book to the shopping cart
+	// add a component to the shopping cart
 	
 	else if(request.getParameter("action").equals("add")){
             
-	    // verify bookid and quantity
+	    // verify compid and quantity
 
             if (request.getParameter("compid") != null && 
                 request.getParameter("quantity")!=null ){
                 ComponentBean cb = null;
 		
-		// search the book in our shop
+		// search the component in our shop
 
 		cb = compList.getById(Integer.parseInt(
                                          request.getParameter("compid")));
@@ -130,7 +147,7 @@ public class ShopServlet extends HttpServlet {
             rd.forward(request,response);
        }
 
-	// remove a book from the cart
+	// remove a component from the cart
 
 	else if(request.getParameter("action").equals("remove")){
 	    if (request.getParameter("compid") != null && 
@@ -147,7 +164,7 @@ public class ShopServlet extends HttpServlet {
             rd.forward(request,response);
 	}
 
-	// detailed information about a book
+	// detailed information about a component
 	
 	else if(request.getParameter("action").equals("detail")){
 	    if (request.getParameter("compid") != null){
@@ -307,7 +324,7 @@ public class ShopServlet extends HttpServlet {
 	    }           
 	    pb.setRole(r);
 
-	    // if this a new user, try to add him to the database
+	    // if this is a new user, try to add him to the database
 
 	    if (request.getParameter("action").equals("usercreate")) {
 		boolean b;

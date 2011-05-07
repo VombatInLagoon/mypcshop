@@ -18,7 +18,6 @@ public class ComponentBean {
     private String name;
     private int price;
     private String supplierName;
-    private String serialNumber;
     private String description;
     
     
@@ -50,14 +49,7 @@ public class ComponentBean {
     	supplierName=_supplierName;
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
-    }
     
-    public void setSerialNumber(String _serialNumber) {
-    	serialNumber =_serialNumber;
-    }
-
     public int getId() {
         return id;
     }
@@ -98,9 +90,6 @@ public class ComponentBean {
       xmlOut.append("<price>");
       xmlOut.append(price);      
       xmlOut.append("</price>");
-      xmlOut.append("<serialNumber>");
-      xmlOut.append(serialNumber);
-      xmlOut.append("</serialNumber>");
       xmlOut.append("<description><![CDATA[");
       xmlOut.append(description);      
       xmlOut.append("]]></description>");   
