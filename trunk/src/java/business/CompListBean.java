@@ -43,8 +43,8 @@ public class CompListBean {
 	    // each componenet is a ComponentBean object
 
             stmt = conn.createStatement();
-            String sql="SELECT COMPONENT_ID, NAME, S_NAME AS SUPPLIER_NAME, ";
-            sql += "PRICE, SERIAL_NUM, DESCRIPTION FROM COMPONENT,";
+            String sql="SELECT COMPONENT_ID, NAME , S_NAME AS SUPPLIER_NAME, ";
+            sql += "PRICE, DESCRIPTION FROM COMPONENT,";
             sql += "SUPPLIERS WHERE COMPONENT.SUPPLIER_ID=SUPPLIERS.SUPPLIER_ID";
             rs= stmt.executeQuery(sql);
             
@@ -58,7 +58,6 @@ public class CompListBean {
                 cb.setName(rs.getString("NAME"));
                 cb.setSupplierName(rs.getString("SUPPLIER_NAME"));
                 cb.setPrice(rs.getInt("PRICE"));
-                cb.setSerialNumber(rs.getString("SERIAL_NUM"));
                 cb.setDescription(rs.getString("DESCRIPTION"));
                 compList.add(cb);
                 
@@ -90,7 +89,7 @@ public class CompListBean {
     
     // return the booklist
     
-    java.util.Collection getProduktLista() {
+    java.util.Collection getProductList() {
         return compList;
     }
     
