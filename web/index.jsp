@@ -2,7 +2,7 @@
 <jsp:include page="/includes/column_left_home.jsp" />
 
 
-<!-- start salam the middle column -->
+<!-- start the middle column -->
 
     <td valign="top">
       <h2>Welcome!</h2>

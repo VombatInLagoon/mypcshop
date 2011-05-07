@@ -97,17 +97,17 @@ public class ShopServlet extends HttpServlet {
             rd.forward(request,response);
         }
 
-	// add a book to the shopping cart
+	// add a component to the shopping cart
 	
 	else if(request.getParameter("action").equals("add")){
             
-	    // verify bookid and quantity
+	    // verify compid and quantity
 
             if (request.getParameter("compid") != null && 
                 request.getParameter("quantity")!=null ){
                 ComponentBean cb = null;
 		
-		// search the book in our shop
+		// search the component in our shop
 
 		cb = compList.getById(Integer.parseInt(
                                          request.getParameter("compid")));
@@ -130,7 +130,7 @@ public class ShopServlet extends HttpServlet {
             rd.forward(request,response);
        }
 
-	// remove a book from the cart
+	// remove a component from the cart
 
 	else if(request.getParameter("action").equals("remove")){
 	    if (request.getParameter("compid") != null && 
@@ -147,7 +147,7 @@ public class ShopServlet extends HttpServlet {
             rd.forward(request,response);
 	}
 
-	// detailed information about a book
+	// detailed information about a component
 	
 	else if(request.getParameter("action").equals("detail")){
 	    if (request.getParameter("compid") != null){
@@ -307,7 +307,7 @@ public class ShopServlet extends HttpServlet {
 	    }           
 	    pb.setRole(r);
 
-	    // if this a new user, try to add him to the database
+	    // if this is a new user, try to add him to the database
 
 	    if (request.getParameter("action").equals("usercreate")) {
 		boolean b;

@@ -1,7 +1,11 @@
 <td width="160"  valign="top" bgcolor="#FFFFCC">
   <p>
   <br><br>
-    Home<br><br>
+  
+  <a href="index.jsp">
+    Home
+  </a><br><br>
+    
     <a href="shop">
         List of available components
     </a><br><br>
