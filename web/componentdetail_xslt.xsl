@@ -37,13 +37,7 @@
         </td>
        
       </tr>
-      <tr>
-          <td bgcolor="#FFDC75" valign="top" align="left">Serial</td>
-           <td>
-            <xsl:value-of select="serialNumber"/> 
       
-        </td>
-      </tr>
       <tr>
         <td bgcolor="#FFDC75" valign="top" align="left">Price</td>
         <td>

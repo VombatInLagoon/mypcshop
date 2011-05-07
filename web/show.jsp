@@ -11,10 +11,7 @@
 
 <td width = "840" valign="top">
 
-
- 
-
-<h2>Please Select Your Products </h2>
+<h2> Available Set of Components </h2>
 <jsp:useBean id="compList" class="business.CompListBean"  scope="application">
     Error, the bean should have been created in the servlet!
 </jsp:useBean>
