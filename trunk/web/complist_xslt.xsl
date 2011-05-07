@@ -47,9 +47,13 @@
             </xsl:element>        
         </td>
         <td>
-            <input type="submit" value="BUY"/>
+            <input type="submit" value="Buy"/>
+        </td>
+        <td>
             <xsl:element name="a"> <!-- A link in XSLT -->
-              <xsl:attribute name="href"><xsl:text disable-output-escaping="yes"><![CDATA[shop?action=detail&compid=]]></xsl:text><xsl:value-of select="id"/></xsl:attribute>
+              <xsl:attribute name="href">
+                  <xsl:text disable-output-escaping="yes"><![CDATA[shop?action=detail&compid=]]></xsl:text><xsl:value-of select="id"/></xsl:attribute>
+             
               <xsl:text>Detail</xsl:text>
             </xsl:element>
         </td>
@@ -58,7 +62,7 @@
     <xsl:element name="input"> <!--A ordinary input in XSLT-->
       <xsl:attribute name="type">hidden</xsl:attribute>
       <xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
-      <xsl:attribute name="name">bookid</xsl:attribute>
+      <xsl:attribute name="name">compid</xsl:attribute>
     </xsl:element>
     
     <input type="hidden" name="action" value="add"/>

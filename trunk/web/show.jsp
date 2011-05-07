@@ -34,9 +34,9 @@
    <c:import url="shoppingcart_xslt.xsl"/>
 </c:set> 
 
-<%--<x:transform xslt="${shoppingcart_xslt}">
-   <bookshop:shoppingcart/>
-</x:transform>--%>
+<x:transform xslt="${shoppingcart_xslt}">
+   <pcshop:shoppingcart/>
+</x:transform>
 
 </td>
 <c:if test="${sessionScope.currentUser != null}">
