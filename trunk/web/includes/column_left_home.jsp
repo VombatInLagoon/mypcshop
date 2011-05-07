@@ -6,11 +6,11 @@
     Home
   </a><br><br>
     
-    <a href="shop">
-        List of available components
+    <a href="product.jsp">
+        List of Products
     </a><br><br>
     <a href="/musicStore/cart">
-        Quick order an album
+        Quick order a PC
     </a><br><br>
     <a href="/musicStore/email/join_email_list.jsp">
         Join our email list

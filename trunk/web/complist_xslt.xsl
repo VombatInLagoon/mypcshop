@@ -12,9 +12,7 @@
     <td>
         <strong>Brand</strong>
     </td>
-    <td>
-        <strong>Serial Number</strong>
-    </td>
+ 
     <td>
         <strong>Price</strong>
     </td>
@@ -32,9 +30,7 @@
         <td>
             <xsl:value-of select="supplierName"/>
         </td>
-        <td>
-            <xsl:value-of select="serialNumber"/> 
-        </td>
+        
         <td>
             <xsl:value-of select="price"/>
         </td>

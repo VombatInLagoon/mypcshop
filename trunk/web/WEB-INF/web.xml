@@ -22,6 +22,10 @@
       <param-value>/show.jsp</param-value>
     </init-param>
     <init-param>
+      <param-name>PRODUCT_PAGE</param-name>
+      <param-value>/productDetail.jsp</param-value>
+    </init-param>
+    <init-param>
       <param-name>THANKYOU_PAGE</param-name>
       <param-value>/thankyou.jsp</param-value>
     </init-param>
