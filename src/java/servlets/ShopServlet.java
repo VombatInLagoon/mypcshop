@@ -23,6 +23,7 @@ public class ShopServlet extends HttpServlet {
     private static String detailPage=null;
     private static String redirectPage = null;
     private static String productPage = null;
+    private static String productCompPage = null;
     private CompListBean compList = null;
     private ProductListBean prodList = null;
     /** Initializes the servlet.
@@ -35,6 +36,7 @@ public class ShopServlet extends HttpServlet {
 
         showPage = config.getInitParameter("SHOW_PAGE");
         productPage = config.getInitParameter("PRODUCT_PAGE");
+        productCompPage = config.getInitParameter("PRODUCT_COMPONENT_PAGE");
         checkoutPage = config.getInitParameter("CHECKOUT_PAGE");
         thankyouPage = config.getInitParameter("THANKYOU_PAGE");
         byePage = config.getInitParameter("BYE_PAGE");
@@ -100,8 +102,13 @@ public class ShopServlet extends HttpServlet {
 	// find out what to do based on the attribute "action"
 	// no action or show
 
-        if(request.getParameter("action") == null ){
+        if(request.getParameter("action") == null){
             rd = request.getRequestDispatcher(productPage); 
+            rd.forward(request,response);
+            
+        }
+        else if(request.getParameter("action").equals("productShow")){
+            rd = request.getRequestDispatcher(productCompPage); 
             rd.forward(request,response);
             
         }
