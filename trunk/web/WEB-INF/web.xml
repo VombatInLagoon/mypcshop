@@ -26,6 +26,11 @@
       <param-value>/productDetail.jsp</param-value>
     </init-param>
     <init-param>
+      <param-name>PRODUCT_COMPONENT_PAGE</param-name>
+      <param-value>/product_comp.jsp</param-value>
+    </init-param>
+    
+    <init-param>
       <param-name>THANKYOU_PAGE</param-name>
       <param-value>/thankyou.jsp</param-value>
     </init-param>
