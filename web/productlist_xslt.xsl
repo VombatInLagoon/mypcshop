@@ -23,22 +23,34 @@
     <form method="post" action="shop">
     <tr bgcolor="#E8E8E8" >
         <td>
+    <!--The variable header is used to save the selected product name -->
+            <xsl:variable name="header"> 
+             <xsl:value-of select="brand"/>
+            </xsl:variable>
+             
             <xsl:value-of select="brand"/>
+            <input name="selected" type="hidden"  value="{$header}"/>
+            
         </td>
         <td>
             <xsl:value-of select="description"/>
+            
         </td>
         
         <td>
             <xsl:element name="input"> <!--A ordinary input in XSLT-->
-              <xsl:attribute name="size">2</xsl:attribute>
+              <xsl:attribute name="size">1</xsl:attribute>
               <xsl:attribute name="type">text</xsl:attribute>
               <xsl:attribute name="value">1</xsl:attribute>
               <xsl:attribute name="name">quantity</xsl:attribute>
             </xsl:element>        
         </td>
         <td>
-            <input type="submit" value="Select"/>
+            <xsl:variable name= "selectedId">
+            <xsl:value-of select="id"/>
+            </xsl:variable>
+            <input type="submit" value="Select" />
+            <input name="selectedProduct" type="hidden"  value="{$selectedId}"/>
         </td>
         <td>
             <xsl:element name="a"> <!-- A link in XSLT -->
@@ -57,6 +69,7 @@
     </xsl:element>
     
     <input type="hidden" name="action" value="productShow"/>
+    
    </form>
   </xsl:template>
   

@@ -15,6 +15,7 @@ public class CompListBean {
     
     private Collection compList;
     private String url=null;
+    private int productID = 0;
 
     // this constructor is not really used in the application
     // but is here for testing purpose
@@ -31,6 +32,7 @@ public class CompListBean {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
+        ResultSet ts = null;
         compList = new ArrayList();    // a list
         try{
             
@@ -39,15 +41,20 @@ public class CompListBean {
             Class.forName("com.mysql.jdbc.Driver");
             conn=DriverManager.getConnection(url);
             
-	    // create SQL statements to load the books into the list
-	    // each componenet is a ComponentBean object
+	    // create SQL statements to load the components into the list
+	    // each component is a ComponentBean object
 
             stmt = conn.createStatement();
-            String sql="SELECT COMPONENT_ID, NAME , S_NAME AS SUPPLIER_NAME, ";
-            sql += "PRICE, DESCRIPTION FROM COMPONENT,";
-            sql += "SUPPLIERS WHERE COMPONENT.SUPPLIER_ID=SUPPLIERS.SUPPLIER_ID";
-            rs= stmt.executeQuery(sql);
+            String sql="SELECT PRODUCT_ID, COMPONENT.COMPONENT_ID, NAME ,";
+            sql += "PRICE, DESCRIPTION  FROM COMPONENT,";
+            sql += "COMP_PROD WHERE COMPONENT.COMPONENT_ID = COMP_PROD.COMPONENT_ID ";
             
+            //String sql = "select brand from PRODUCT where PRODUCT_ID = " + sp ;
+            
+            
+            
+            rs= stmt.executeQuery(sql);
+       
 	    // analyze the result set
 
             while(rs.next()){
@@ -55,8 +62,9 @@ public class CompListBean {
                 ComponentBean cb = new ComponentBean();
                 
                 cb.setId(rs.getInt("COMPONENT_ID"));
+                cb.setPId(rs.getInt("PRODUCT_ID"));
                 cb.setName(rs.getString("NAME"));
-                cb.setSupplierName(rs.getString("SUPPLIER_NAME"));
+               
                 cb.setPrice(rs.getInt("PRICE"));
                 cb.setDescription(rs.getString("DESCRIPTION"));
                 compList.add(cb);
@@ -74,6 +82,7 @@ public class CompListBean {
         finally{
  	    try{
               rs.close();
+              ts.close();
             }
             catch(Exception e) {}
             try{
@@ -93,8 +102,17 @@ public class CompListBean {
         return compList;
     }
     
-    // create an XML document from the complist
-
+    
+    public int getProductID() {
+        return productID;
+    }
+    
+    public void setProductID(int _pid) {
+        productID = _pid;
+    }
+    
+    // create an XML document from the complist 
+    
     public String getXml() {
         
         ComponentBean cb=null;
@@ -127,10 +145,31 @@ public class CompListBean {
 	return null;
     }
     
+     public String getXMLByProductID(String pid) {
+	ComponentBean cb = null;
+        Iterator iter = compList.iterator();
+        StringBuffer bufftmp = new StringBuffer();
+        bufftmp.append("<complist>");
+        while(iter.hasNext()){
+            cb=(ComponentBean)iter.next();
+            if(cb.getPId()== Integer.parseInt(pid)){
+                 bufftmp.append(cb.getXml());
+	    }
+            
+        }
+        bufftmp.append("</complist>");        
+        
+        return bufftmp.toString();
+	
+    }
+    
+    
+    
+    
     // a main used for testing, remember that a bean can be run
     // without a container
 
-    public static void main(String[] args){
+ /*   public static void main(String[] args){
         try{
 	    CompListBean clb = new CompListBean();
 	    System.out.println(clb.getXml());
@@ -138,6 +177,6 @@ public class CompListBean {
         catch(Exception e){
 	    System.out.println(e.getMessage());
         }
-    }
+    } */
 }
 

@@ -17,8 +17,10 @@ public class ComponentBean {
     private int id;
     private String name;
     private int price;
+    private int amount;
     private String supplierName;
     private String description;
+    private int pid;
     
     
     /** Creates a new instance of ComponentBean */
@@ -59,7 +61,23 @@ public class ComponentBean {
         
     }
     
-
+    public int getPId() {
+        return pid;
+    }
+    
+    public void setPId( int _pid) {
+        pid= _pid;
+        
+    }
+    
+    public int getAmount() {
+        return amount;
+    }
+    
+    public void setAmount( int _amount) {
+        amount= _amount;
+        
+    }
     public void setDescription(String _description) {
         description=_description;
     }
@@ -84,15 +102,18 @@ public class ComponentBean {
       xmlOut.append("<name><![CDATA[");
       xmlOut.append(name);
       xmlOut.append("]]></name>");
-      xmlOut.append("<supplierName><![CDATA[");
-      xmlOut.append(supplierName);
-      xmlOut.append("]]></supplierName>");
+      //xmlOut.append("<supplierName><![CDATA[");
+      //xmlOut.append(supplierName);
+      //xmlOut.append("]]></supplierName>");
       xmlOut.append("<price>");
       xmlOut.append(price);      
       xmlOut.append("</price>");
       xmlOut.append("<description><![CDATA[");
       xmlOut.append(description);      
-      xmlOut.append("]]></description>");   
+      xmlOut.append("]]></description>");
+      xmlOut.append("<amount>");
+      xmlOut.append(amount);      
+      xmlOut.append("</amount>");
       xmlOut.append("</component>");
       
       return xmlOut.toString();

@@ -26,6 +26,8 @@ public class ShopServlet extends HttpServlet {
     private static String productCompPage = null;
     private CompListBean compList = null;
     private ProductListBean prodList = null;
+    private static String selectedP = null;
+    HttpServletRequest temp;
     /** Initializes the servlet.
      */
     public void init(ServletConfig config) throws ServletException {
@@ -46,15 +48,18 @@ public class ShopServlet extends HttpServlet {
         jdbcURL = config.getInitParameter("JDBC_URL");
         redirectPage = config.getInitParameter("CHECKOUT_REDIRECT_PAGE");
 
-	// get the books from the database using a bean
+	// get the component from the database using a bean
 
-        try{
-            compList = new CompListBean(jdbcURL);
-        }
-        catch(Exception e){
+          try{
+                compList = new CompListBean(jdbcURL);
+             }
+            catch(Exception e){
             throw new ServletException(e);
         }
         
+        //selectedP = temp.getParameter("selectedProduct");
+        
+               
         try{
             prodList = new ProductListBean(jdbcURL);
         }
@@ -99,6 +104,8 @@ public class ShopServlet extends HttpServlet {
 	sess.setAttribute("currentUser", request.getRemoteUser());
         sess.setAttribute("jdbcURL",jdbcURL);
 
+      
+        
 	// find out what to do based on the attribute "action"
 	// no action or show
 
@@ -108,6 +115,7 @@ public class ShopServlet extends HttpServlet {
             
         }
         else if(request.getParameter("action").equals("productShow")){
+                      
             rd = request.getRequestDispatcher(productCompPage); 
             rd.forward(request,response);
             
@@ -116,7 +124,7 @@ public class ShopServlet extends HttpServlet {
         else if (request.getParameter("action").equals("show")){
 	    
             // A request dispatcher that's connected to the page.
-	    
+	     
             rd = request.getRequestDispatcher(showPage); 
             rd.forward(request,response);
         }
