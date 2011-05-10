@@ -17,22 +17,11 @@
 
 <td width = "840" valign="top">    
 
-    <h2> The Product List </h2>
-    <jsp:useBean id="productList" class="business.ProductListBean"  scope="application">
-        Error, the Bean is not created!
-    </jsp:useBean>
-
-    <c:set var="productlist_xslt">
-        <c:import url="productlist_xslt.xsl"/>
-    </c:set>
-
-
-    <x:transform xslt="${productlist_xslt}">
-        <jsp:getProperty name="productList" property="xml"/>
-    </x:transform>
-
+    <h2> You Have Selected The Product : ${param.selected} </h2>
+    
     <h2> Available Set of Components </h2> 
     <jsp:useBean id="compList" class="business.CompListBean"  scope="application">
+        
         Error, the bean should have been created in the servlet!
     </jsp:useBean>
 
@@ -40,9 +29,12 @@
         <c:import url="complist_xslt.xsl"/>
     </c:set>
 
-
+        
+                
     <x:transform xslt="${complist_xslt}">
-        <jsp:getProperty name="compList" property="xml"/>
+        
+        <%= compList.getXMLByProductID(request.getParameter("selectedProduct")) %>
+        
     </x:transform>
 
 
