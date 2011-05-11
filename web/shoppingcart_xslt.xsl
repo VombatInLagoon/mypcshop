@@ -29,7 +29,7 @@
   <form method="post" action="shop">
     <tr>
         <td>
-            <xsl:value-of select="component/name"/>
+            <xsl:value-of select="brand"/>
         </td>
         <td align="center">
             <xsl:value-of select="quantity"/>
@@ -49,8 +49,8 @@
     
       <xsl:element name="input"> <!--A ordinary input in XSLT-->
         <xsl:attribute name="type">hidden</xsl:attribute>
-        <xsl:attribute name="value"><xsl:value-of select="component/id"/></xsl:attribute>
-        <xsl:attribute name="name">compid</xsl:attribute>
+        <xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
+        <xsl:attribute name="name">productid</xsl:attribute>
       </xsl:element>
       <xsl:element name="input"> <!--A ordinary input in XSLT-->
         <xsl:attribute name="type">hidden</xsl:attribute>

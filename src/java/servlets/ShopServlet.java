@@ -25,9 +25,9 @@ public class ShopServlet extends HttpServlet {
     private static String productPage = null;
     private static String productCompPage = null;
     private CompListBean compList = null;
-    private ProductListBean prodList = null;
+    private ProductListBean productList = null;
     private static String selectedP = null;
-    HttpServletRequest temp;
+    
     /** Initializes the servlet.
      */
     public void init(ServletConfig config) throws ServletException {
@@ -61,7 +61,7 @@ public class ShopServlet extends HttpServlet {
         
                
         try{
-            prodList = new ProductListBean(jdbcURL);
+            productList = new ProductListBean(jdbcURL);
         }
         catch(Exception e){
             throw new ServletException(e);
@@ -73,7 +73,7 @@ public class ShopServlet extends HttpServlet {
 
          ServletContext sc = getServletContext();
          sc.setAttribute("compList",compList);
-         sc.setAttribute("productList", prodList);
+         sc.setAttribute("productList", productList);
      }
     
     /** Destroys the servlet.
@@ -114,12 +114,12 @@ public class ShopServlet extends HttpServlet {
             rd.forward(request,response);
             
         }
-        else if(request.getParameter("action").equals("productShow")){
-                      
-            rd = request.getRequestDispatcher(productCompPage); 
-            rd.forward(request,response);
-            
-        }
+//        else if(request.getParameter("action").equals("productShow")){
+//                      
+//            rd = request.getRequestDispatcher(productCompPage); 
+//            rd.forward(request,response);
+//            
+//        }
             
         else if (request.getParameter("action").equals("show")){
 	    
@@ -131,19 +131,19 @@ public class ShopServlet extends HttpServlet {
 
 	// add a component to the shopping cart
 	
-	else if(request.getParameter("action").equals("add")){
+	else if(request.getParameter("action").equals("productShow")){
             
 	    // verify compid and quantity
 
-            if (request.getParameter("compid") != null && 
+            if (request.getParameter("productid") != null && 
                 request.getParameter("quantity")!=null ){
-                ComponentBean cb = null;
+                ProductBean pb = null;
 		
 		// search the component in our shop
 
-		cb = compList.getById(Integer.parseInt(
-                                         request.getParameter("compid")));
-                if(cb==null){
+		pb = productList.getById(Integer.parseInt(
+                                         request.getParameter("productid")));
+                if(pb==null){
                     throw new ServletException("The component is not in stock.");
                     
                 }
@@ -151,29 +151,29 @@ public class ShopServlet extends HttpServlet {
 
 		    // found, add it to the cart
 
-                    shoppingCart.addComp(cb,Integer.parseInt(
+                    shoppingCart.addProduct(pb,Integer.parseInt(
                                          request.getParameter("quantity")));
                 }
             }
             
 	    // back to the showpage
 
-            rd = request.getRequestDispatcher(showPage);
+            rd = request.getRequestDispatcher(productCompPage);
             rd.forward(request,response);
        }
 
 	// remove a component from the cart
 
 	else if(request.getParameter("action").equals("remove")){
-	    if (request.getParameter("compid") != null && 
+	    if (request.getParameter("productid") != null && 
 		request.getParameter("quantity")!=null ){
-		shoppingCart.removeComp(
-			Integer.parseInt(request.getParameter("compid")),
+		shoppingCart.removeProduct(
+			Integer.parseInt(request.getParameter("productid")),
                         Integer.parseInt(request.getParameter("quantity")));
            }
            else{
              throw new ServletException(
-		    "No compid or quantity when removing component from cart");
+		    "No productid or quantity when removing component from cart");
            }
             rd = request.getRequestDispatcher(showPage);
             rd.forward(request,response);
@@ -182,16 +182,16 @@ public class ShopServlet extends HttpServlet {
 	// detailed information about a component
 	
 	else if(request.getParameter("action").equals("detail")){
-	    if (request.getParameter("compid") != null){
+	    if (request.getParameter("productid") != null){
 
 		// find the book, store a reference in our request
 
-		ComponentBean cb = compList.getById(
-			   Integer.parseInt(request.getParameter("compid")));
-		request.setAttribute("component", cb);
+		ProductBean pb = productList.getById(
+			   Integer.parseInt(request.getParameter("productid")));
+		request.setAttribute("product", pb);
 	    }
 	    else{
-		throw new ServletException("No compid when viewing detail");
+		throw new ServletException("No productid when viewing detail");
 	    }
             rd = request.getRequestDispatcher(detailPage);
             rd.forward(request,response);
