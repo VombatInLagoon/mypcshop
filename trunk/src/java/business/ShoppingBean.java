@@ -22,16 +22,16 @@ public class ShoppingBean {
     
     // add some copies of a book to the shopping cart
 
-    public void addComp(ComponentBean cb, int quantity) {
+    public void addProduct(ProductBean pb, int quantity) {
         
         Object newItem[] = null;
-        ComponentBean tmpBean = null;
+        ProductBean tmpBean = null;
 
 	// if the cart is empty just add the book
 
         if (cart.isEmpty()){
             newItem = new Object[2];
-            newItem[0]=cb;
+            newItem[0]=pb;
             newItem[1]=new Integer(quantity);    
             cart.add(newItem);
         }
@@ -48,7 +48,7 @@ public class ShoppingBean {
 
 		// check if we found the book
 
-		if(((ComponentBean)tmpArr[0]).getId()==cb.getId()){ 
+		if(((ProductBean)tmpArr[0]).getId()==pb.getId()){ 
 
 		    // yes, increase the quantity
 
@@ -63,7 +63,7 @@ public class ShoppingBean {
 	    
 	    if(!found){
 		newItem = new Object[2];
-		newItem[0]=cb;
+		newItem[0]=pb;
 		newItem[1]=new Integer(quantity);    
 		cart.add(newItem);
 		System.out.println("addProduct: cart.size():" + cart.size());
@@ -74,7 +74,7 @@ public class ShoppingBean {
 
     // remove some copies of a book from the cart
 
-    public void removeComp(int id, int quantity) {
+    public void removeProduct(int id, int quantity) {
 
 	// if must not be empty
 
@@ -86,7 +86,7 @@ public class ShoppingBean {
 
             while(iter.hasNext()){
                 tmpArr=(Object[])iter.next();
-                if(((ComponentBean)tmpArr[0]).getId()==id){
+                if(((ProductBean)tmpArr[0]).getId()==id){
 
 		    // found
 
@@ -127,7 +127,7 @@ public class ShoppingBean {
         while(iter.hasNext()){
             objBuff =(Object[])iter.next();
             buff.append("<order>");
-            buff.append(((ComponentBean)objBuff[0]).getXml());
+            buff.append(((ProductBean)objBuff[0]).getXml());
             buff.append("<quantity>");
             buff.append(((Integer)objBuff[1]).intValue());
             buff.append("</quantity>");

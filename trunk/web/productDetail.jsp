@@ -31,5 +31,13 @@
     <jsp:getProperty name="productList" property="xml"/>
 </x:transform>
 
+    
+<c:set var="shoppingcart_xslt">
+    <c:import url="shoppingcart_xslt.xsl"/>
+</c:set> 
+
+<x:transform xslt="${shoppingcart_xslt}">
+    <pcshop:shoppingcart/>
+</x:transform>
 
 <jsp:include page="includes/footer.jsp" />

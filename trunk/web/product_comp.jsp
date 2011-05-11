@@ -18,10 +18,10 @@
 <td width = "840" valign="top">    
 
     <h2> You Have Selected The Product : ${param.selected} </h2>
-    
+
     <h2> Available Set of Components </h2> 
     <jsp:useBean id="compList" class="business.CompListBean"  scope="application">
-        
+
         Error, the bean should have been created in the servlet!
     </jsp:useBean>
 
@@ -29,12 +29,12 @@
         <c:import url="complist_xslt.xsl"/>
     </c:set>
 
-        
-                
+
+
     <x:transform xslt="${complist_xslt}">
-        
-        <%= compList.getXMLByProductID(request.getParameter("selectedProduct")) %>
-        
+
+        <%= compList.getXMLByProductID(request.getParameter("selectedProduct"))%>
+
     </x:transform>
 
 

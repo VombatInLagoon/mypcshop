@@ -56,7 +56,7 @@
   </xsl:element>
   <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;&nbsp]]></xsl:text>  
   <xsl:element name="a"> <!-- A link in XSLT -->
-    <xsl:attribute name="href"><xsl:text disable-output-escaping="yes"><![CDATA[shop?action=add&quantity=1&bookid=]]></xsl:text><xsl:value-of select="id"/></xsl:attribute>
+    <xsl:attribute name="href"><xsl:text disable-output-escaping="yes"><![CDATA[shop?action=add&quantity=1&compid=]]></xsl:text><xsl:value-of select="id"/></xsl:attribute>
     <xsl:text>Add one copy</xsl:text>
   </xsl:element>
   </xsl:template>
