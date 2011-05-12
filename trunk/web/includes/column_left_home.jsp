@@ -21,7 +21,7 @@
     <%-- The Admin link is for testing only
          and should be deleted for production environements --%>
     <br><br>
-    <a href="https://localhost:8443/musicStore/admin">
+    <a href="admin/admin.jsp">
         Admin application
     </a>
     
