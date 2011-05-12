@@ -188,7 +188,7 @@ public class ShopServlet extends HttpServlet {
 
 		ProductBean pb = productList.getById(
 			   Integer.parseInt(request.getParameter("productid")));
-		request.setAttribute("product", pb);
+		request.setAttribute("productid", pb);
 	    }
 	    else{
 		throw new ServletException("No productid when viewing detail");

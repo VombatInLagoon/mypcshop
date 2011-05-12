@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/pcShop2011"/>
+
+<!--
+    Document   : context.xml
+    Created on : May 11, 2011, 9:17 PM
+    Author     : amin
+    Description:
+        Purpose of the document follows.
+-->
+
+<Context path="/pcShop2011"/>
+    

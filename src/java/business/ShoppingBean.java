@@ -46,7 +46,7 @@ public class ShoppingBean {
 	    while(iter.hasNext()){
 		tmpArr=(Object[])iter.next();
 
-		// check if we found the book
+		// check if we found the pc
 
 		if(((ProductBean)tmpArr[0]).getId()==pb.getId()){ 
 
@@ -72,7 +72,7 @@ public class ShoppingBean {
         }          
     }    
 
-    // remove some copies of a book from the cart
+    // remove some copies of a product from the cart
 
     public void removeProduct(int id, int quantity) {
 
@@ -128,6 +128,11 @@ public class ShoppingBean {
             objBuff =(Object[])iter.next();
             buff.append("<order>");
             buff.append(((ProductBean)objBuff[0]).getXml());
+            
+            buff.append("<brand>");
+            buff.append(((ProductBean)objBuff[0]).getName());
+            buff.append("</brand>");
+            
             buff.append("<quantity>");
             buff.append(((Integer)objBuff[1]).intValue());
             buff.append("</quantity>");

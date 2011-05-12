@@ -50,19 +50,10 @@
                         <xsl:value-of select="id"/>
                     </xsl:variable>
                     <input type="submit" value="Select" />
+                    
                     <input name="selectedProduct" type="hidden"  value="{$selectedId}"/>
                 </td>
-                <td>
-                    <xsl:element name="a"> <!-- A link in XSLT -->
-                        <xsl:attribute name="href">
-                            <xsl:text disable-output-escaping="yes"><![CDATA[productShow?action=detail&productid=]]>
-                            </xsl:text>
-                            <xsl:value-of select="id"/>
-                        </xsl:attribute>
-             
-                        <xsl:text>Detail</xsl:text>
-                    </xsl:element>
-                </td>
+                
             </tr>
     
     <xsl:element name="input"> 
@@ -70,20 +61,17 @@
       <xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
       <xsl:attribute name="name">productid</xsl:attribute>
     </xsl:element>
-    
-            <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;&nbsp]]>
-            </xsl:text>  
-            <xsl:element name="a"> <!-- A link in XSLT -->
-                <xsl:attribute name="href">
-                    <xsl:text disable-output-escaping="yes"><![CDATA[shop?action=add&quantity=1&productid=]]>
-                    </xsl:text>
-                    <xsl:value-of select="id"/>
-                </xsl:attribute>
-                <xsl:text>Add one copy</xsl:text>
-            </xsl:element>
+      <xsl:element name="input"> <!--A ordinary input in XSLT-->
+      <xsl:attribute name="type">hidden</xsl:attribute>
+      <xsl:attribute name="value"><xsl:value-of select="id"/></xsl:attribute>
+      <xsl:attribute name="name">productid</xsl:attribute>
+    </xsl:element>
     
     
-            <input type="hidden" name="action" value="productShow"/>
+            
+    
+    
+    <input type="hidden" name="action" value="productShow"/>
     
         </form>
     </xsl:template>

@@ -124,6 +124,23 @@ public class ProductListBean {
 	return null;
     }
     
+    public String getNameById(String id) {
+	ProductBean pb = null;
+	Iterator iter = productList.iterator();
+        
+	while(iter.hasNext()){
+	    pb=(ProductBean)iter.next();
+	    if(pb.getId()== Integer.parseInt(id))
+                {
+                return pb.getName();
+	    }
+	}
+	return null;
+    }
+    
+    
+    
+    
     // a main used for testing, remember that a bean can be run
     // without a container
 

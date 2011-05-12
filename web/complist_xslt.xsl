@@ -22,6 +22,7 @@
    </table>
   </xsl:template>
   
+  
   <xsl:template match="component">
     <form method="post" action="shop">
     <tr bgcolor="#E8E8E8" >

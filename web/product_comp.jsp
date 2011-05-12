@@ -16,15 +16,25 @@
 
 
 <td width = "840" valign="top">    
+    
+    <jsp:useBean id="productList" class="business.ProductListBean"  scope="application">
 
-    <h2> You Have Selected The Product : ${param.selected} </h2>
-
-    <h2> Available Set of Components </h2> 
+        Error, the bean should have been created in the servlet!
+    </jsp:useBean>
+        
     <jsp:useBean id="compList" class="business.CompListBean"  scope="application">
 
         Error, the bean should have been created in the servlet!
     </jsp:useBean>
-
+        
+    
+    
+        
+    <h2> You Have Selected The Product : <%= productList.getNameById(request.getParameter("productid")) %> </h2>
+    <h2> Available Set of Components </h2> 
+    
+    
+    
     <c:set var="complist_xslt">
         <c:import url="complist_xslt.xsl"/>
     </c:set>
@@ -32,8 +42,8 @@
 
 
     <x:transform xslt="${complist_xslt}">
-
-        <%= compList.getXMLByProductID(request.getParameter("selectedProduct"))%>
+        
+        <%= compList.getXMLByProductID(request.getParameter("productid"))%>
 
     </x:transform>
 
@@ -57,9 +67,5 @@
         <input type="submit" value="Logout">
     </form>
 </c:if>
-
-
-
-
 
 <jsp:include page="includes/footer.jsp" />
