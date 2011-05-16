@@ -1,11 +1,4 @@
-drop table COMPONENT cascade;
-drop table PRODUCT cascade;
-drop table SUPPLIERS cascade;
-drop table ORDERS cascade;
-drop table ORDER_ITEMS cascade;
-drop table USERS cascade;
-drop table USER_ROLES cascade;
-drop table COMP_PROD cascade;
+
 
 
 CREATE TABLE COMPONENT(
