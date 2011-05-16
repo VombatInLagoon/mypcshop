@@ -17,8 +17,8 @@ public class ComponentBean {
     private int id;
     private String name;
     private int price;
-    private int amount;
-    private String supplierName;
+   
+    private int stock_num;
     private String description;
     private int pid;
     
@@ -43,12 +43,12 @@ public class ComponentBean {
         name=_name;
     }
 
-    public String getSupplierName() {
-        return supplierName;
+    public int getStockNum() {
+        return stock_num;
     }
     
-    public void setSupplierName(String _supplierName) {
-    	supplierName=_supplierName;
+    public void setStockNum(int _stockNum) {
+    	stock_num =_stockNum;
     }
 
     
@@ -70,14 +70,7 @@ public class ComponentBean {
         
     }
     
-    public int getAmount() {
-        return amount;
-    }
-    
-    public void setAmount( int _amount) {
-        amount= _amount;
-        
-    }
+   
     public void setDescription(String _description) {
         description=_description;
     }
@@ -112,7 +105,7 @@ public class ComponentBean {
       xmlOut.append(description);      
       xmlOut.append("]]></description>");
       xmlOut.append("<amount>");
-      xmlOut.append(amount);      
+      xmlOut.append(stock_num);      
       xmlOut.append("</amount>");
       xmlOut.append("</component>");
       

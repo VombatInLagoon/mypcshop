@@ -3,6 +3,10 @@
     <servlet>
         <servlet-name>Shop</servlet-name>
         <servlet-class>servlets.ShopServlet</servlet-class>
+        <!-- This init vale has been added to support the Administartor servlet -->
+        
+            
+               
         <init-param>
             <param-name>CHECKOUT_PAGE</param-name>
             <param-value>/checkout.jsp</param-value>
@@ -48,9 +52,33 @@
             <param-value>checkout.jsp</param-value>
         </init-param>
     </servlet>
+    
+    <!-- The Admin servlet is defined here -->
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>servlets.AdminServlet</servlet-class>
+        
+        <init-param>
+            <param-name>ADMIN_WARE_HOUSE_PAGE</param-name>
+            <param-value>/adminWareHouse.jsp</param-value>
+        </init-param>
+        <init-param>
+            <param-name>JDBC_URL</param-name>
+            <param-value>jdbc:mysql://localhost/pcshop?user=root&amp;password=sesame</param-value>
+        </init-param>
+        
+           
+    </servlet>
+    
+    
+    
     <servlet-mapping>
         <servlet-name>Shop</servlet-name>
         <url-pattern>/shop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -72,7 +100,7 @@
         </taglib>
     </jsp-config>
     <security-constraint>
-<!--        <web-resource-collection>
+        <!--        <web-resource-collection>
             <web-resource-name>TheShop</web-resource-name>
             <url-pattern>/checkout.jsp</url-pattern>
         </web-resource-collection>-->
@@ -83,7 +111,6 @@
         </web-resource-collection>
         <auth-constraint>
             <role-name>tomcat</role-name>
-            
         </auth-constraint>
         <user-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>
@@ -95,8 +122,5 @@
     <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>Login Page</realm-name>
-        
-        
     </login-config>
-    
 </web-app>
