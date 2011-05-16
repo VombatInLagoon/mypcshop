@@ -32,7 +32,7 @@ public class CompListBean {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
-        ResultSet ts = null;
+        //ResultSet ts = null;
         compList = new ArrayList();    // a list
         try{
             
@@ -82,7 +82,7 @@ public class CompListBean {
         finally{
  	    try{
               rs.close();
-              ts.close();
+              //ts.close();
             }
             catch(Exception e) {}
             try{
@@ -103,7 +103,7 @@ public class CompListBean {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
-        ResultSet ts = null;
+        //ResultSet ts = null;
         int tmp = 0;
         compList = new ArrayList();    // a list
         try{
@@ -154,7 +154,7 @@ public class CompListBean {
         finally{
  	    try{
               rs.close();
-              ts.close();
+              //ts.close();
             }
             catch(Exception e) {}
             try{
@@ -236,6 +236,74 @@ public class CompListBean {
 	
     }
     
+     /**
+      * This method has been added to support the add new component 
+      * Administrative task
+      * @param id
+      * @param amount
+      * @throws Exception 
+      */
+     public void setCount(int id,int amount) throws Exception{
+         
+        Connection conn = null;
+        Statement stmt = null;
+        
+       
+        
+        try{
+            
+	    // get a database connection and load the JDBC-driver
+
+            Class.forName("com.mysql.jdbc.Driver");
+            conn=DriverManager.getConnection("jdbc:mysql://localhost/pcshop?user=root&password=sesame");
+            
+	    // create SQL statements to load the components into the list
+	    // each component is a ComponentBean object
+
+           
+            // first we get the current amount of the component 
+            // using the following query
+            
+            conn.setAutoCommit(false);
+            
+            
+            stmt = conn.createStatement();
+            
+            String sql="UPDATE COMPONENT SET STOCK_NUM = (STOCK_NUM+9),";
+            sql += "WHERE COMPONENT_ID = 'id'";
+            
+  
+
+
+            //String sql = "select brand from PRODUCT where PRODUCT_ID = " + sp ;
+            
+            
+            
+            stmt.executeUpdate(sql);
+       
+	    // analyze the result set
+
+            
+          conn.commit();
+      //out.println("Order successful!  Thanks for your business!");
+    }
+    catch (Exception e) {
+      // Any error is grounds for rollback
+      try {
+        conn.rollback();
+      }
+      catch (SQLException ignored) { }
+      //out.println("Order failed. Please contact technical support.");
+    }
+    finally {
+      // Clean up.
+      try {
+        if (conn != null) conn.close();
+      }
+      catch (SQLException ignored) { }
+    }
+         
+     }
     
     
     

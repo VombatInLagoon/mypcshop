@@ -17,25 +17,35 @@
 
 
 <td width ="840" valign="top"> 
-    
-    <jsp:useBean id="compList" class="business.CompListBean"  scope="application">
+    <%--
+    <jsp:useBean id="compFullList" class="business.CompListBean"  scope="application">
 
         Error, the bean should have been created in the servlet!
     </jsp:useBean>
-     <h2>The list of available components in the warehouse!</h2>
-    <p></p>
-    <p></p>
+    --%>
+    <%--
+        Each time we instantiate a new object to reflect the amount of the 
+        Components in the stock
+    --%>
     
-
+    <% 
+        CompListBean compFullList = new CompListBean(
+                "jdbc:mysql://localhost/pcshop?user=root&password=sesame", 0);
+        request.setAttribute("compFullList", compFullList);
+    %>
+    <h2>The list of available components in the warehouse!</h2>
+    <p></p>
+    <p></p>
+   
         
         
-    <c:set var="complist_xslt">
-        <c:import url="complist_xslt.xsl"/>
+    <c:set var="compfulllist_xslt">
+        <c:import url="compfulllist_xslt.xsl"/>
     </c:set>
 
-    <x:transform xslt="${complist_xslt}">
+    <x:transform xslt="${compfulllist_xslt}">
         
-       <jsp:getProperty name="compList" property="xml"/>
+       <%= compFullList.getXml() %>
 
     </x:transform>
     
