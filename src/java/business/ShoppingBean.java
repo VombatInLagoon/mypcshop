@@ -128,7 +128,9 @@ public class ShoppingBean {
             objBuff =(Object[])iter.next();
             buff.append("<order>");
             buff.append(((ProductBean)objBuff[0]).getXml());
-            
+            buff.append("<id>");
+            buff.append(((ProductBean)objBuff[0]).getId());
+            buff.append("</id>");
             buff.append("<brand>");
             buff.append(((ProductBean)objBuff[0]).getName());
             buff.append("</brand>");

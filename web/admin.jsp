@@ -11,17 +11,29 @@
 
 <td>
     <h2>Welcome to the Admin page<br>Please choose what to do!</br></h2>
+</td>
 
-    <form action="admin">
+<td>
+
+    
+    <form action="admin" method="post">
         <br></br>
         <br></br>
         
-        <input type="submit" value="Go to the warehouse" align ="right"/>
-        <input type="hidden" name="action" value="adminPage"/>
+        <input type="submit" value="Go to the Components Page" align ="right"/>
+        <input type="hidden" name="action" value="adminPageComponent"/>
+        
+        
     </form>
+
+    
+    <form action="admin" method="post">
+        <br></br>
+             
+        <input type="submit" value="Add new products!" align ="right"/>
+        <input type="hidden" name="action" value="adminPageProduct"/>
+    </form>
+
 </td>
-
-
-
-
-<jsp:include page="/includes/footer.jsp" />
+    
+ <jsp:include page="/includes/footer.jsp" />
