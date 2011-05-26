@@ -168,10 +168,78 @@ public class CompListBean {
         }
     }
     
+    public CompListBean(String _url,String comp) throws Exception {
+        
+        url=_url;
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        //ResultSet ts = null;
+        compList = new ArrayList();    // a list
+        try{
+            
+	    // get a database connection and load the JDBC-driver
+
+            Class.forName("com.mysql.jdbc.Driver");
+            conn=DriverManager.getConnection(url);
+            
+	    // create SQL statements to load the components into the list
+	    // each component is a ComponentBean object
+
+            stmt = conn.createStatement();
+            String sql="SELECT COMPONENT_ID, DESCRIPTION FROM COMPONENT WHERE COMPONENT.NAME ='"+comp+"'";
+            
+            //String sql = "select brand from PRODUCT where PRODUCT_ID = " + sp ;
+            
+            
+            
+            rs= stmt.executeQuery(sql);
+       
+	    // analyze the result set
+
+            while(rs.next()){
+                
+                ComponentBean cb = new ComponentBean();
+                
+                cb.setId(rs.getInt("COMPONENT_ID"));
+                //cb.setPId(rs.getInt("PRODUCT_ID"));
+                //cb.setName(rs.getString("NAME"));
+               
+                //cb.setPrice(rs.getInt("PRICE"));
+                cb.setDescription(rs.getString("DESCRIPTION"));
+                compList.add(cb);
+                
+            }
+        
+        }
+        catch(SQLException sqle){
+            throw new Exception(sqle);
+        }
+
+	// note the we always try to close all services
+	// even if one or more fail to close
+	
+        finally{
+ 	    try{
+              rs.close();
+              //ts.close();
+            }
+            catch(Exception e) {}
+            try{
+              stmt.close();
+            }
+	    catch(Exception e) {}
+            try {
+              conn.close();
+            }
+            catch(Exception e){}
+        }
+    }
+    
     
     // return the booklist
     
-    java.util.Collection getProductList() {
+    public java.util.Collection getProductList() {
         return compList;
     }
     

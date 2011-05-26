@@ -26,6 +26,7 @@ public class ShopServlet extends HttpServlet {
     private static String productCompPage = null;
     private CompListBean compList = null;
     private ProductListBean productList = null;
+    
     private static String selectedP = null;
     
     /** Initializes the servlet.
@@ -68,12 +69,15 @@ public class ShopServlet extends HttpServlet {
         }
         
         
+        
+        
         // servletContext is the same as scope Application
 	// store the complist in application scope
 
          ServletContext sc = getServletContext();
          sc.setAttribute("compList",compList);
          sc.setAttribute("productList", productList);
+         
      }
     
     /** Destroys the servlet.
@@ -133,7 +137,7 @@ public class ShopServlet extends HttpServlet {
 	
 	else if(request.getParameter("action").equals("productShow")){
             
-	    // verify compid and quantity
+	    // verify productid and quantity
 
             if (request.getParameter("productid") != null && 
                 request.getParameter("quantity")!=null ){
@@ -158,7 +162,7 @@ public class ShopServlet extends HttpServlet {
             
 	    // back to the showpage
 
-            rd = request.getRequestDispatcher(productCompPage);
+            rd = request.getRequestDispatcher(productPage);
             rd.forward(request,response);
        }
 
@@ -175,7 +179,7 @@ public class ShopServlet extends HttpServlet {
              throw new ServletException(
 		    "No productid or quantity when removing component from cart");
            }
-            rd = request.getRequestDispatcher(showPage);
+            rd = request.getRequestDispatcher(productPage);
             rd.forward(request,response);
 	}
 
@@ -193,7 +197,7 @@ public class ShopServlet extends HttpServlet {
 	    else{
 		throw new ServletException("No productid when viewing detail");
 	    }
-            rd = request.getRequestDispatcher(detailPage);
+            rd = request.getRequestDispatcher(productCompPage);
             rd.forward(request,response);
 	}
 

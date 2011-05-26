@@ -63,8 +63,26 @@
             <param-value>/adminWareHouse.jsp</param-value>
         </init-param>
         <init-param>
+            <param-name>ADMIN_PRODUCT_PAGE</param-name>
+            <param-value>/adminProduct.jsp</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ADMIN_PRODUCT_DETAIL_PAGE</param-name>
+            <param-value>/product_comp_admin.jsp</param-value>
+        </init-param>
+        
+          <init-param>
+            <param-name>ADD_PRODUCT_PAGE</param-name>
+            <param-value>/addProduct.jsp</param-value>
+        </init-param>
+        
+        <init-param>
             <param-name>JDBC_URL</param-name>
             <param-value>jdbc:mysql://localhost/pcshop?user=root&amp;password=sesame</param-value>
+        </init-param>
+        <init-param>
+            <param-name>THANK_YOU_PAGE</param-name>
+            <param-value>/thankyou.jsp</param-value>
         </init-param>
         
            
