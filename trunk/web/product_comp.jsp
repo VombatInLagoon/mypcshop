@@ -21,6 +21,7 @@
 
         Error, the bean should have been created in the servlet!
     </jsp:useBean>
+        
 
     <jsp:useBean id="compList" class="business.CompListBean"  scope="application">
 
