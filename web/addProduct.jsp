@@ -25,7 +25,7 @@
     <h1>Please Enter The New Product Configuration. </h1>
 
     <table border=0>
-        <form action=admin?action=addNewProduct method=post>
+        <form action=admin>
             <tr>
                 <td>Product Brand:</td>
                 <td> <input type="text" name="brand" value="" ></td>
@@ -47,16 +47,18 @@
                             ArrayList<ComponentBean> itemsmb = clmb;
                             for (ComponentBean item : itemsmb) {
                         %>
-
-                        <option value="<%=item.getDescription()%>" name="Mb" >
+                        
+                        <option value="<%=item.getId()%>" name="Mb" >
                             <%=item.getDescription()%>
                         </option> 
-
+                            
 
                         <%}%>
-
+                            
                     </select>  
-
+                           
+                        
+                        
 
                 </td>
             </tr>
@@ -71,7 +73,7 @@
                             for (ComponentBean item : itemsram) {
                         %>
 
-                        <option value="<%=item.getDescription()%>" name="Ram" >
+                        <option value="<%=item.getId() %>" name="Ram" >
                             <%=item.getDescription()%>
                         </option> 
 
@@ -79,7 +81,7 @@
                         <%}%>
 
                     </select>  
-
+                        <input name="ramAmount" type="text"></input>
 
 
                 </td>
@@ -95,7 +97,7 @@
                             for (ComponentBean item : itemsvga) {
                         %>
 
-                        <option value="<%=item.getDescription()%>" name="Vga" >
+                        <option value="<%=item.getId()%>" name="Vga" >
                             <%=item.getDescription()%>
                         </option> 
 
@@ -103,7 +105,7 @@
                         <%}%>
 
                     </select>  
-
+                            <input name="vgaAmount" type="text"></input>
                 </td>
             </tr>
 
@@ -111,7 +113,7 @@
                 <td>Select CPU type:</td>
                 <td> 
 
-                    <select name="CPU">
+                    <select name="Cpu">
 
                         <%
                             ArrayList clcpu = (ArrayList) request.getAttribute("complistcpu");
@@ -119,7 +121,7 @@
                             for (ComponentBean item : itemscpu) {
                         %>
 
-                        <option value="<%=item.getDescription()%>" name="CPU" >
+                        <option value="<%=item.getId()%>" name="Cpu" >
                             <%=item.getDescription()%>
                         </option> 
 
@@ -127,7 +129,7 @@
                         <%}%>
                         
                     </select>  
-
+                            <input name="cpuAmount" type="text"></input>
                 </td>
             </tr>
 
@@ -143,7 +145,7 @@
                             for (ComponentBean item : itemshdd) {
                         %>
 
-                        <option value="<%=item.getDescription()%>" name="HDD" >
+                        <option value="<%=item.getId()%>" name="HDD" >
                             <%=item.getDescription()%>
                         </option> 
 
@@ -151,7 +153,7 @@
                         <%}%>
 
                     </select>         
-
+                            <input name="hddAmount" type="text"></input>
                 </td>
 
             </tr> 
@@ -167,7 +169,7 @@
                             for (ComponentBean item : itemsmonitor) {
                         %>
 
-                        <option value="<%=item.getDescription()%>" name="Monitor" >
+                        <option value="<%=item.getId()%>" name="Monitor" >
                             <%=item.getDescription()%>
                         </option> 
 
@@ -176,7 +178,7 @@
 
                     </select>  
 
-
+                            <input name="monitorAmount" type="text"></input>
                 </td>
             </tr>
 
@@ -191,7 +193,7 @@
                             for (ComponentBean item : itemsoptic) {
                         %>
 
-                        <option value="<%=item.getDescription()%>" name="Optic" >
+                        <option value="<%=item.getId()%>" name="Optic" >
                             <%=item.getDescription()%>
                         </option> 
 
@@ -199,13 +201,14 @@
                         <%}%>
 
                     </select>  
-
+                        <input name="opticAmount" type="text" ></input>
                 </td>
             </tr>   
             
    
     
       </table> 
+     <input type="hidden" name ="action" value="addNewProduct">
      <input type="button" value="Submit" onClick ="validate(this.form)"> 
     
 </form>

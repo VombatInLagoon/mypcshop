@@ -13,10 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import business.*;
 import business.ProductBean;
+import java.io.Writer;
 import javax.servlet.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Hashtable;
 
 /**
  *
@@ -73,12 +76,6 @@ public class AdminServlet extends HttpServlet {
          
          
          
-         try{
-               // cpuList = new CpuListBean(jdbcURL);
-             }
-            catch(Exception e){
-            throw new ServletException(e);
-        }
          
         ServletContext sc = getServletContext();
         sc.setAttribute("compFullList", compFullList);
@@ -126,13 +123,13 @@ public class AdminServlet extends HttpServlet {
             
             
             
-            Collection collCpu = cpuListb.getProductList();
-            Collection collHdd = hddListb.getProductList();
-            Collection collVga = vgaListb.getProductList();
-            Collection collRam = ramListb.getProductList();
-            Collection collMb = mbListb.getProductList();
-            Collection collMonitor = monitorListb.getProductList();
-            Collection collOptical = opticListb.getProductList();
+            Collection collCpu = cpuListb.getComponentList();
+            Collection collHdd = hddListb.getComponentList();
+            Collection collVga = vgaListb.getComponentList();
+            Collection collRam = ramListb.getComponentList();
+            Collection collMb = mbListb.getComponentList();
+            Collection collMonitor = monitorListb.getComponentList();
+            Collection collOptical = opticListb.getComponentList();
            
             
             
@@ -154,21 +151,50 @@ public class AdminServlet extends HttpServlet {
                 
         else if(request.getParameter("action").equals("addNewProduct")){
             
-            if (request.getParameter("CPU")== null){
-                rd = request.getRequestDispatcher(thankPage);
-                rd.forward(request, response);
-            }
+            PrintWriter out = response.getWriter();
             
-            else if(request.getParameter("CPU")!= null){
-                
-                response.setContentType("text/plain");
-                PrintWriter out = response.getWriter();
-                out.print("the Value is:"+request.getParameter("CPU"));
-                
-                
-                
-            }
+            out.println("The action has been reached succesfully!");
             
+            HashMap compId = new HashMap();
+            
+            ProductBean pb = new ProductBean();
+            
+            pb.setName(request.getParameter("brand"));
+            pb.setDescription(request.getParameter("name"));
+            pb.setCpu(Integer.parseInt(request.getParameter("cpuAmount")));
+            pb.setHdd(Integer.parseInt(request.getParameter("hddAmount")));
+            pb.setMonitor(Integer.parseInt(request.getParameter("monitorAmount")));
+            pb.setOptical(Integer.parseInt(request.getParameter("opticAmount")));
+            pb.setRam(Integer.parseInt(request.getParameter("ramAmount")));
+            pb.setVga(Integer.parseInt(request.getParameter("vgaAmount")));
+            
+            compId.put("Mb", Integer.parseInt(request.getParameter("Mb")));
+            compId.put("Cpu", Integer.parseInt(request.getParameter("Cpu")));
+            compId.put("Ram", Integer.parseInt(request.getParameter("Ram")));
+            compId.put("Vga", Integer.parseInt(request.getParameter("Vga")));
+            compId.put("Hdd", Integer.parseInt(request.getParameter("Hdd")));
+            compId.put("Monitor", Integer.parseInt(request.getParameter("Monitor")));
+            compId.put("Optic", Integer.parseInt(request.getParameter("Optic")));
+           
+            
+            pb.addProduct(jdbcURL,compId);
+            
+            
+            
+            
+            
+            
+            try{
+            productList = new ProductListBean(jdbcURL);
+            }
+                catch(Exception e){
+                throw new ServletException(e);
+            }
+
+            ServletContext sc = getServletContext();
+            sc.setAttribute("productList", productList);
+            rd = request.getRequestDispatcher(productAdminPage);
+            rd.forward(request,response);
            
         }
                 

@@ -13,6 +13,7 @@ import java.io.*;
  */
 public class CompListBean {
     
+    
     private Collection compList;
     private String url=null;
     private int productID = 0;
@@ -239,7 +240,7 @@ public class CompListBean {
     
     // return the booklist
     
-    public java.util.Collection getProductList() {
+    public java.util.Collection getComponentList() {
         return compList;
     }
     
