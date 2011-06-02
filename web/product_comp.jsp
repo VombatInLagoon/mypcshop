@@ -46,18 +46,18 @@
     </x:transform>
 
 
-    <h2> You Have Selected The Product : <%= productList.getNameById(request.getParameter("productid")) %> </h2>
-    <h2> Available Set of Components </h2>
+    <h2> The configuration of the  : <%= productList.getNameById(request.getParameter("productid")) %> </h2>
+   
 
 
 
-    <c:set var="complist_xslt">
-        <c:import url="complist_xslt.xsl"/>
+    <c:set var="complist_xslt_brif">
+        <c:import url="complist_xslt_brif.xsl"/>
     </c:set>
 
 
 
-    <x:transform xslt="${complist_xslt}">
+    <x:transform xslt="${complist_xslt_brif}">
 
         <%= compList.getXMLByProductID(request.getParameter("productid"))%>
 

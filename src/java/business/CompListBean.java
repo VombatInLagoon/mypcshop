@@ -188,7 +188,7 @@ public class CompListBean {
 	    // each component is a ComponentBean object
 
             stmt = conn.createStatement();
-            String sql="SELECT COMPONENT_ID, DESCRIPTION FROM COMPONENT WHERE COMPONENT.NAME ='"+comp+"'";
+            String sql="SELECT COMPONENT_ID, DESCRIPTION,PRICE FROM COMPONENT WHERE COMPONENT.NAME ='"+comp+"'";
             
             //String sql = "select brand from PRODUCT where PRODUCT_ID = " + sp ;
             
@@ -206,7 +206,7 @@ public class CompListBean {
                 //cb.setPId(rs.getInt("PRODUCT_ID"));
                 //cb.setName(rs.getString("NAME"));
                
-                //cb.setPrice(rs.getInt("PRICE"));
+                cb.setPrice(rs.getInt("PRICE"));
                 cb.setDescription(rs.getString("DESCRIPTION"));
                 compList.add(cb);
                 

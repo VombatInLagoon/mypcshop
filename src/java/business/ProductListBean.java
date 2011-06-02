@@ -44,7 +44,7 @@ public class ProductListBean {
 
             stmt = conn.createStatement();
             String sql="SELECT PRODUCT_ID, BRAND , ";
-            sql += "DESCRIPTION FROM PRODUCT";
+            sql += "DESCRIPTION,PRICE FROM PRODUCT";
             rs= stmt.executeQuery(sql);
             
 	    // analyze the result set
@@ -56,6 +56,7 @@ public class ProductListBean {
                 pb.setId(rs.getInt("PRODUCT_ID"));
                 pb.setName(rs.getString("BRAND"));
                 pb.setDescription(rs.getString("DESCRIPTION"));
+                pb.setPrice(rs.getDouble("PRICE"));
                 productList.add(pb);
                 
             }

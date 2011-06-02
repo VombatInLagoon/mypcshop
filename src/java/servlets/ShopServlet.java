@@ -197,6 +197,20 @@ public class ShopServlet extends HttpServlet {
 	    else{
 		throw new ServletException("No productid when viewing detail");
 	    }
+            
+            /** 
+             * We defined this to reload the bean which is used to show the 
+             * list of components of the product
+             */
+            try {
+                compList = new CompListBean(jdbcURL);
+            } catch (Exception e) {
+                throw new ServletException(e);
+            }
+            ServletContext sc = getServletContext();
+            sc.setAttribute("compList",compList);
+            
+            
             rd = request.getRequestDispatcher(productCompPage);
             rd.forward(request,response);
 	}

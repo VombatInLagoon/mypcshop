@@ -122,6 +122,8 @@ public class AdminServlet extends HttpServlet {
             CompListBean opticListb = new CompListBean(jdbcURL, "OPTIC");
             
             
+            // These Collections have been defined to keep the list of
+            // available component of each type!
             
             Collection collCpu = cpuListb.getComponentList();
             Collection collHdd = hddListb.getComponentList();
@@ -153,14 +155,16 @@ public class AdminServlet extends HttpServlet {
             
             PrintWriter out = response.getWriter();
             
-            out.println("The action has been reached succesfully!");
             
+            // This hash map is defined here to keep the list of 
+            // components of the new product 
             HashMap compId = new HashMap();
+            
             
             ProductBean pb = new ProductBean();
             
-            pb.setName(request.getParameter("brand"));
-            pb.setDescription(request.getParameter("name"));
+            pb.setName(request.getParameter("brand").trim());
+            pb.setDescription(request.getParameter("name").trim());
             pb.setCpu(Integer.parseInt(request.getParameter("cpuAmount")));
             pb.setHdd(Integer.parseInt(request.getParameter("hddAmount")));
             pb.setMonitor(Integer.parseInt(request.getParameter("monitorAmount")));
@@ -168,17 +172,30 @@ public class AdminServlet extends HttpServlet {
             pb.setRam(Integer.parseInt(request.getParameter("ramAmount")));
             pb.setVga(Integer.parseInt(request.getParameter("vgaAmount")));
             
-            compId.put("Mb", Integer.parseInt(request.getParameter("Mb")));
-            compId.put("Cpu", Integer.parseInt(request.getParameter("Cpu")));
-            compId.put("Ram", Integer.parseInt(request.getParameter("Ram")));
-            compId.put("Vga", Integer.parseInt(request.getParameter("Vga")));
-            compId.put("Hdd", Integer.parseInt(request.getParameter("Hdd")));
-            compId.put("Monitor", Integer.parseInt(request.getParameter("Monitor")));
-            compId.put("Optic", Integer.parseInt(request.getParameter("Optic")));
+            compId.put(Integer.parseInt(request.getParameter("Mb")),1);
+            compId.put(Integer.parseInt(request.getParameter("Cpu"))
+                    ,Integer.parseInt(request.getParameter("cpuAmount")));
+            compId.put(Integer.parseInt(request.getParameter("Ram"))
+                    ,Integer.parseInt(request.getParameter("ramAmount")));
+            compId.put(Integer.parseInt(request.getParameter("Vga"))
+                    ,Integer.parseInt(request.getParameter("vgaAmount")));
+            compId.put(Integer.parseInt(request.getParameter("Hdd"))
+                    ,Integer.parseInt(request.getParameter("hddAmount")));
+            compId.put(Integer.parseInt(request.getParameter("Monitor"))
+                    ,Integer.parseInt(request.getParameter("monitorAmount")));
+            compId.put(Integer.parseInt(request.getParameter("Optic"))
+                    ,Integer.parseInt(request.getParameter("opticAmount")));
            
             
+            // First we must calculate the price of new product
+            // and then we will add it to the DataBase
+            
+            pb.computePrice(jdbcURL,compId);
+            out.println("The action has been reached succesfully!");
             pb.addProduct(jdbcURL,compId);
             
+            
+    
             
             
             
@@ -207,6 +224,20 @@ public class AdminServlet extends HttpServlet {
              else{
 		throw new ServletException("No productid when viewing detail");
 	    }
+            
+            /** 
+             * We defined this to reload the bean which is used to show the 
+             * list of components of the product
+             */
+            try {
+                compList = new CompListBean(jdbcURL);
+            } catch (Exception e) {
+                throw new ServletException(e);
+            }
+            ServletContext sc = getServletContext();
+            sc.setAttribute("compList",compList);
+            
+            
             rd = request.getRequestDispatcher(compPage);
             rd.forward(request,response);
         }

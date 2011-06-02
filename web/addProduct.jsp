@@ -38,7 +38,7 @@
                             value = "" ></td>
             </tr>
             <tr>
-                <td>Select MB type:</td> 
+                <td>Select MB Type:</td> 
                 <td>
                     <select name="Mb">
 
@@ -63,7 +63,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Select RAM type: </td>
+                <td> Select RAM Type & Amount: </td>
                 <td>
                     <select name="Ram">
 
@@ -81,13 +81,13 @@
                         <%}%>
 
                     </select>  
-                        <input name="ramAmount" type="text"></input>
+                        <input name="ramAmount" type="text" size="2"></input>
 
 
                 </td>
             </tr>
             <tr>
-                <td>Select VGA type:</td>
+                <td>Select VGA Type & Amount:</td>
                 <td> 
                     <select name="Vga">
 
@@ -105,12 +105,12 @@
                         <%}%>
 
                     </select>  
-                            <input name="vgaAmount" type="text"></input>
+                            <input name="vgaAmount" type="text" size="2"></input>
                 </td>
             </tr>
 
             <tr>
-                <td>Select CPU type:</td>
+                <td>Select CPU Type & Amount:</td>
                 <td> 
 
                     <select name="Cpu">
@@ -129,12 +129,12 @@
                         <%}%>
                         
                     </select>  
-                            <input name="cpuAmount" type="text"></input>
+                            <input name="cpuAmount" type="text" size="2"></input>
                 </td>
             </tr>
 
             <tr>
-                <td>Select H.D.D type:</td>
+                <td>Select H.D.D Type & Amount:</td>
                 <td>
 
                     <select name="Hdd">
@@ -153,13 +153,13 @@
                         <%}%>
 
                     </select>         
-                            <input name="hddAmount" type="text"></input>
+                            <input name="hddAmount" type="text" size="2" ></input>
                 </td>
 
             </tr> 
 
             <tr>
-                <td>Select Monitor type:</td>
+                <td>Select Monitor Type & Amount:</td>
                 <td> 
                     <select name="Monitor">
 
@@ -178,12 +178,12 @@
 
                     </select>  
 
-                            <input name="monitorAmount" type="text"></input>
+                            <input name="monitorAmount" type="text" size="2"></input>
                 </td>
             </tr>
 
             <tr>
-                <td>Select Optical Drive type:</td>
+                <td>Select Optical Drive Type & Amount:</td>
                 <td> 
                     <select name="Optic">
 
@@ -193,7 +193,7 @@
                             for (ComponentBean item : itemsoptic) {
                         %>
 
-                        <option value="<%=item.getId()%>" name="Optic" >
+                        <option value="<%=item.getId() %>" name="Optic" >
                             <%=item.getDescription()%>
                         </option> 
 
@@ -201,7 +201,8 @@
                         <%}%>
 
                     </select>  
-                        <input name="opticAmount" type="text" ></input>
+                        <input name="opticAmount" type="text" size="2"></input>
+                        
                 </td>
             </tr>   
             

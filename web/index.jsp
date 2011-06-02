@@ -4,7 +4,7 @@
 
 <!-- start the middle column -->
 
-    <td valign="top">
+    <td valign="top" class ="onlineshop">
       <h2>Welcome!</h2>
       <p>
       Thanks for visiting. Make yourself at home. Feel free to browse through 
@@ -13,10 +13,7 @@
       to them later. We think our catalog contains some great music, and we 
       hope you like it as much as we do.
       </p>
-      <p>
-      If you find an album that you like, we hope that you'll use this site 
-      to order it. Most of the albums we carry aren't available anywhere else!
-      </p>
+      
     </td>
 
 <!-- end the middle column -->
