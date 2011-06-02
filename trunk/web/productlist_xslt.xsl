@@ -14,6 +14,10 @@
                 <td>
                     <strong>Description</strong>
                 </td>
+                <td>
+                    <strong>Price</strong>
+                </td>
+                
             </tr>
             <xsl:apply-templates/>
         </table>
@@ -36,6 +40,12 @@
                     <xsl:value-of select="description"/>
             
                 </td>
+                    
+                <td>
+                    <xsl:value-of select="price"/>
+            
+                </td>
+        
         
                 <td>
                     <xsl:element name="input"> 
