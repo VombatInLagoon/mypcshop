@@ -16,7 +16,7 @@ import java.util.Map;
  * @author amin
  */
 public class ProductBean {
-    // describe a book
+    // describe a Pc
 
     private int id;
     private String brand;
@@ -28,13 +28,17 @@ public class ProductBean {
     private int hdd;
     private int monitor;
     private int optical;
-    
     private int available;// Will Keep the available amount of this product
 
+    private HashMap compIdAmount ;
+    
     
     
     /** Creates a new instance of ProductBean */
-    public ProductBean() {
+    public ProductBean() throws Exception {
+        
+        
+        
     }
 
     
@@ -120,6 +124,15 @@ public class ProductBean {
 
     public void setAvailable(int _available) {
         available = _available;
+
+    }
+    
+    public HashMap getCompIdAmount() {
+        return compIdAmount;
+    }
+
+    public void setCompIdAmount(HashMap _compIdAmount) {
+        compIdAmount = _compIdAmount;
 
     }
     
@@ -249,7 +262,7 @@ public class ProductBean {
             //Finaly set the product id and its Available Amount
             
             this.id = pId;
-            computeAvailable(_url, _compId);
+            computeAvailable(url, compId);
 
 
 
@@ -298,7 +311,7 @@ public class ProductBean {
                                 // current product
         Connection conn = null;
         Statement stmt = null;
-        ResultSet rs = null;
+        ResultSet rst = null;
         
         
         double totalPrice = 0;
@@ -318,7 +331,7 @@ public class ProductBean {
                     
             
             //This result set will keep the list of components of the product
-            ResultSet rst = stmt.executeQuery(sql);
+            rst = stmt.executeQuery(sql);
             
                     
             
@@ -346,7 +359,7 @@ public class ProductBean {
             throw new Exception(sqle);
         } finally {
             try {
-                rs.close();
+                rst.close();
                 //ts.close();
             } catch (Exception e) {
             }
@@ -371,7 +384,7 @@ public class ProductBean {
      * @param _url
      * @param _copmList //this is the list of this product components 
      */
-    private void computeAvailable(String _url,HashMap _copmList) 
+    public void computeAvailable(String _url,HashMap _copmList) 
             throws ClassNotFoundException, Exception{
         
         String url = _url;
@@ -379,7 +392,9 @@ public class ProductBean {
         // current product
         Connection conn = null;
         Statement stmt = null;
-        ResultSet rs = null;
+        Statement stmtt = null;
+        ResultSet rstt = null;
+        ResultSet rst = null;
 
         ArrayList<Integer> avCompArray = new ArrayList<Integer>();
         
@@ -391,16 +406,16 @@ public class ProductBean {
         
             stmt = conn.createStatement();
         
-        
+            stmtt = conn.createStatement();
             
             String sql="SELECT * FROM COMPONENT";
             
-//            String sqlp = "SELECT MB,CPU,RAM,VGA,MONITOR,HDD,OPTIC FROM PRODUCT"
-//                    +"WHERE PRODUCT_ID='"+ this.id +"'";
-            
+            String sqlp = "SELECT MB,CPU,RAM,VGA,MONITOR,HDD,OPTIC FROM PRODUCT WHERE PRODUCT_ID='"+ id +"'";
+            rstt = stmtt.executeQuery(sqlp);
+            rstt.next();
             //This result set will keep the list of components of the product
-            ResultSet rst = stmt.executeQuery(sql);
-//            ResultSet rstp = stmt.executeQuery(sqlp);
+            rst = stmt.executeQuery(sql);
+            
 
             
             while(rst.next()){
@@ -417,33 +432,33 @@ public class ProductBean {
                         avCompArray.add(avMb);
                         
                     }else if(name.equals("CPU")){
-                        int cpuNum = this.cpu;//rstp.getInt(name);
+                        int cpuNum = rstt.getInt(name);
                         int avCpu = stocktmp/cpuNum;
                         avCompArray.add(avCpu);
                         
                     }else if(name.equals("VGA")){
-                        int vgaNum = this.vga;//rstp.getInt(name);
+                        int vgaNum = rstt.getInt(name);
                         int avVga = stocktmp/vgaNum;
                         avCompArray.add(avVga);
                         
                     }else if(name.equals("RAM")){
-                        int ramNum = this.ram;//rstp.getInt(name);
+                        int ramNum = rstt.getInt(name);
                         int avRam = stocktmp/ramNum;
                         avCompArray.add(avRam);
                         
                     }else if(name.equals("HDD")){
-                        int hddNum = this.hdd;//rstp.getInt(name);
+                        int hddNum = rstt.getInt(name);
                         int avHdd = stocktmp/hddNum;
                         avCompArray.add(avHdd);
                         
                         
                     }else if(name.equals("MONITOR")){
-                        int monitorNum = this.monitor;//rstp.getInt(name);
+                        int monitorNum = rstt.getInt(name);
                         int avMonitor = stocktmp/monitorNum;
                         avCompArray.add(avMonitor);
                         
                     }else if(name.equals("OPTIC")){
-                        int opticNum = this.optical;//rstp.getInt(name);
+                        int opticNum = rstt.getInt(name);
                         int avOptic = stocktmp/opticNum;
                         avCompArray.add(avOptic);
                         
@@ -458,12 +473,12 @@ public class ProductBean {
             Object avail = Collections.min(avCompArray);
             this.available = (Integer)avail;
             
-            String sqlAmount="UPDATE PRODUCT SET "
-                    +"AMOUNT='"+ this.available +"'"
-                    +"WHERE PRODUCT_ID='"+ this.id +"'";
-            
-            stmt.executeUpdate(sqlAmount);
-            
+//            String sqlAmount="UPDATE PRODUCT SET "
+//                    +"AMOUNT='"+ this.available +"'"
+//                    +"WHERE PRODUCT_ID='"+ this.id +"'";
+//            
+//            stmt.executeUpdate(sqlAmount);
+//            
             
             
              
@@ -471,8 +486,8 @@ public class ProductBean {
             throw new Exception(sqle);
         } finally {
             try {
-                rs.close();
-                //ts.close();
+                rstt.close();
+                rst.close();
             } catch (Exception e) {
             }
             try {
@@ -486,6 +501,80 @@ public class ProductBean {
         }
         
         
+    }
+    
+    
+    public void populateCompIdAmountMap(String _url) throws Exception{
+        
+        
+        // current product
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rscmp = null;
+        String url = _url; 
+        
+        compIdAmount = new HashMap();
+
+               
+        try {
+            
+            Class.forName("com.mysql.jdbc.Driver");
+
+            conn = DriverManager.getConnection(url);
+        
+            String sql="SELECT COMPONENT.COMPONENT_ID,COMPONENT.NAME FROM "
+                    + "COMPONENT INNER JOIN COMP_PROD WHERE COMP_PROD.PRODUCT_ID=? "
+                    + "AND COMPONENT.COMPONENT_ID=COMP_PROD.COMPONENT_ID;";
+            
+            
+            
+            pstmt = conn.prepareStatement(sql);
+        
+        
+            
+            
+
+            
+            //This result set will keep the list of components of the product
+            pstmt.setInt(1, this.id);
+            rscmp= pstmt.executeQuery();
+
+
+            
+            while(rscmp.next()){
+                
+                
+                String name = rscmp.getString("NAME");
+                if(name.equals("MB")){compIdAmount.put(rscmp.getInt("COMPONENT_ID"), 1);}
+                if(name.equals("CPU")){compIdAmount.put(rscmp.getInt("COMPONENT_ID"), this.cpu);}
+                if(name.equals("VGA")){compIdAmount.put(rscmp.getInt("COMPONENT_ID"), this.vga);}
+                if(name.equals("RAM")){compIdAmount.put(rscmp.getInt("COMPONENT_ID"), this.ram);}
+                if(name.equals("MONITOR")){compIdAmount.put(rscmp.getInt("COMPONENT_ID"), this.monitor);}
+                if(name.equals("HDD")){compIdAmount.put(rscmp.getInt("COMPONENT_ID"), this.hdd);}
+                if(name.equals("OPTIC")){compIdAmount.put(rscmp.getInt("COMPONENT_ID"), this.optical);}
+                
+                
+                
+            }     
+                     
+        } catch (SQLException sqle) {
+            throw new Exception(sqle);
+        } finally {
+            try {
+                rscmp.close();
+                //ts.close();
+            } catch (Exception e) {
+            }
+            try {
+                pstmt.close();
+            } catch (Exception e) {
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+                
     }
     
 }

@@ -9,13 +9,11 @@
     <a href="product.jsp">
         List of Products
     </a><br><br>
-    <a href="/musicStore/cart">
-        Quick order a PC
-    </a><br><br>
-    <a href="/musicStore/email/join_email_list.jsp">
+    
+    <a href="contactUs.html">
         Join our email list
     </a><br><br>
-    <a href="/musicStore/customer_service.jsp">
+    <a href="contactUs.jsp">
         Contact customer service
     </a>
     <%-- The Admin link is for testing only

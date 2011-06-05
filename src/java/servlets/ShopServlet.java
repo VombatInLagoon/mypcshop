@@ -231,11 +231,45 @@ public class ShopServlet extends HttpServlet {
 		shoppingCart.removeProduct(
 			Integer.parseInt(request.getParameter("productid")),
                         Integer.parseInt(request.getParameter("quantity")));
+                
+                
+                
+		    // Here we add the quantity of the product which is removed
+                    // From shopping cart by the user to the amount of the current product
+                    //
+                    ProductBean pb = null;
+		
+		// search the component in our shop
+
+                    pb = productList.getById(Integer.parseInt(
+                                         request.getParameter("productid")));
+                    
+                    Collection tmpProductList = (ArrayList)productList.getProductList();
+                    tmpProductList.remove(pb);
+                    
+                    pb.setAvailable(pb.getAvailabe()+ Integer
+                            .parseInt(request.getParameter("quantity")));
+                    
+                    tmpProductList.add(pb);
+                    
+                    productList.setProductList(tmpProductList);
+                    
+                    
+                    
+                    ServletContext sc = getServletContext();
+                    sc.setAttribute("productList", productList);
+                
+                
+                
+                
            }
            else{
              throw new ServletException(
 		    "No productid or quantity when removing component from cart");
            }
+            
+             
+            
             rd = request.getRequestDispatcher(productPage);
             rd.forward(request,response);
 	}
@@ -514,7 +548,27 @@ public class ShopServlet extends HttpServlet {
 
 	    rd = request.getRequestDispatcher(userPage);
 	    rd.forward(request, response);
-        }   
+        }
+        
+        
+        else if (request.getParameter("action").equals("deleteCookie")){
+        
+            Cookie[] cookies = request.getCookies();
+            for (int i = 0; i < cookies.length; i++) {
+                Cookie cookie = cookies[i];
+                cookie.setMaxAge(0); //delete the cookie
+                cookie.setPath("/"); //allow the entire application to access it
+                response.addCookie(cookie);
+            }
+
+            String urltmp = "/delete_cookies.jsp";
+            RequestDispatcher dispatcher =
+                    getServletContext().getRequestDispatcher(urltmp);
+            dispatcher.forward(request, response);
+   
+        }
+        
+        
     }
 
 

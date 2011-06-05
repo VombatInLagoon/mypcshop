@@ -10,7 +10,13 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="pcshop" uri="/WEB-INF/pcshop.tld"%>
 
+<% if (request.getRemoteUser() != null){ %>
+<jsp:include page="includes/headerlogout.html" />
+<%}else {%>
 <jsp:include page="includes/header.html" />
+<%}%>
+
+
 <jsp:include page="includes/column_left_home.jsp" />
 
 
@@ -74,14 +80,6 @@
     </x:transform>
 
 </td>
-<c:if test="${sessionScope.currentUser != null}">
-    <form action=shop?action=profile method=post>
-        <input type="submit" value="Update Profile">
-    </form>
 
-    <form action=shop?action=logout method=post>
-        <input type="submit" value="Logout">
-    </form>
-</c:if>
 
 <jsp:include page="includes/footer.jsp" />

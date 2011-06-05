@@ -3,7 +3,11 @@
     Created on : May 7, 2011, 4:43:33 PM
     Author     : amin
 --%>
+<% if (request.getRemoteUser() != null){ %>
+<jsp:include page="includes/headerlogout.html" />
+<%}else {%>
 <jsp:include page="includes/header.html" />
+<%}%>
 <jsp:include page="includes/column_left_home.jsp" />
 
 
@@ -14,10 +18,10 @@
     <p></p>
     <p></p>
     
-    <a href="shop"> <img src="images/pc.jpeg" /></a>
+    <a href="shop?action=show"> <img src="images/pc.jpeg" /></a>
 
 
-    <a href="laptop"> <img src="images/laptop.jpg" /></a>
+     <img src="images/laptop.jpg" />
 </td>
 
 

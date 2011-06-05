@@ -1,4 +1,8 @@
-<jsp:include page="/includes/header.html" />
+<% if (request.getRemoteUser() != null){ %>
+<jsp:include page="includes/headerlogout.html" />
+<%}else {%>
+<jsp:include page="includes/header.html" />
+<%}%>
 <jsp:include page="/includes/column_left_home.jsp" />
 
 

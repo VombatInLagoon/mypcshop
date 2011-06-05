@@ -157,8 +157,5 @@
         </form-login-config>
     </login-config>
   
-    <security-role>
-        <role-name>tomcat</role-name>
-    </security-role>
-  
+    
 </web-app>
