@@ -18,13 +18,17 @@
                     <strong>Price</strong>
                 </td>
                 
+                <td>
+                    <strong>Amount</strong>
+                </td>
+                
             </tr>
             <xsl:apply-templates/>
         </table>
     </xsl:template>
   
     <xsl:template match="product">
-        <form method="post" action="shop">
+        <form action="shop">
             <tr bgcolor="#E8E8E8" >
                 <td>
     <!--The variable header is used to save the selected product name -->
@@ -45,7 +49,12 @@
                     <xsl:value-of select="price"/>
             
                 </td>
-        
+                
+                <td>
+                    <xsl:value-of select="available"/>
+            
+                </td>
+                
         
                 <td>
                     <xsl:element name="input"> 
@@ -59,7 +68,7 @@
                     <xsl:variable name= "selectedId">
                         <xsl:value-of select="id"/>
                     </xsl:variable>
-                    <input type="submit" value="Select" />
+                    <input type="submit" value="Select"/>
                    
                     <input name="selectedProduct" type="hidden"  value="{$selectedId}"/>
                 </td>

@@ -44,7 +44,7 @@ public class ProductListBean {
 
             stmt = conn.createStatement();
             String sql="SELECT PRODUCT_ID, BRAND , ";
-            sql += "DESCRIPTION,PRICE FROM PRODUCT";
+            sql += "DESCRIPTION,PRICE,AMOUNT FROM PRODUCT";
             rs= stmt.executeQuery(sql);
             
 	    // analyze the result set
@@ -57,6 +57,7 @@ public class ProductListBean {
                 pb.setName(rs.getString("BRAND"));
                 pb.setDescription(rs.getString("DESCRIPTION"));
                 pb.setPrice(rs.getDouble("PRICE"));
+                pb.setAvailable(rs.getInt("AMOUNT"));
                 productList.add(pb);
                 
             }
@@ -85,10 +86,15 @@ public class ProductListBean {
         }
     }
     
-    // return the booklist
+    // return the product list
     
-    java.util.Collection getProductList() {
+    public java.util.Collection getProductList() {
         return productList;
+    }
+    
+    
+    public void setProductList(java.util.Collection _productList){
+        productList = _productList;
     }
     
     // create an XML document from the complist

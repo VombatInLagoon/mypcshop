@@ -15,7 +15,7 @@
 
   <xsl:template match="checkout">
     <html>
-    <head><title>BookShop::Checkout</title></head>
+    <head><title>PcShop::Checkout</title></head>
     <body>
   <table border="0" cellspacing="0">
     <tr bgcolor="silver">
@@ -25,7 +25,7 @@
     <tr bgcolor="silver">
       <td>Title</td>
       <td>Quantity</td>
-      <td colspan="2">Remove</td>
+<!--      <td colspan="2">Remove</td>-->
     </tr>
     </tr>
         <xsl:apply-templates select="shoppingcart/order"/>
@@ -76,7 +76,7 @@
   <xsl:template match="shoppingcart/order">
     <tr>
         <td>
-            <xsl:value-of select="book/title"/>
+            <xsl:value-of select="brand"/>
         </td>
         <td align="right">
             <xsl:value-of select="quantity"/>

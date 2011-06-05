@@ -118,14 +118,26 @@
         </taglib>
     </jsp-config>
     <security-constraint>
-        <!--        <web-resource-collection>
-            <web-resource-name>TheShop</web-resource-name>
-            <url-pattern>/checkout.jsp</url-pattern>
-        </web-resource-collection>-->
+        
         <web-resource-collection>
             <web-resource-name>Admin Page</web-resource-name>
             <description>to control the administrator access</description>
-            <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/admin.jsp</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>TheShop</web-resource-name>
+
+            <url-pattern>/checkout.jsp</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>tomcat</role-name>
@@ -134,11 +146,19 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    <security-constraint>
-        <display-name>Constraint1</display-name>
-    </security-constraint>
+    
+    
+   
     <login-config>
-        <auth-method>BASIC</auth-method>
-        <realm-name>Login Page</realm-name>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/login_error.jsp</form-error-page>
+        </form-login-config>
     </login-config>
+  
+    <security-role>
+        <role-name>tomcat</role-name>
+    </security-role>
+  
 </web-app>
