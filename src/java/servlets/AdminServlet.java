@@ -13,13 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import business.*;
 import business.ProductBean;
-import java.io.Writer;
 import javax.servlet.*;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Hashtable;
+
 
 /**
  *
@@ -191,9 +189,9 @@ public class AdminServlet extends HttpServlet {
             // and then we will add it to the DataBase
             
             pb.computePrice(jdbcURL,compId);
-            out.println("The action has been reached succesfully!");
+            //out.println("The action has been reached succesfully!");
             pb.addProduct(jdbcURL,compId);
-            
+            //out.println("The action has been reached succesfully!");
             
     
             

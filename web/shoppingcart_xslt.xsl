@@ -18,11 +18,13 @@
     </tr>
     </tr>
         <xsl:apply-templates/>
-      <tr>
-      <td colspan="2">
-        <a href="shop?action=checkout">Checkout</a>
-      </td>
-    </tr>
+           
+                <tr>   
+                    <td colspan="2">
+                        <a href="shop?action=checkout">Checkout</a>
+                    </td>
+                </tr>
+           
    </table>
   </xsl:template>
   <xsl:template match="order">

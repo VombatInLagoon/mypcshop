@@ -7,6 +7,7 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import business.*;
+import java.io.PrintWriter;
 /**
  *
  * @author  Fredrik �lund, Olle Eriksson
@@ -26,6 +27,8 @@ public class ShopServlet extends HttpServlet {
     private static String productCompPage = null;
     private CompListBean compList = null;
     private ProductListBean productList = null;
+    
+    
     
     private static String selectedP = null;
     
@@ -108,7 +111,8 @@ public class ShopServlet extends HttpServlet {
 	sess.setAttribute("currentUser", request.getRemoteUser());
         sess.setAttribute("jdbcURL",jdbcURL);
 
-      
+        String errorMessage = " ";
+        String url= " ";
         
 	// find out what to do based on the attribute "action"
 	// no action or show
@@ -128,12 +132,21 @@ public class ShopServlet extends HttpServlet {
         else if (request.getParameter("action").equals("show")){
 	    
             // A request dispatcher that's connected to the page.
-	     
-            rd = request.getRequestDispatcher(showPage); 
+	    
+            try {
+                productList = new ProductListBean(jdbcURL);
+            } catch (Exception e) {
+                throw new ServletException(e);
+            }
+
+            ServletContext sc = getServletContext();
+            sc.setAttribute("productList", productList);
+   
+            rd = request.getRequestDispatcher(productPage); 
             rd.forward(request,response);
         }
 
-	// add a component to the shopping cart
+	
 	
 	else if(request.getParameter("action").equals("productShow")){
             
@@ -141,32 +154,76 @@ public class ShopServlet extends HttpServlet {
 
             if (request.getParameter("productid") != null && 
                 request.getParameter("quantity")!=null ){
+                
+                
+                
+                
                 ProductBean pb = null;
 		
 		// search the component in our shop
 
 		pb = productList.getById(Integer.parseInt(
                                          request.getParameter("productid")));
-                if(pb==null){
+                
+                
+                //Here we check some criteria for the quantity of the product slected
+                // by the user.
+                // We use servelet for data validation on the server side!
+                
+                if(Integer.parseInt(request.getParameter("quantity"))> pb.getAvailabe()||
+                        Integer.parseInt(request.getParameter("quantity"))<= 0){
+                    
+                    errorMessage = "Please Select a correct amount of products";
+                    url = "/productDetail.jsp";
+                    
+                    
+                    request.setAttribute("message", errorMessage);
+                    
+                    RequestDispatcher dispatch = getServletContext().getRequestDispatcher(url);
+                    dispatch.forward(request, response);
+                    
+                }else{
+                
+                if(pb == null){
                     throw new ServletException("The component is not in stock.");
                     
-                }
+                } 
                 else {
 
-		    // found, add it to the cart
+		    // Here we remove the selected quantity of the product temporarily
+                    // And if the purchase is done then this will also remove
+                    // from database permanently
 
+                    
+                    Collection tmpProductList = (ArrayList)productList.getProductList();
+                    tmpProductList.remove(pb);
+                    
+                    pb.setAvailable(pb.getAvailabe()-Integer
+                            .parseInt(request.getParameter("quantity")));
+                    
+                    tmpProductList.add(pb);
+                    
+                    productList.setProductList(tmpProductList);
+                    
                     shoppingCart.addProduct(pb,Integer.parseInt(
                                          request.getParameter("quantity")));
-                }
-            }
+                    
+                    ServletContext sc = getServletContext();
+                    sc.setAttribute("productList", productList);
+                    
+                   
+                    }
+            
             
 	    // back to the showpage
-
+            request.setAttribute("message", " ");    
             rd = request.getRequestDispatcher(productPage);
             rd.forward(request,response);
+            }
+            }
        }
 
-	// remove a component from the cart
+	// remove a product from the cart
 
 	else if(request.getParameter("action").equals("remove")){
 	    if (request.getParameter("productid") != null && 
@@ -251,10 +308,26 @@ public class ShopServlet extends HttpServlet {
 
 	// checkout, get user data, we must have a valid user
 
-       else if(request.getParameter("action").equals("checkout")){       
+       else if(request.getParameter("action").equals("checkout")){ 
+          
+            if(shoppingCart.getCart().isEmpty()){
+                
+                errorMessage = "Your Shopping Cart Is Empty!";
+                    url = "/productDetail.jsp";
+                    
+                    
+                    request.setAttribute("messageEptyCart", errorMessage);
+                    
+                    RequestDispatcher dispatch = getServletContext().getRequestDispatcher(url);
+                    dispatch.forward(request, response);
+                
+            }
+            else{
+           
+           
 	       if(sess.getAttribute("currentUser") != null) {
 
-		   // create an profile and populate it from the
+		   // create a profile and populate it from the
 		   // database
 
 	       ProfileBean p = new ProfileBean(jdbcURL);
@@ -271,14 +344,14 @@ public class ShopServlet extends HttpServlet {
 	       // redirect (not forward)
 
             response.sendRedirect(redirectPage);
-          
+            }
        }
 
 	// logout, just delete the session (where we have the user data)
 	
        else if(request.getParameter("action").equals("logout")) {
 	    sess.invalidate();
-          rd = request.getRequestDispatcher(byePage);
+            rd = request.getRequestDispatcher(byePage);
 	    rd.forward(request,response);
         }	 
 

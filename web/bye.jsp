@@ -5,11 +5,15 @@
 <%@taglib prefix="webstore" uri="/WEB-INF/pcshop.tld"%>
 
 <html>
-<head><title>BookShop::Bye</title></head>
-<body>
-	<h1>Good bye</h1>
-  You have logged out from the shop.<br /><br />
-  <a href="shop?action=show">Buy more books</a>
-  
-</body>
+    <head>
+        <title>Good Bye, We hope you get back soon!</title>
+        <link rel="stylesheet" href="/pcShop2011/pcshop.css">
+    <center>
+        <body>
+            <h1>Good Bye, We hope you get back soon!</h1>
+            You have logged out from the shop.<br /><br />
+            <a href="shop?action=show"> Buy More Product</a>
+
+        </body>
+    </center>
 </html>

@@ -5,6 +5,8 @@
 package business;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -26,8 +28,12 @@ public class ProductBean {
     private int hdd;
     private int monitor;
     private int optical;
+    
+    private int available;// Will Keep the available amount of this product
 
-    /** Creates a new instance of ComponentBean */
+    
+    
+    /** Creates a new instance of ProductBean */
     public ProductBean() {
     }
 
@@ -107,6 +113,17 @@ public class ProductBean {
 
     }
 
+    
+    public int getAvailabe() {
+        return available;
+    }
+
+    public void setAvailable(int _available) {
+        available = _available;
+
+    }
+    
+    
     public void setDescription(String _description) {
         description = _description;
     }
@@ -120,7 +137,7 @@ public class ProductBean {
 
         // use a Stringbuffer (not String) to avoid multiple
         // object creation
-
+        
         StringBuffer xmlOut = new StringBuffer();
 
         xmlOut.append("<product>");
@@ -136,6 +153,10 @@ public class ProductBean {
         xmlOut.append("<price>");
         xmlOut.append(price);
         xmlOut.append("</price>");
+        xmlOut.append("<available>");
+        xmlOut.append(available);
+        xmlOut.append("</available>");
+        
         xmlOut.append("</product>");
 
         return xmlOut.toString();
@@ -146,6 +167,9 @@ public class ProductBean {
     /**
      * This method has been added to make the bean able to add 
      * The new product into the DataBase
+     * @param _url
+     * @param _compId
+     * @throws Exception 
      */
     public void addProduct(String _url, HashMap _compId) throws Exception {
 
@@ -222,10 +246,10 @@ public class ProductBean {
 
             }
 
-            //Finaly set the product id
+            //Finaly set the product id and its Available Amount
             
-            this.id=pId;
-
+            this.id = pId;
+            computeAvailable(_url, _compId);
 
 
 
@@ -254,7 +278,20 @@ public class ProductBean {
     }
     
     
-    public void computePrice(String _url,HashMap _copmList) throws SQLException, ClassNotFoundException, Exception{
+    
+    /**
+     * This method computes the price of each product
+     * By summing up the prices of it's individual components and adding 
+     * 10% to the total price
+     * 
+     * @param _url
+     * @param _copmList  // This is the list of components of this product
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     * @throws Exception 
+     */
+    public void computePrice(String _url,HashMap _copmList) throws SQLException
+            , ClassNotFoundException, Exception{
         
         String url = _url;
         HashMap compList = _copmList; // This map will keep the amount of each component of the 
@@ -283,13 +320,7 @@ public class ProductBean {
             //This result set will keep the list of components of the product
             ResultSet rst = stmt.executeQuery(sql);
             
-            
-            // temporary variables to keep the amount of different component
-            // in the product
-
-            
-            
-            
+                    
             
             while(rst.next()){
                 
@@ -311,6 +342,131 @@ public class ProductBean {
                 
                 
         
+        } catch (SQLException sqle) {
+            throw new Exception(sqle);
+        } finally {
+            try {
+                rs.close();
+                //ts.close();
+            } catch (Exception e) {
+            }
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+        
+        
+    }
+    
+    
+    /**
+     * This method will compute the number of available product of this brand
+     * Based on the available amount of the components which are used in this 
+     * Product.
+     * @param _url
+     * @param _copmList //this is the list of this product components 
+     */
+    private void computeAvailable(String _url,HashMap _copmList) 
+            throws ClassNotFoundException, Exception{
+        
+        String url = _url;
+        HashMap compList = _copmList; // This map will keep the amount of each component of the 
+        // current product
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Integer> avCompArray = new ArrayList<Integer>();
+        
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            conn = DriverManager.getConnection(url);
+        
+            stmt = conn.createStatement();
+        
+        
+            
+            String sql="SELECT * FROM COMPONENT";
+            
+//            String sqlp = "SELECT MB,CPU,RAM,VGA,MONITOR,HDD,OPTIC FROM PRODUCT"
+//                    +"WHERE PRODUCT_ID='"+ this.id +"'";
+            
+            //This result set will keep the list of components of the product
+            ResultSet rst = stmt.executeQuery(sql);
+//            ResultSet rstp = stmt.executeQuery(sqlp);
+
+            
+            while(rst.next()){
+                
+                int idtmp = rst.getInt("COMPONENT_ID");
+                int stocktmp = rst.getInt("STOCK_NUM");
+                String name = rst.getString("NAME");
+                
+                if(compList.containsKey(idtmp)){
+                    
+                    if(name.equals("MB")){
+                        int mbNum = 1;//rstp.getInt(name);
+                        int avMb = stocktmp/mbNum;
+                        avCompArray.add(avMb);
+                        
+                    }else if(name.equals("CPU")){
+                        int cpuNum = this.cpu;//rstp.getInt(name);
+                        int avCpu = stocktmp/cpuNum;
+                        avCompArray.add(avCpu);
+                        
+                    }else if(name.equals("VGA")){
+                        int vgaNum = this.vga;//rstp.getInt(name);
+                        int avVga = stocktmp/vgaNum;
+                        avCompArray.add(avVga);
+                        
+                    }else if(name.equals("RAM")){
+                        int ramNum = this.ram;//rstp.getInt(name);
+                        int avRam = stocktmp/ramNum;
+                        avCompArray.add(avRam);
+                        
+                    }else if(name.equals("HDD")){
+                        int hddNum = this.hdd;//rstp.getInt(name);
+                        int avHdd = stocktmp/hddNum;
+                        avCompArray.add(avHdd);
+                        
+                        
+                    }else if(name.equals("MONITOR")){
+                        int monitorNum = this.monitor;//rstp.getInt(name);
+                        int avMonitor = stocktmp/monitorNum;
+                        avCompArray.add(avMonitor);
+                        
+                    }else if(name.equals("OPTIC")){
+                        int opticNum = this.optical;//rstp.getInt(name);
+                        int avOptic = stocktmp/opticNum;
+                        avCompArray.add(avOptic);
+                        
+                    }                                
+                        
+                }
+            
+                
+            }
+            
+            
+            Object avail = Collections.min(avCompArray);
+            this.available = (Integer)avail;
+            
+            String sqlAmount="UPDATE PRODUCT SET "
+                    +"AMOUNT='"+ this.available +"'"
+                    +"WHERE PRODUCT_ID='"+ this.id +"'";
+            
+            stmt.executeUpdate(sqlAmount);
+            
+            
+            
+             
         } catch (SQLException sqle) {
             throw new Exception(sqle);
         } finally {

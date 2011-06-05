@@ -5,11 +5,17 @@
 <%@taglib prefix="webstore" uri="/WEB-INF/pcshop.tld"%>
 
 <html>
-<head><title>BookShop::Thank you</title></head>
+<head>
+<title>Thank you for your shopping</title>
+<link rel="stylesheet" href="/pcShop2011/pcshop.css">
+<center>
 <body>
+
+
 	<h1>Thank you</h1>
   Your order has been saved to the database and will be shipped shortly<br /><br />
-  <a href="shop?action=show">Buy more books</a>
+  <a href="shop?action=show">Buy more Products</a>
   
 </body>
+</center>
 </html>
