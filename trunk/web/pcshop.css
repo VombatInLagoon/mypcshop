@@ -28,11 +28,11 @@ li {font-family: Arial, sans-serif; font-size: 12px; margin-bottom: 3px}
 .times       {font-family: "Times New Roman", Times, serif}
 .identlevel  {margin-top: -12px; margin-bottom: -12px; margin-left: 18px}
 
-.tablebg { background: url('images/BG-Main.gif');}
+.tablebg { background: url('images/banner.png') no-repeat right top;}
 
 
 .onlineshop{
-    background:url('images/onlineshop.jpg') no-repeat right bottom;
+    background:url('images/mouse.jpg') no-repeat right bottom;
     
         
 }
