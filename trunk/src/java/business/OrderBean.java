@@ -135,7 +135,7 @@ public class OrderBean  {
       updateCompSQL = "UPDATE COMPONENT SET STOCK_NUM = (STOCK_NUM - ?) WHERE COMPONENT_ID=?";
       
      
-      productAmountUpdateSQL = "UPDATE PRODUCT SET AMOUNT = AMOUNT-(?) WHERE PRODUCT_ID=?";
+      //productAmountUpdateSQL = "UPDATE PRODUCT SET AMOUNT = AMOUNT-(?) WHERE PRODUCT_ID=?";
       
       
       stmt = con.prepareStatement("SELECT LAST_INSERT_ID()");
@@ -153,7 +153,7 @@ public class OrderBean  {
       tmpCompPstmt = con.prepareStatement(tmpCompSQL);
       tmpProdPstmt = con.prepareStatement(tmpProdSQL);
       updateCompPstmt = con.prepareStatement(updateCompSQL);
-      updateProductAmount = con.prepareStatement(productAmountUpdateSQL);
+      //updateProductAmount = con.prepareStatement(productAmountUpdateSQL);
       
       while(iter.hasNext()){
           
@@ -164,9 +164,9 @@ public class OrderBean  {
           orderItemPstmt.setInt(3,((Integer)tmpArr[1]).intValue());  
           orderItemPstmt.execute();
           
-          updateProductAmount.setInt(1,((Integer)tmpArr[1]).intValue() );
-          updateProductAmount.setInt(2,pb.getId());
-          updateProductAmount.execute();
+          //updateProductAmount.setInt(1,((Integer)tmpArr[1]).intValue() );
+          //updateProductAmount.setInt(2,pb.getId());
+          //updateProductAmount.execute();
           
           tmpCompPstmt.setInt(1,pb.getId() );
           ResultSet rstComp = tmpCompPstmt.executeQuery();

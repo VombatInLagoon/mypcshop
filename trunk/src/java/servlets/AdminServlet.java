@@ -186,7 +186,7 @@ public class AdminServlet extends HttpServlet {
            
             
             // First we must calculate the price of new product
-            // and then we will add it to the DataBase
+            // And then we will add it to the DataBase
             
             pb.computePrice(jdbcURL,compId);
             //out.println("The action has been reached succesfully!");

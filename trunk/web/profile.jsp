@@ -5,7 +5,7 @@
 <%@taglib prefix="webstore" uri="/WEB-INF/pcshop.tld"%>
 
 <html>
-<head><title>BookShop::Password</title></head>
+<head><title>PcShop::Password</title></head>
 <body>
 	<h1>Please update the profile for the user 
       <i>${sessionScope.currentUser}</i></h1>

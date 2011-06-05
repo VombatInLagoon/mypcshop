@@ -6,35 +6,35 @@
 
 <html>
     <head><title>CheckOut</title>
-    <link rel="stylesheet" href="/pcShop2011/pcshop.css">
+        <link rel="stylesheet" href="/pcShop2011/pcshop.css">
     </head>
     <center>
         <body>
 
-<c:if test="${sessionScope.currentUser == null}">
-  <pcshop:profile url="${jdbcURL}"/>
-</c:if>
-            
+            <c:if test="${sessionScope.currentUser == null}">
+                <pcshop:profile url="${jdbcURL}"/>
+            </c:if>
 
-<c:set var="shoppingcart_xslt">
-   <c:import url="shoppingcart_checkout_xslt.xsl"/>
-</c:set> 
-<x:transform xslt="${shoppingcart_xslt}">
-   <checkout>
-   <pcshop:shoppingcart/>
-   <name>${profile.name}</name>
-   <address>${profile.street}</address>
-   <zip>${profile.zip}</zip>
-   <city>${profile.city}</city>
-   </checkout>
-</x:transform>
 
-        
-        
-        
+            <c:set var="shoppingcart_xslt">
+                <c:import url="shoppingcart_checkout_xslt.xsl"/>
+            </c:set> 
+            <x:transform xslt="${shoppingcart_xslt}">
+            <checkout>
+                <pcshop:shoppingcart/>
+                <name>${profile.name}</name>
+                <address>${profile.street}</address>
+                <zip>${profile.zip}</zip>
+                <city>${profile.city}</city>
+            </checkout>
+        </x:transform>
 
-        </body>
-    </center>
+
+
+
+
+    </body>
+</center>
 </html>
 
 
