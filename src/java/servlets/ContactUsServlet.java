@@ -36,20 +36,18 @@ public class ContactUsServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
                 // get parameters from the request
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
+        String firstName = request.getParameter("first_name");
+        //String lastName = request.getParameter("last_name");
         String emailAddress = request.getParameter("email");
         String comments = request.getParameter("comments"); 
 
-        
-        
         
         
         // send email to user
         String toUser = emailAddress;
         String fromPcShop = "email_list@murach.com";
         String subject = "Welcome to our email list";
-        String body = "Dear " + firstName + ",\n\n" +
+        String body = "Dear " + firstName+ ",\n\n" +
             "Thanks for your comment. We'll make sure to send " +
             "you announcements about new products and promotions.\n" +
             "Have a great day and thanks again!\n\n" +
