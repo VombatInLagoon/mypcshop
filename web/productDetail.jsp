@@ -26,7 +26,7 @@
 
 <td width = "840" valign="top">    
 
-<h2> The Product List </h2>
+<h2> List of Products </h2>
 <jsp:useBean id="productList" class="business.ProductListBean"  scope="application">
     Error, the Bean is not created!
 </jsp:useBean>

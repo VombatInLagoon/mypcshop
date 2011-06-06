@@ -12,7 +12,7 @@
         <body>
             <h1>Good Bye, We hope you get back soon!</h1>
             You have logged out from the shop.<br /><br />
-            <a href="shop?action=show"> Buy More Product</a>
+            <a href="index.jsp"> Go to Home Page</a>
 
         </body>
     </center>

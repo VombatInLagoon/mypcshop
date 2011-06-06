@@ -40,7 +40,7 @@
     
 
    
-    <h2> The Product List </h2>
+    <h2> List of Products </h2>
 
     <c:set var="productlist_xslt">
         <c:import url="productlist_xslt.xsl"/>
@@ -52,9 +52,10 @@
     </x:transform>
 
 
-    <h2> The configuration of the  : <%= productList.getNameById(request.getParameter("productid")) %> </h2>
-   
-
+    <h2> Configuration of the  : <%= productList.getNameById(request.getParameter("productid")) %> </h2>
+    <form method="post" action="productDetail.jsp">
+        <input type="submit" name="hide" value="Hide" />
+    </form>
 
 
     <c:set var="complist_xslt_brif">

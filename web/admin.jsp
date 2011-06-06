@@ -13,7 +13,7 @@
 <%}%>
 <jsp:include page="/includes/column_left_home.jsp" />
 
-<td>
+<td class="admin">
     <table>
         <tr>
 

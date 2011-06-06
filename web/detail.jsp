@@ -8,7 +8,7 @@
 <jsp:useBean id="component" class="business.ProductBean" scope="request">
     Error, the bean should have been created in the servlet!
 </jsp:useBean>
-
+    
 
 <c:set var="componentdetail_xslt">
    <c:import url="componentdetail_xslt.xsl"/>

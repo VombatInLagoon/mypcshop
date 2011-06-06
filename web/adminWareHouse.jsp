@@ -38,6 +38,10 @@
         request.setAttribute("compFullList", compFullList);
     %>
     <h2>The list of available components in the warehouse!</h2>
+    <form method="post" action="admin.jsp">
+        <input type="submit" name="back" value="Back" />
+    </form>
+    
     <p></p>
     <p></p>
    

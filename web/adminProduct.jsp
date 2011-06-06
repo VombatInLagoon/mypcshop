@@ -31,7 +31,7 @@
    <c:import url="productListWareHouse_xslt.xsl"/>
 </c:set>
 
-    <form action="admin">
+    <form action="admin" method="post">
         <x:transform xslt="${productListWareHouse_xslt}">
             <jsp:getProperty name="productList" property="xml"/>
         </x:transform>
