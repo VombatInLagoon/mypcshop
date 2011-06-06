@@ -12,8 +12,8 @@
 <jsp:include page="/includes/header.html" />
 <jsp:include page="/includes/column_left_home.jsp" />
 
-<td valign="top" >
-    <form name="contactform" method="post" action="send_form_email.php">
+<td valign="top" class="contact">
+    <form action=contactUs>
         <table width="450px">
             </tr>
             <tr>
@@ -55,16 +55,42 @@
         <label for="comments">Comments *</label>
         </td>
         <td valign="top">
-            <textarea  name="comments" maxlength="1000" cols="25" rows="6"></textarea>
+            <textarea  name="comments" maxlength="1000" cols="30" rows="6"></textarea>
         </td>
 
         </tr>
         <tr>
         <td colspan="2" style="text-align:center">
-            <input type="submit" value="Submit">  
+            
+            <input type="button" value="Submit" onClick ="validate(this.form)">  
         </td>
         </tr>
     </table>
 </form>
 
+<script language="javascript">
+    function validate(form){
+        if (form.first_name.value ==""){
+            alert("Please fill in your name");
+            form.first_name.focus();
+                                   
+        }
+        else if(form.last_name.value==""){
+            alert("Please fill in your last name ");
+            form.last_name.focus();
+        }
+        else if(form.email.value==""){
+            alert("Please fill in your email address ");
+            form.email.focus();
+        }
+        else if(form.comments.value==""){
+            alert("Please fill in your comments in the comment box ");
+            form.comments.focus();
+        }
+        else {
+            form.submit();
+        }
+    }
+</script>
+    
 <jsp:include page="/includes/footer.jsp" />

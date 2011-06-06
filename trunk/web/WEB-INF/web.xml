@@ -4,9 +4,6 @@
         <servlet-name>Shop</servlet-name>
         <servlet-class>servlets.ShopServlet</servlet-class>
         <!-- This init vale has been added to support the Administartor servlet -->
-        
-            
-               
         <init-param>
             <param-name>CHECKOUT_PAGE</param-name>
             <param-value>/checkout.jsp</param-value>
@@ -52,12 +49,10 @@
             <param-value>checkout.jsp</param-value>
         </init-param>
     </servlet>
-    
     <!-- The Admin servlet is defined here -->
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
         <servlet-class>servlets.AdminServlet</servlet-class>
-        
         <init-param>
             <param-name>ADMIN_WARE_HOUSE_PAGE</param-name>
             <param-value>/adminWareHouse.jsp</param-value>
@@ -70,12 +65,10 @@
             <param-name>ADMIN_PRODUCT_DETAIL_PAGE</param-name>
             <param-value>/product_comp_admin.jsp</param-value>
         </init-param>
-        
-          <init-param>
+        <init-param>
             <param-name>ADD_PRODUCT_PAGE</param-name>
             <param-value>/addProduct.jsp</param-value>
         </init-param>
-        
         <init-param>
             <param-name>JDBC_URL</param-name>
             <param-value>jdbc:mysql://localhost/pcshop?user=root&amp;password=sesame</param-value>
@@ -84,12 +77,11 @@
             <param-name>THANK_YOU_PAGE</param-name>
             <param-value>/thankyou.jsp</param-value>
         </init-param>
-        
-           
     </servlet>
-    
-    
-    
+    <servlet>
+        <servlet-name>ContactUsServlet</servlet-name>
+        <servlet-class>servlets.ContactUsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Shop</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -97,6 +89,10 @@
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactUsServlet</servlet-name>
+        <url-pattern>/contactUs</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -118,7 +114,6 @@
         </taglib>
     </jsp-config>
     <security-constraint>
-        
         <web-resource-collection>
             <web-resource-name>Admin Page</web-resource-name>
             <description>to control the administrator access</description>
@@ -131,12 +126,9 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    
-    
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>TheShop</web-resource-name>
-
             <url-pattern>/checkout.jsp</url-pattern>
         </web-resource-collection>
         <auth-constraint>
@@ -146,9 +138,6 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    
-    
-   
     <login-config>
         <auth-method>FORM</auth-method>
         <form-login-config>
@@ -156,6 +145,4 @@
             <form-error-page>/login_error.jsp</form-error-page>
         </form-login-config>
     </login-config>
-  
-    
 </web-app>

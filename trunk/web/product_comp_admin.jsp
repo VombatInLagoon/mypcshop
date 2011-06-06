@@ -36,6 +36,11 @@
     <h2> The List of Components of : <%= productList.getNameById(request.getParameter("productid")) %> </h2>
     
 
+    <form method="post" action="adminProduct.jsp">
+        <input type="submit" name="back" value="Back" />
+    </form>
+    
+    
     <c:set var="complist_xslt">
         <c:import url="complist_xslt_admin.xsl"/>
     </c:set>

@@ -58,13 +58,14 @@
                         <td>Select roles:</td>
                         <c:forEach var="next" items="${roles}">
                         <tr>
+                        <c:if test="${next.key != 'admin' && next.key != 'manager-script'}">
                             <c:if test="${next.value == true}">
                                 <td><input type="checkbox" name="${next.key}" checked> ${next.key}    </td>
                                 </c:if>
                                 <c:if test="${next.value == false}">
                                 <td><input type="checkbox" name="${next.key}"> ${next.key}    </td>
                                 </c:if>
-
+                        </c:if>
                         </tr>
                     </c:forEach>
             </table> 

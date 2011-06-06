@@ -8,17 +8,22 @@
 
 <!-- start the middle column -->
 
-    <td valign="top" class ="onlineshop">
-      <h2>Welcome!</h2>
-      <p>
-      Thanks for visiting. Make yourself at home. Feel free to browse through 
-      our musical catalog. When you do, you can listen to samples from the 
-      albums on our site, or you can download selected sound files and listen 
-      to them later. We think our catalog contains some great music, and we 
-      hope you like it as much as we do.
-      </p>
+<td valign="top"   width="40%">
+    <h2>Welcome!</h2>
+    <p>
+        This is an online shopping web site. Through this e-commerce site you 
+        can easily find what you need.We offer a wide variety of Personal Computers
+        with unique configuration,each suitable with one specific task.
+        We offer up-to-date solutions for Gamers and also ordinary home and office 
+        uses.Feel free and navigate trough our list of products.
+    </p>
+</td> 
+<td valign="top" class ="onlineshop" width="40%">
+
+</td>
       
-    </td>
+      
+    
 
 <!-- end the middle column -->
 
