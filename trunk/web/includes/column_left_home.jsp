@@ -19,7 +19,7 @@
     <%-- The Admin link is for testing only
          and should be deleted for production environements --%>
     <br><br>
-    <a href="loginPage.jsp">
+    <a href="login?action=login">
         Admin application
     </a>
     

@@ -355,7 +355,7 @@ public class ShopServlet extends HttpServlet {
                     url = "/productDetail.jsp";
                    
                    
-                    request.setAttribute("messageEptyCart", errorMessage);
+                    request.setAttribute("messageEmptyCart", errorMessage);
                    
                     RequestDispatcher dispatch = getServletContext().getRequestDispatcher(url);
                     dispatch.forward(request, response);
@@ -390,7 +390,7 @@ public class ShopServlet extends HttpServlet {
        
        else if(request.getParameter("action").equals("logout")) {
             sess.invalidate();
-            rd = request.getRequestDispatcher(byePage);
+            rd = request.getRequestDispatcher(homePage);
             rd.forward(request,response);
         }        
 
