@@ -13,7 +13,7 @@
 <jsp:include page="/includes/column_left_home.jsp" />
 
 <td valign="top" class="contact">
-    <form action=contactUs>
+    <form action=contactUs method="post">
         <table width="450px">
             </tr>
             <tr>

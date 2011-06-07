@@ -13,8 +13,8 @@
     <p>
         This is an online shopping web site. Through this e-commerce site you 
         can easily find what you need.We offer a wide variety of Personal Computers
-        with unique configuration,each suitable with one specific task.
-        We offer up-to-date solutions for Gamers and also ordinary home and office 
+        with unique configuration,each suitable for one specific task.
+        We offer up-scale solutions for Gamers and also ordinary home and office 
         uses.Feel free and navigate trough our list of products.
     </p>
 </td> 

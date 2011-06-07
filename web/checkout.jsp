@@ -10,11 +10,11 @@
     </head>
     <center>
         <body>
-
+            
             <c:if test="${sessionScope.currentUser == null}">
                 <pcshop:profile url="${jdbcURL}"/>
             </c:if>
-
+            
 
             <c:set var="shoppingcart_xslt">
                 <c:import url="shoppingcart_checkout_xslt.xsl"/>
@@ -28,10 +28,6 @@
                 <city>${profile.city}</city>
             </checkout>
         </x:transform>
-
-
-
-
 
     </body>
 </center>

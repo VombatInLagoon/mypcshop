@@ -19,8 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author amin
+ * This servlet is used to send the user contacts messages via Gmail email 
+ * facilities
+ * @author amin & soode
  */
 public class ContactUsServlet extends HttpServlet {
 
