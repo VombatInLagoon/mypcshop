@@ -69,9 +69,60 @@
                         </tr>
                     </c:forEach>
             </table> 
-            <input type="submit" value="Go">
+                    <input type="button" value="Go" onClick="validate(this.form)">
             </form>
 
+                    
+                    
+<script language="JavaScript">
+function validate(form) 
+{
+    if (form.user.value=="") 
+    {
+            alert("Please fill in your user name");
+            form.user.focus();
+    }
+    else if (form.password.value=="") 
+    {
+            alert("Please fill in your password");
+            form.password.focus();
+    }
+    else if (form.password2.value=="") 
+    {
+            alert("Please re-enter your password");
+            form.password2.focus();
+    }
+    else if (form.name.value=="") 
+    {
+            alert("Please fill in your name");
+            form.name.focus();
+    }
+    else if (form.city.value=="") 
+    {
+            alert("Please fill in your city name");
+            form.city.focus();
+    }
+    else if (form.street.value=="") 
+    {
+            alert("Please fill in your address");
+            form.street.focus();
+    }
+    else if (form.zip.value=="") 
+    {
+            alert("Please fill in your zip/postal code");
+            form.zip.focus();
+    }
+    else if (form.country.value=="") 
+    {
+            alert("Please fill in your country");
+            form.country.focus();
+    }
+    else 
+    {
+           form.submit();
+    }
+}
+</script>
 
         </body>
     </center>

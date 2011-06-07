@@ -4,18 +4,25 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="webstore" uri="/WEB-INF/pcshop.tld"%>
 
-<html>
-<head><title>PcShop::Password</title></head>
-<body>
-	<h1>Please update the profile for the user 
-      <i>${sessionScope.currentUser}</i></h1>
+<jsp:include page="/includes/header.html" />
+<jsp:include page="/includes/column_left_home.jsp" />
+
+
+<!-- start the middle column -->
+
+<td valign="top" class ="onlineshop">
+
+	<h2>Please update the profile for the user 
+      <i>${sessionScope.currentUser}</i></h2>
 	${(passwordInvalid != null)?(passwordInvalid):null}
       <table border=0>
-	<form action=shop?action=profilechange method=post>
+	<form action=shop?action=profilechange method="post">
       <tr>
 	<td>Username:</td>
       <td> <input type="text" name="user" 
-             value="${sessionScope.currentUser}" disabled></td>
+             value="${sessionScope.currentUser}" disabled>
+          <input type="hidden" name="user" value="${sessionScope.currentUser}">
+      </td>
       <tr>
 	<td>New password:</td> 
       <td><input type="password" name="password" 
@@ -67,7 +74,6 @@
        </table> 
 	<input type="submit" value="Go">
       </form>
-
-  
-</body>
-</html>
+      
+      
+    <jsp:include page="/includes/footer.jsp" />

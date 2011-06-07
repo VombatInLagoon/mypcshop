@@ -12,7 +12,7 @@
     <form method="post" action='<%= response.encodeURL("j_security_check")%>' >
         <table border="0" cellspacing="5" align="left">
             <tr>
-            <td colspan="2"  align="left"><h2>Log in to the Admin Area</h2></td>
+            <td colspan="2"  align="left"><h2>Log in to continue shopping </h2></td>
             </tr>
 
             <tr>
@@ -27,10 +27,15 @@
             <th align="left"><input type="submit" value="Log In"></th>
             <td align="left"><input type="reset"></td>
             </tr>
+            
+            
+            
+            
             <tr>
             <td><a href="shop?action=newuser">register here!</a>
             </td>
             </tr>
+            
 
             
             

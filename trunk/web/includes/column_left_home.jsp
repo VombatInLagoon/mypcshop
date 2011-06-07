@@ -10,8 +10,8 @@
         List of Products
     </a><br><br>
     
-    <a href="contactUs.html">
-        Join our email list
+    <a href="loginPageProfile.jsp">
+        Edit your profile
     </a><br><br>
     <a href="contactUs.jsp">
         Contact customer service
@@ -19,7 +19,7 @@
     <%-- The Admin link is for testing only
          and should be deleted for production environements --%>
     <br><br>
-    <a href="admin.jsp">
+    <a href="loginPage.jsp">
         Admin application
     </a>
     

@@ -15,7 +15,7 @@ public class ProfileBean {
     
     // create a profile bean
 
-    private String url=null;
+    static String url=null;
     private String user;
     private String password;
     private String name;
@@ -24,9 +24,19 @@ public class ProfileBean {
     private String city;
     private String country;
     private HashMap<String,Boolean> role = null;
+    
+    static Connection currentCon = null;
+    
+    private boolean valid;
 
+    
+    public ProfileBean() {
+        this(
+          "jdbc:mysql://localhost/pcshop?user=root&password=sesame");
+    }
+
+    
     // constructor, set the database URL
-
     public ProfileBean(String _url) {
         url=_url;
     }
@@ -97,6 +107,17 @@ public class ProfileBean {
     public void setCountry(String _country) {
         country =  _country;
     }
+    
+    public boolean getValid() { 
+        return valid; 
+    } 
+    
+    public void setValid(boolean _valid) { 
+        valid = _valid; 
+    } 
+    
+    
+    
 
     // populate a profile instance from the database
 
@@ -191,7 +212,7 @@ public class ProfileBean {
         }
      }
     
-    // test if a user if in our tables
+    // test if a user is in our tables
 
     public boolean testUser(String u) throws Exception {
 	
@@ -231,5 +252,217 @@ public class ProfileBean {
             catch(Exception e){}
         }
     }
+    
+    
+    
+    public ProfileBean selectUser(String _name) throws ClassNotFoundException, SQLException
+    {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(url);
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String userName = _name;
+        
+        String query = "SELECT * FROM USERS " +
+                       "WHERE USER_NAME = ?";
+        try
+        {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, userName);
+            rs = ps.executeQuery();
+            ProfileBean up = null;
+            if (rs.next())
+            {
+                up = new ProfileBean();
+                
+                up.setUser(rs.getString("USER_NAME"));
+                up.setName(rs.getString("NAME"));
+                up.setStreet(rs.getString("STREET_ADDRESS"));
+                up.setZip(rs.getString("ZIP_CODE"));
+                up.setPassword(rs.getString("USER_PASS"));
+                up.setCity(rs.getString("CITY"));
+                up.setCountry(rs.getString("COUNTRY"));
+             
+            }
+            return up;
+        }
+        catch (SQLException e){
+            return null;
+        }        
+        finally
+        {
+             try{
+		rs.close();
+            }
+            catch(Exception e) {}
+            try{
+		ps.close();
+            }
+	    catch(Exception e) {}
+            try {
+		connection.close();
+            }
+            catch(Exception e){}
+        }
+    }
+    
+    
+    
+    
+    
+    public  static ProfileBean loginAdmin(ProfileBean bean) { 
+        //preparing some objects for connection 
+        Statement stmtLogin = null;
+        ResultSet rsLogin = null;
+        String username = bean.getUser(); 
+        String password = bean.getPassword();
+        
+        
+        String searchQuery = "select USERS.USER_NAME , USER_PASS from USERS "
+                + ", USER_ROLES where USER_ROLES.USER_NAME='"+username+"'"
+               
+                + "and ROLE_NAME = 'admin' and "
+                + "USERS.USER_PASS ='"+password+"'";
+        
+        // "System.out.println" prints in the console; Normally used to trace the process 
+        System.out.println("Your user name is " + username); 
+        System.out.println("Your password is " + password); 
+        System.out.println("Query: "+searchQuery); 
+        try { 
+            //connect to DB
+            Class.forName("com.mysql.jdbc.Driver");
+            currentCon = DriverManager.getConnection(url);
+            stmtLogin = currentCon.createStatement(); 
+            rsLogin = stmtLogin.executeQuery(searchQuery); 
+            boolean more = rsLogin.next(); 
+            
+            // if user does not exist set the isValid variable to false 
+            if (!more) { 
+                System.out.println("Sorry, you are not a registered user! Please sign up first");
+                bean.setValid(false); 
+            } //if user exists set the isValid variable to true 
+            else if (more) { 
+                String userName = rsLogin.getString("USER_NAME");
+                //String lastName = rsLogin.getString("LastName");
+                
+                System.out.println("Welcome " + userName);
+                bean.setUser(userName); 
+                //bean.setLastName(lastName); 
+                bean.setValid(true); 
+            } 
+        } catch (Exception ex) { 
+            System.out.println("Log In failed: An Exception has occurred! " + ex);
+        }  
+        
+        //some exception handling 
+        
+        finally { 
+            if (rsLogin != null) { 
+                try { 
+                    rsLogin.close(); 
+                } catch (Exception e) {} 
+                rsLogin = null; 
+            } 
+            
+            
+            if (stmtLogin != null) { 
+                try { 
+                    stmtLogin.close(); 
+                } catch (Exception e) {} 
+                stmtLogin = null; 
+            } 
+            
+            if ( currentCon != null) { 
+                try { 
+                    currentCon.close(); 
+                } catch (Exception e) { 
+                } 
+                
+                
+                currentCon = null; 
+            } 
+        } 
+        
+        return bean; 
+    
+    }
+    
+    public  static ProfileBean login(ProfileBean bean) { 
+        //preparing some objects for connection 
+        Statement stmtLogin = null;
+        ResultSet rsLogin = null;
+        String username = bean.getUser(); 
+        String password = bean.getPassword();
+        
+        
+        String searchQuery = "select USERS.USER_NAME , USER_PASS from USERS "
+                + ", USER_ROLES where USER_ROLES.USER_NAME='"+username+"'"
+                + "and USERS.USER_PASS ='"+password+"'";
+        
+        // "System.out.println" prints in the console; Normally used to trace the process 
+        System.out.println("Your user name is " + username); 
+        System.out.println("Your password is " + password); 
+        System.out.println("Query: "+searchQuery); 
+        try { 
+            //connect to DB
+            Class.forName("com.mysql.jdbc.Driver");
+            currentCon = DriverManager.getConnection(url);
+            stmtLogin = currentCon.createStatement(); 
+            rsLogin = stmtLogin.executeQuery(searchQuery); 
+            boolean more = rsLogin.next(); 
+            
+            // if user does not exist set the isValid variable to false 
+            if (!more) { 
+                System.out.println("Sorry, you are not a registered user! Please sign up first");
+                bean.setValid(false); 
+            } //if user exists set the isValid variable to true 
+            else if (more) { 
+                String userName = rsLogin.getString("USER_NAME");
+                //String lastName = rsLogin.getString("LastName");
+                
+                System.out.println("Welcome " + userName);
+                bean.setUser(userName); 
+                //bean.setLastName(lastName); 
+                bean.setValid(true); 
+            } 
+        } catch (Exception ex) { 
+            System.out.println("Log In failed: An Exception has occurred! " + ex);
+        }  
+        
+        //some exception handling 
+        
+        finally { 
+            if (rsLogin != null) { 
+                try { 
+                    rsLogin.close(); 
+                } catch (Exception e) {} 
+                rsLogin = null; 
+            } 
+            
+            
+            if (stmtLogin != null) { 
+                try { 
+                    stmtLogin.close(); 
+                } catch (Exception e) {} 
+                stmtLogin = null; 
+            } 
+            
+            if ( currentCon != null) { 
+                try { 
+                    currentCon.close(); 
+                } catch (Exception e) { 
+                } 
+                
+                
+                currentCon = null; 
+            } 
+        } 
+        
+        return bean; 
+    
+    }
+    
+    
+    
 }
 
