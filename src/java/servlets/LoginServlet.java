@@ -1,9 +1,9 @@
 package servlets;
 
-
 import business.*;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,24 +16,47 @@ public class LoginServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
 
-        try {
-            ProfileBean user = new ProfileBean();
 
-            user.setUser(request.getParameter("un"));
-            user.setPassword(request.getParameter("pw"));
-            
-            user = ProfileBean.loginAdmin(user);
-            if (user.getValid()) {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("currentUser", user);
+        HttpSession session = request.getSession();
+        //String url = null;
+        //session.setAttribute("currentUser", request.getRemoteUser());
 
-                response.sendRedirect("admin.jsp");
-            } else {
-                response.sendRedirect("login_error_admin.jsp");
-            }
+        if (session.getAttribute("logedinUser") != null) {
+            response.sendRedirect("admin.jsp");
+        } else if(request.getParameter("action").equals("login")){
+            response.sendRedirect("loginPage.jsp");
+        } 
+        else
+        {
+            try {
+                ProfileBean user = new ProfileBean();
+
+                user.setUser(request.getParameter("un"));
+                user.setPassword(request.getParameter("pw"));
+
+                user = ProfileBean.loginAdmin(user);
+                if (user.getValid()) {
+                    //session = request.getSession(true);
+                    session.setAttribute("logedinUser", user);
+                    //url = "/admin.jsp";
+                    
+                    
+//                    RequestDispatcher dispatch = 
+//                            getServletContext().getRequestDispatcher(url);
+//                    dispatch.forward(request, response);
+                    response.sendRedirect("admin.jsp");
+                } else {
+                    
+                    //url = "/login_error_admin.jsp";
+//                    RequestDispatcher dispatch = 
+//                            getServletContext().getRequestDispatcher(url);
+//                    dispatch.forward(request, response);
+                    response.sendRedirect("login_error_admin.jsp");
+                }
 //error page 
-        } catch (Throwable theException) {
-            System.out.println(theException);
+            } catch (Throwable theException) {
+                System.out.println(theException);
+            }
         }
     }
 }

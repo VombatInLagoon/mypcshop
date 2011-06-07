@@ -4,12 +4,13 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="pcshop" uri="/WEB-INF/pcshop.tld"%>
 
-<html>
-    <head><title>CheckOut</title>
-        <link rel="stylesheet" href="/pcShop2011/pcshop.css">
-    </head>
-    <center>
-        <body>
+<jsp:include page="/includes/header.html" />
+<jsp:include page="/includes/column_left_home.jsp" />
+
+
+<!-- start the middle column -->
+
+<td valign="top" class ="onlineshop">
             
             <c:if test="${sessionScope.currentUser == null}">
                 <pcshop:profile url="${jdbcURL}"/>
@@ -29,9 +30,7 @@
             </checkout>
         </x:transform>
 
-    </body>
-</center>
-</html>
+<jsp:include page="/includes/footer.jsp" />
 
 
 

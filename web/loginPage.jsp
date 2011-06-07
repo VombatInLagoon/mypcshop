@@ -10,6 +10,8 @@
 <jsp:include page="/includes/header.html" />
 <jsp:include page="/includes/column_left_home.jsp" />
 
+
+
 <td valign="top" class ="onlineshop">
 
 
@@ -32,6 +34,7 @@
             <tr>
             <th align="left"><input type="submit" value="Log In"></th>
             <td align="left"><input type="reset"></td>
+            <td align="left"><input type="hidden" name="action" value="" ></td>
             </tr>
  
         </table>

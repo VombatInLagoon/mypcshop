@@ -4,13 +4,21 @@
     Author     : amin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% if (request.getRemoteUser() != null){ %>
-<jsp:include page="includes/headerlogout.html" />
-<%}else {%>
-<jsp:include page="includes/header.html" />
-<%}%>
+
+<!-- This will check that if the user is log in and shows the logout option! --> 
+<c:choose>
+    <c:when test="${sessionScope.logedinUser != null}">
+        <jsp:include page="includes/headerlogout.html" />
+    </c:when>
+    
+    <c:otherwise>
+        <jsp:include page="includes/header.html" />
+    </c:otherwise>
+</c:choose>
+
 <jsp:include page="/includes/column_left_home.jsp" />
 
 <td class="admin">
