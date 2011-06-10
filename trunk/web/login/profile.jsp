@@ -4,8 +4,8 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="webstore" uri="/WEB-INF/pcshop.tld"%>
 
-<jsp:include page="/includes/header.html" />
-<jsp:include page="/includes/column_left_home.jsp" />
+<jsp:include page="../includes/header.html" />
+<jsp:include page="../includes/column_left_home.jsp" />
 
 
 <!-- start the middle column -->
@@ -16,7 +16,7 @@
       <i>${sessionScope.currentUser}</i></h2>
 	${(passwordInvalid != null)?(passwordInvalid):null}
       <table border=0>
-	<form action=shop?action=profilechange method="post">
+	<form action="../mainApp/shop?action=profilechange" method="post">
       <tr>
 	<td>Username:</td>
       <td> <input type="text" name="user" 
@@ -60,7 +60,9 @@
       </tr>
 	<tr>
 	<td>Select roles:</td>
+        
 	<c:forEach var="next" items="${roles}">
+            <c:if test="${next.key == 'tomcat' || next.key == 'manager'}" > 
       <tr>
          <c:if test="${next.value == true}">
 	    <td><input type="checkbox" name="${next.key}" checked> ${next.key}    </td>
@@ -68,12 +70,13 @@
        <c:if test="${next.value == false}">
 	    <td><input type="checkbox" name="${next.key}"> ${next.key}    </td>
          </c:if>
-
+            </c:if>
       </tr>
       </c:forEach>
        </table> 
 	<input type="submit" value="Go">
+        <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);return true;" />
       </form>
       
       
-    <jsp:include page="/includes/footer.jsp" />
+    <jsp:include page="../includes/footer.jsp" />

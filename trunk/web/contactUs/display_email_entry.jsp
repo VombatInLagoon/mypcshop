@@ -7,11 +7,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <% if (request.getRemoteUser() != null){ %>
-<jsp:include page="includes/headerlogout.html" />
+<jsp:include page="../includes/headerlogout.html" />
 <%}else {%>
-<jsp:include page="includes/header.html" />
+<jsp:include page="../includes/header.html" />
 <%}%>
-<jsp:include page="/includes/column_left_home.jsp" />
+<jsp:include page="../includes/column_left_home.jsp" />
 
 <td valign="top" >
 
@@ -23,4 +23,4 @@
     </form>
   
 </td>
-<jsp:include page="/includes/footer.jsp" />
+<jsp:include page="../includes/footer.jsp" />

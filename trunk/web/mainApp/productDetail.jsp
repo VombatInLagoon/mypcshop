@@ -7,20 +7,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" import="business.*, tags.*" %>
 
 
-<% String message =(String) request.getAttribute("message"); %>
-<% String messageEptyCart =(String) request.getAttribute("messageEptyCart"); %>        
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="pcshop" uri="/WEB-INF/pcshop.tld"%>
 
-<% if (request.getRemoteUser() != null){ %>
-<jsp:include page="includes/headerlogout.html" />
-<%}else {%>
-<jsp:include page="includes/header.html" />
-<%}%>
 
-<jsp:include page="includes/column_left_home.jsp" />
+<c:choose>
+    <c:when test="${pageContext.request.remoteUser != null}">
+        <jsp:include page="../includes/headerlogout.html" />
+    </c:when>
+    
+    <c:otherwise>
+        <jsp:include page="../includes/header.html" />
+    </c:otherwise>
+</c:choose>
+
+
+<jsp:include page="../includes/column_left_home.jsp" />
 
 
 
@@ -40,10 +44,8 @@
     <jsp:getProperty name="productList" property="xml"/>
 </x:transform>
 
-    
-<% if (message != null) { %>
- <p><i><%= message %></i></p> 
-<%}%>
+<%-- this is to check that the entered amount by user is correct! --%>    
+<h3> ${(message != null)?(message):null} </h3>  
     
 <c:set var="shoppingcart_xslt">
     <c:import url="shoppingcart_xslt.xsl"/>
@@ -55,9 +57,8 @@
     </x:transform>
     
 
-    
-<% if (messageEptyCart != null) { %>
- <p><i><%= messageEptyCart %></i></p> 
-<%}%>
-    
-<jsp:include page="includes/footer.jsp" />
+<%-- If the cart is empty show the error message --%>    
+<h3> ${(messageEmptyCart != null)?(messageEmptyCart):null} </h3>  
+
+
+<jsp:include page="../includes/footer.jsp" />

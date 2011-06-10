@@ -6,9 +6,18 @@
 
 
 
-<jsp:include page="/includes/header.html" />
-<jsp:include page="/includes/column_left_home.jsp" />
+<c:choose>
+    <c:when test="${pageContext.request.remoteUser != null}">
+        <jsp:include page="../includes/headerlogout.html" />
+    </c:when>
+    
+    <c:otherwise>
+        <jsp:include page="../includes/header.html" />
+    </c:otherwise>
+</c:choose>
 
+
+<jsp:include page="../includes/column_left_home.jsp" />
 <td width = "840" valign="top">
 
 <h2> Available Set of Components </h2>
@@ -48,4 +57,4 @@
 
 
 <%-- <jsp:include page="/includes/column_right_news.jsp" flush="true" /> --%>
-<jsp:include page="/includes/footer.jsp" />
+<jsp:include page="../includes/footer.jsp" />

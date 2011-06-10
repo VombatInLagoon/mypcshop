@@ -11,15 +11,15 @@
 <!-- This will check that if the user is log in and shows the logout option! --> 
 <c:choose>
     <c:when test="${sessionScope.logedinUser != null}">
-        <jsp:include page="includes/headerlogout.html" />
+        <jsp:include page="../includes/headerlogout.html" />
     </c:when>
     
     <c:otherwise>
-        <jsp:include page="includes/header.html" />
+        <jsp:include page="../includes/header.html" />
     </c:otherwise>
 </c:choose>
 
-<jsp:include page="/includes/column_left_home.jsp" />
+<jsp:include page="../includes/column_left_home.jsp" />
 
 <td class="admin">
     <table>
@@ -30,7 +30,7 @@
     </tr>
     <tr>
 
-    <form action="admin" method="post">
+    <form action="admin">
         <br></br>
         <br></br>
 
@@ -53,4 +53,4 @@
 </table>
 </td>
 
-<jsp:include page="/includes/footer.jsp" />
+<jsp:include page="../includes/footer.jsp" />

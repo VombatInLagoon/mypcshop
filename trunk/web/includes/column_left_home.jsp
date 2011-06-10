@@ -2,24 +2,24 @@
   <p>
   <br><br>
   
-  <a href="index.jsp">
+  <a href="http://localhost:8080/pcShop2011">
     Home
   </a><br><br>
     
-    <a href="product.jsp">
+    <a href="http://localhost:8080/pcShop2011/mainApp/product.jsp">
         List of Products
     </a><br><br>
     
-    <a href="loginPageProfile.jsp">
+    <a href="http://localhost:8080/pcShop2011/login/loginPageProfile.jsp">
         Edit your profile
     </a><br><br>
-    <a href="contactUs.jsp">
+    <a href="http://localhost:8080/pcShop2011/contactUs/contactUs.jsp">
         Contact customer service
     </a>
     <%-- The Admin link is for testing only
          and should be deleted for production environements --%>
     <br><br>
-    <a href="login?action=login">
+    <a href="http://localhost:8080/pcShop2011/administrator/login?action=login">
         Admin application
     </a>
     
