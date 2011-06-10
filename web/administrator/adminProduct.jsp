@@ -11,17 +11,18 @@
 <%@taglib prefix="pcshop" uri="/WEB-INF/pcshop.tld"%>
 
 <!-- This will check that if the user is log in and shows the logout option! --> 
+
 <c:choose>
     <c:when test="${sessionScope.logedinUser != null}">
-        <jsp:include page="includes/headerlogout.html" />
+        <jsp:include page="../includes/headerlogout.html" />
     </c:when>
     
     <c:otherwise>
-        <jsp:include page="includes/header.html" />
+        <jsp:include page="../includes/header.html" />
     </c:otherwise>
 </c:choose>
 
-<jsp:include page="includes/column_left_home.jsp" />
+<jsp:include page="../includes/column_left_home.jsp" />
 
 
 
@@ -44,4 +45,4 @@
         <input type="hidden" name ="action" value="addProduct"/>
     </from>
 
-<jsp:include page="includes/footer.jsp" />
+<jsp:include page="../includes/footer.jsp" />

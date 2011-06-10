@@ -35,24 +35,6 @@
         <example></example>
     </tag>
         
-    <tag>
-        <name>complist</name>
-        <tag-class>tags.CompListTag</tag-class>
-        <body-content>empty</body-content>
-        <attribute>
-		<name>url</name>
-		<required>true</required>
-            <rtexprvalue>false</rtexprvalue>
-	  </attribute>
-	  <attribute>
-		<name>component</name>
-		<required>true</required>
-            <rtexprvalue>false</rtexprvalue>
-	  </attribute>
-        <small-icon></small-icon>
-        <large-icon></large-icon>
-        <description></description>
-        <example></example>
-    </tag>
+    
 
 </taglib>

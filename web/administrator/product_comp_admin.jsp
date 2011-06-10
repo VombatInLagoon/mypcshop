@@ -10,12 +10,18 @@
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@taglib prefix="pcshop" uri="/WEB-INF/pcshop.tld"%>
 
-<% if (request.getRemoteUser() != null){ %>
-<jsp:include page="includes/headerlogout.html" />
-<%}else {%>
-<jsp:include page="includes/header.html" />
-<%}%>
-<jsp:include page="includes/column_left_home.jsp" />
+
+<c:choose>
+    <c:when test="${sessionScope.logedinUser != null}">
+        <jsp:include page="../includes/headerlogout.html" />
+    </c:when>
+    
+    <c:otherwise>
+        <jsp:include page="../includes/header.html" />
+    </c:otherwise>
+</c:choose>
+
+<jsp:include page="../includes/column_left_home.jsp" />
 
 
 
@@ -53,4 +59,4 @@
 
     </x:transform>
     
-<jsp:include page="includes/footer.jsp" />
+<jsp:include page="../includes/footer.jsp" />

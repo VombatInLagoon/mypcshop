@@ -6,9 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
-
-
 <jsp:include page="/includes/header.html" />
 <jsp:include page="/includes/column_left_home.jsp" />
 

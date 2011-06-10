@@ -6,7 +6,7 @@
 
 <html>
     <head><title>New User</title>
-    <link rel="stylesheet" href="/pcShop2011/pcshop.css">
+    <link rel="stylesheet" href="/pcShop2011/pcshop.css" />
     </head>
     <center>
         <body>
@@ -70,55 +70,51 @@
                     </c:forEach>
             </table> 
                     <input type="button" value="Go" onClick="validate(this.form)">
+                    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);return true;" />
             </form>
 
                     
                     
 <script language="JavaScript">
-function validate(form) 
-{
-    if (form.user.value=="") 
-    {
+function validate(form){
+    if (form.user.value==""){
             alert("Please fill in your user name");
             form.user.focus();
     }
-    else if (form.password.value=="") 
-    {
+    else if (form.password.value==""){
             alert("Please fill in your password");
             form.password.focus();
     }
-    else if (form.password2.value=="") 
-    {
+    else if (form.password2.value==""){
             alert("Please re-enter your password");
             form.password2.focus();
     }
-    else if (form.name.value=="") 
-    {
+    else if (form.password.value != form.password2.value){
+            alert("Passwords does not match!");
+            form.password2.focus();
+    }
+    
+    else if (form.name.value==""){
             alert("Please fill in your name");
             form.name.focus();
     }
-    else if (form.city.value=="") 
-    {
+    else if (form.city.value==""){
             alert("Please fill in your city name");
             form.city.focus();
     }
-    else if (form.street.value=="") 
-    {
+    else if (form.street.value==""){
             alert("Please fill in your address");
             form.street.focus();
     }
-    else if (form.zip.value=="") 
-    {
+    else if (form.zip.value==""){
             alert("Please fill in your zip/postal code");
             form.zip.focus();
     }
-    else if (form.country.value=="") 
-    {
+    else if (form.country.value==""){
             alert("Please fill in your country");
             form.country.focus();
     }
-    else 
-    {
+    else{
            form.submit();
     }
 }

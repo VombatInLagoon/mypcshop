@@ -14,15 +14,15 @@
 <!-- This will check that if the user is log in and shows the logout option! --> 
 <c:choose>
     <c:when test="${sessionScope.logedinUser != null}">
-        <jsp:include page="includes/headerlogout.html" />
+        <jsp:include page="../includes/headerlogout.html" />
     </c:when>
     
     <c:otherwise>
-        <jsp:include page="includes/header.html" />
+        <jsp:include page="../includes/header.html" />
     </c:otherwise>
 </c:choose>
 
-<jsp:include page="includes/column_left_home.jsp" />
+<jsp:include page="../includes/column_left_home.jsp" />
 
 
 
@@ -44,9 +44,7 @@
         request.setAttribute("compFullList", compFullList);
     %>
     <h2>The list of available components in the warehouse!</h2>
-    <form method="post" action="admin.jsp">
-        <input type="submit" name="back" value="Back" />
-    </form>
+    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);return true;"/>
     
     <p></p>
     <p></p>
@@ -67,4 +65,4 @@
 </td>
 
 
-<jsp:include page="includes/footer.jsp" />
+<jsp:include page="../includes/footer.jsp" />

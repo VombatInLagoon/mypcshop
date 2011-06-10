@@ -2,8 +2,8 @@
     Document   : addProduct
     Created on : May 25, 2011, 8:35:34 PM
     Author     : amin & soode
-    This page is supposed to produce a view for adding new 
-    Product into the pcshop data-base by selecting its components from
+    This page is supposed to produce a interface to make the admin able to add new 
+    Products into the pcshop data-base by selecting its components from
     availabel set of components.
 
 
@@ -19,15 +19,15 @@
 <!-- This will check that if the user is log in and shows the logout option! --> 
 <c:choose>
     <c:when test="${sessionScope.currentUser != null}">
-        <jsp:include page="includes/headerlogout.html" />
+        <jsp:include page="../includes/headerlogout.html" />
     </c:when>
     
     <c:otherwise>
-        <jsp:include page="includes/header.html" />
+        <jsp:include page="../includes/header.html" />
     </c:otherwise>
 </c:choose>
 
-<jsp:include page="includes/column_left_home.jsp" />
+<jsp:include page="../includes/column_left_home.jsp" />
 
 
 <td width = "840" valign="top">    
@@ -244,4 +244,4 @@
     }
 </script>
 
-<jsp:include page="includes/footer.jsp" />
+<jsp:include page="../includes/footer.jsp" />
