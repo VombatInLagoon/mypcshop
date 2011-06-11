@@ -21,7 +21,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author amin
+ * @author amin & soode
  */
 public class AdminServlet extends HttpServlet {
 
@@ -35,7 +35,7 @@ public class AdminServlet extends HttpServlet {
     private static CompListBean compList = null;
     private static String addProductPage = null;
     private static String thankPage = null;
-    
+   
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -79,11 +79,11 @@ public class AdminServlet extends HttpServlet {
         sc.setAttribute("compFullList", compFullList);
         sc.setAttribute("productList", productList);
         sc.setAttribute("compList",compList);
-        
+       
 
     }
 
-    /** 
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -100,17 +100,17 @@ public class AdminServlet extends HttpServlet {
 
             rd = request.getRequestDispatcher(wareHousePage);
             rd.forward(request, response);
-        
-        } 
+       
+        }
         else if(request.getParameter("action").equals("adminPageProduct")){
-            
+           
             rd = request.getRequestDispatcher(productAdminPage);
             rd.forward(request, response);
-            
+           
         }
-                
+               
         else if(request.getParameter("action").equals("addProduct")){
-            
+           
             CompListBean cpuListb = new CompListBean(jdbcURL, "CPU");
             CompListBean hddListb = new CompListBean(jdbcURL, "HDD");
             CompListBean vgaListb = new CompListBean(jdbcURL, "VGA");
@@ -118,11 +118,11 @@ public class AdminServlet extends HttpServlet {
             CompListBean mbListb = new CompListBean(jdbcURL, "MB");
             CompListBean monitorListb = new CompListBean(jdbcURL, "MONITOR");
             CompListBean opticListb = new CompListBean(jdbcURL, "OPTIC");
-            
-            
+           
+           
             // These Collections have been defined to keep the list of
             // available component of each type!
-            
+           
             Collection collCpu = cpuListb.getComponentList();
             Collection collHdd = hddListb.getComponentList();
             Collection collVga = vgaListb.getComponentList();
@@ -131,8 +131,8 @@ public class AdminServlet extends HttpServlet {
             Collection collMonitor = monitorListb.getComponentList();
             Collection collOptical = opticListb.getComponentList();
            
-            
-            
+           
+           
             request.setAttribute("complistcpu", collCpu);
             request.setAttribute("complisthdd", collHdd);
             request.setAttribute("complistmb", collMb);
@@ -140,27 +140,27 @@ public class AdminServlet extends HttpServlet {
             request.setAttribute("complistoptic", collOptical);
             request.setAttribute("complistram", collRam);
             request.setAttribute("complistvga", collVga);
-            
-            
+           
+           
             rd = request.getRequestDispatcher(addProductPage);
             rd.forward(request,response);
-            
+           
         }
-                
-                
-                
+               
+               
+               
         else if(request.getParameter("action").equals("addNewProduct")){
-            
+           
             PrintWriter out = response.getWriter();
-            
-            
-            // This hash map is defined here to keep the list of 
-            // components of the new product 
+           
+           
+            // This hash map is defined here to keep the list of
+            // components of the new product
             HashMap compId = new HashMap();
-            
-            
+           
+           
             ProductBean pb = new ProductBean();
-            
+           
             pb.setName(request.getParameter("brand").trim());
             pb.setDescription(request.getParameter("name").trim());
             pb.setCpu(Integer.parseInt(request.getParameter("cpuAmount")));
@@ -169,7 +169,7 @@ public class AdminServlet extends HttpServlet {
             pb.setOptical(Integer.parseInt(request.getParameter("opticAmount")));
             pb.setRam(Integer.parseInt(request.getParameter("ramAmount")));
             pb.setVga(Integer.parseInt(request.getParameter("vgaAmount")));
-            
+           
             compId.put(Integer.parseInt(request.getParameter("Mb")),1);
             compId.put(Integer.parseInt(request.getParameter("Cpu"))
                     ,Integer.parseInt(request.getParameter("cpuAmount")));
@@ -184,21 +184,21 @@ public class AdminServlet extends HttpServlet {
             compId.put(Integer.parseInt(request.getParameter("Optic"))
                     ,Integer.parseInt(request.getParameter("opticAmount")));
            
-            
+           
             // First we must calculate the price of new product
             // And then we will add it to the DataBase
-            
+           
             pb.computePrice(jdbcURL,compId);
             //out.println("The action has been reached succesfully!");
             pb.addProduct(jdbcURL,compId);
             //out.println("The action has been reached succesfully!");
-            
-    
-            
-            
-            
-            
-            
+           
+   
+           
+           
+           
+           
+           
             try{
             productList = new ProductListBean(jdbcURL);
             }
@@ -212,7 +212,7 @@ public class AdminServlet extends HttpServlet {
             rd.forward(request,response);
            
         }
-                
+               
         else if (request.getParameter("action").equals("detail")){
             if(request.getParameter("productid")!= null){
                 ProductBean pb = productList.getById(
@@ -220,11 +220,11 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("productid", pb);
             }
              else{
-		throw new ServletException("No productid when viewing detail");
-	    }
-            
-            /** 
-             * We defined this to reload the bean which is used to show the 
+                throw new ServletException("No productid when viewing detail");
+            }
+           
+            /**
+             * We defined this to reload the bean which is used to show the
              * list of components of the product
              */
             try {
@@ -234,16 +234,16 @@ public class AdminServlet extends HttpServlet {
             }
             ServletContext sc = getServletContext();
             sc.setAttribute("compList",compList);
-            
-            
+           
+           
             rd = request.getRequestDispatcher(compPage);
             rd.forward(request,response);
         }
-        
+       
         else if (request.getParameter("action").equals("addStock")) {
             if (request.getParameter("componentid") != null
                     && request.getParameter("quantity") != null) {
-                
+               
 
                 response.setContentType("text/plain");
                 PrintWriter out = response.getWriter();
@@ -260,16 +260,16 @@ public class AdminServlet extends HttpServlet {
                     Statement stmt = con.createStatement();
                     String sql = "UPDATE COMPONENT SET STOCK_NUM = (STOCK_NUM+"+count+
                             ") WHERE COMPONENT.COMPONENT_ID = '"+tmp+"'";
-                    
+                   
                     stmt.executeUpdate(sql);
-                    
+                   
 
                     con.commit();
                     out.println("Order successful!Thanks for your business!");
-                    
+                   
                     rd = request.getRequestDispatcher(wareHousePage);
                     rd.forward(request, response);
-                    
+                   
                 } catch (Exception e) {
                     // Any error is grounds for rollback
                     try {
@@ -291,7 +291,7 @@ public class AdminServlet extends HttpServlet {
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-            /** 
+            /**
              * Handles the HTTP <code>GET</code> method.
              * @param request servlet request
              * @param response servlet response
@@ -311,7 +311,7 @@ public class AdminServlet extends HttpServlet {
                 }
             }
 
-            /** 
+            /**
              * Handles the HTTP <code>POST</code> method.
              * @param request servlet request
              * @param response servlet response
@@ -331,14 +331,15 @@ public class AdminServlet extends HttpServlet {
                 }
             }
 
-            /** 
+            /**
              * Returns a short description of the servlet.
              * @return a String containing servlet description
              */
             @Override
             public String getServletInfo
-            
+           
                 () {
         return "Short description";
             }// </editor-fold>
         }
+

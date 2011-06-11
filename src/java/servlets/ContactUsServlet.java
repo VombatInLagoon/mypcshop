@@ -11,15 +11,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 /**
- * This servlet is used to send the user contacts messages via Gmail email 
+ * This servlet is used to send the user's contact messages via Gmail email 
  * facilities
  * @author amin & soode
  */
@@ -114,7 +113,7 @@ public class ContactUsServlet extends HttpServlet {
         
         
         // forward request and response to JSP page
-        String url = "/display_email_entry.jsp";
+        String url = "/contactUs/display_email_entry.jsp";
         RequestDispatcher dispatcher =
              getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);        

@@ -18,7 +18,7 @@
 
 <!-- This will check that if the user is log in and shows the logout option! --> 
 <c:choose>
-    <c:when test="${sessionScope.currentUser != null}">
+    <c:when test="${sessionScope.logedinUser != null}">
         <jsp:include page="../includes/headerlogout.html" />
     </c:when>
     
