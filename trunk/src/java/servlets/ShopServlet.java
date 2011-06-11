@@ -7,21 +7,29 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import business.*;
-import java.io.PrintWriter;
+
+
+
+
 /**
- *
- * @author  Fredrik �lund, Olle Eriksson
- * @version 1.0
+ * This is the main servlet of the application which controls almost 
+ * all of the functionality of the project, especially the shopping part is under
+ * the control of this servlet.
+ * 
+ * @author  Amin & Soode
+ * 
+ * 
  */
 public class ShopServlet extends HttpServlet {
-    private static String showPage=null;
-    private static String checkoutPage = null;
+  
+    
+    // List of initialization variables
     private static String thankyouPage = null;
-    private static String byePage = null;
+    private static String profileChange = null;
     private static String profilePage = null;
     private static String userPage = null;
     private static String jdbcURL = null;
-    private static String detailPage=null;
+    
     private static String redirectPage = null;
     private static String productPage = null;
     private static String productCompPage = null;
@@ -31,11 +39,12 @@ public class ShopServlet extends HttpServlet {
     private CompListBean compList = null;
     private ProductListBean productList = null;
    
+   /////////////////////////////////////
    
+
    
-    private static String selectedP = null;
-   
-    /** Initializes the servlet.
+    /** 
+     * Initializes the servlet.
      */
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -43,21 +52,18 @@ public class ShopServlet extends HttpServlet {
         // look up our aliases for all pages, these are mapped
         // in web.xml
 
-        showPage = config.getInitParameter("SHOW_PAGE");
+        
         productPage = config.getInitParameter("PRODUCT_PAGE");
         productCompPage = config.getInitParameter("PRODUCT_COMPONENT_PAGE");
-        checkoutPage = config.getInitParameter("CHECKOUT_PAGE");
         thankyouPage = config.getInitParameter("THANKYOU_PAGE");
-        byePage = config.getInitParameter("BYE_PAGE");
         profilePage = config.getInitParameter("PROFILE_PAGE");
         userPage = config.getInitParameter("USER_PAGE");
-        detailPage = config.getInitParameter("DETAIL_PAGE");
         jdbcURL = config.getInitParameter("JDBC_URL");
         redirectPage = config.getInitParameter("CHECKOUT_REDIRECT_PAGE");
         homePage = config.getInitParameter("HOME_PAGE"); 
-
+        profileChange = config.getInitParameter("PROFILE_CHANGE"); 
         
-        // get the component from the database using a bean
+        // get the component list from the database using a bean
 
           try{
                 compList = new CompListBean(jdbcURL);
@@ -66,8 +72,8 @@ public class ShopServlet extends HttpServlet {
             throw new ServletException(e);
         }
        
-        //selectedP = temp.getParameter("selectedProduct");
-       
+        
+       // get the product list from the database using a bean
                
         try{
             productList = new ProductListBean(jdbcURL);
@@ -88,7 +94,8 @@ public class ShopServlet extends HttpServlet {
          
      }
    
-    /** Destroys the servlet.
+    /** 
+     * Destroys the servlet.
      */
     public void destroy() {
        
@@ -103,12 +110,12 @@ public class ShopServlet extends HttpServlet {
                                   HttpServletResponse response)
     throws ServletException, java.io.IOException {
 
-        // this is the dispatcher in our application
-        // all requests will go through it.
+        // This is the dispatcher in our application
+        // All requests will go through it.
 
-        // get access to the session and to the shoppingcart
+        // Get access to the session and to the shoppingcart
         // Store the logged in username in the session
-        // and get jdbc-URL provided in web.xml as init-parameter
+        // And get jdbc-URL provided in web.xml as init-parameter
 
         HttpSession sess = request.getSession();
         RequestDispatcher rd = null;
@@ -127,12 +134,7 @@ public class ShopServlet extends HttpServlet {
             rd.forward(request,response);
            
         }
-//        else if(request.getParameter("action").equals("productShow")){
-//                      
-//            rd = request.getRequestDispatcher(productCompPage);
-//            rd.forward(request,response);
-//            
-//        }
+
            
         else if (request.getParameter("action").equals("show")){
            
@@ -160,9 +162,6 @@ public class ShopServlet extends HttpServlet {
             if (request.getParameter("productid") != null &&
                 request.getParameter("quantity")!=null ){
                
-               
-               
-               
                 ProductBean pb = null;
                
                 // search the component in our shop
@@ -171,20 +170,21 @@ public class ShopServlet extends HttpServlet {
                                          request.getParameter("productid")));
                
                
-                //Here we check some criteria for the quantity of the product slected
-                // by the user.
+                // Here we check some criteria for the quantity of the product slected
+                // By the user.
                 // We use servelet for data validation on the server side!
                
                 if(Integer.parseInt(request.getParameter("quantity"))> pb.getAvailabe()||
                         Integer.parseInt(request.getParameter("quantity"))<= 0){
                    
                     errorMessage = "Please Select a correct amount of products";
-                    url = "/productDetail.jsp";
+                    url = "/mainApp/productDetail.jsp";
                    
                    
                     request.setAttribute("message", errorMessage);
                    
-                    RequestDispatcher dispatch = getServletContext().getRequestDispatcher(url);
+                    RequestDispatcher dispatch = 
+                            getServletContext().getRequestDispatcher(url);
                     dispatch.forward(request, response);
                    
                 }else{
@@ -284,7 +284,7 @@ public class ShopServlet extends HttpServlet {
         else if(request.getParameter("action").equals("detail")){
             if (request.getParameter("productid") != null){
 
-                // find the book, store a reference in our request
+                // find the product, store a reference in our request
 
                 ProductBean pb = productList.getById(
                            Integer.parseInt(request.getParameter("productid")));
@@ -352,12 +352,13 @@ public class ShopServlet extends HttpServlet {
             if(shoppingCart.getCart().isEmpty()){
                
                 errorMessage = "Your Shopping Cart Is Empty!";
-                    url = "/productDetail.jsp";
+                    url = "/mainApp/productDetail.jsp";
                    
                    
                     request.setAttribute("messageEmptyCart", errorMessage);
                    
-                    RequestDispatcher dispatch = getServletContext().getRequestDispatcher(url);
+                    RequestDispatcher dispatch = 
+                            getServletContext().getRequestDispatcher(url);
                     dispatch.forward(request, response);
                
             }
@@ -522,7 +523,7 @@ public class ShopServlet extends HttpServlet {
                     catch(Exception e){
                         throw new ServletException("Error saving profile", e);
                     }
-                    rd = request.getRequestDispatcher(homePage);
+                    rd = request.getRequestDispatcher(profileChange);
                     rd.forward(request, response);
                 }
                 else {
@@ -556,7 +557,7 @@ public class ShopServlet extends HttpServlet {
             rd.forward(request, response);
         }
        
-       
+       /*
         else if (request.getParameter("action").equals("deleteCookie")){
        
             Cookie[] cookies = request.getCookies();
@@ -573,12 +574,12 @@ public class ShopServlet extends HttpServlet {
             dispatcher.forward(request, response);
    
         }
-       
+       */
        
     }
 
 
-    // valide a profile
+    // validate a profile
 
     private boolean profileValidate(HttpServletRequest request,
                                     HttpSession sess) {

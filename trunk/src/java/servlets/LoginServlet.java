@@ -11,6 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /** * Servlet implementation class LoginServlet */
+
+/**
+ * This servlet is used to control the Log in process of user to the 
+ * Admin area of the application
+ * 
+ * 
+ * @author Amin & Soode
+ */
+
+
 public class LoginServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)

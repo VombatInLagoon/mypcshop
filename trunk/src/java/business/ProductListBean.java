@@ -6,7 +6,6 @@ package business;
 
 import java.util.*;
 import java.sql.*;
-import java.io.*;
 /**
  *
  * @author  Amin khorsandi
@@ -24,7 +23,7 @@ public class ProductListBean {
           "jdbc:mysql://localhost/pcshop?user=root&password=sesame");
     }
     
-    /** Creates a new instance of BookListBean */
+    /** Creates a new instance of ProductListBean */
 
     public ProductListBean(String _url) throws Exception {
         url=_url;

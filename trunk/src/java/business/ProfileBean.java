@@ -6,7 +6,7 @@ package business;
 
 import java.util.*;
 import java.sql.*;
-import java.io.*;
+
 /**
  *
  * @author  Olle Eriksson
@@ -15,7 +15,7 @@ public class ProfileBean {
     
     // create a profile bean
 
-    static String url=null;
+    static String url= null;
     private String user;
     private String password;
     private String name;
@@ -31,8 +31,8 @@ public class ProfileBean {
 
     
     public ProfileBean() {
-        this(
-          "jdbc:mysql://localhost/pcshop?user=root&password=sesame");
+        this("jdbc:mysql://localhost/pcshop?user=root&password=sesame");
+        
     }
 
     
@@ -255,8 +255,8 @@ public class ProfileBean {
     
     
     
-    public ProfileBean selectUser(String _name) throws ClassNotFoundException, SQLException
-    {
+    public ProfileBean selectUser(String _name) 
+            throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection(url);
         PreparedStatement ps = null;

@@ -6,6 +6,12 @@ import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import javax.servlet.jsp.tagext.*;
 
+
+/**
+ * This tag is used for the conditions that 
+ * @author amin
+ */
+
 public class ProfileTag extends TagSupport {
 
 	private String url = null;

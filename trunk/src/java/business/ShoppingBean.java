@@ -10,6 +10,8 @@ import java.util.*;
 /**
  *
  * @author  Fredrik �lund, Olle Eriksson
+ * 
+ * (Borrowed from the bookshop application)
  */
 public class ShoppingBean {
     private Collection cart;
@@ -20,7 +22,7 @@ public class ShoppingBean {
         cart = new ArrayList();
     }
     
-    // add some copies of a book to the shopping cart
+    // add some products to the shopping cart
 
     public void addProduct(ProductBean pb, int quantity) {
         
@@ -77,7 +79,7 @@ public class ShoppingBean {
     public void removeProduct(int id, int quantity) {
 
 	// if must not be empty
-
+        
         if(!cart.isEmpty()){
             Iterator iter = cart.iterator();
             Object tmpArr[];

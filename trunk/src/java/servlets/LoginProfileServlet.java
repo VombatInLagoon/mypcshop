@@ -1,18 +1,26 @@
 package servlets;
 
 
-import business.*;
+import business.ProfileBean;
 
-import java.io.IOException;
+
 import java.util.HashMap;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/** * Servlet implementation class LoginServlet */
+/** * Servlet implementation class LoginProfileServlet */
+/**
+ * This servlet is used to control the Log in process of user to the 
+ * Profile area which makes them able to change their profile information
+ * 
+ * 
+ * @author Amin & Soode
+ */
+
+
 public class LoginProfileServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -27,12 +35,14 @@ public class LoginProfileServlet extends HttpServlet {
             user.setUser(userName);
             user.setPassword(request.getParameter("pw"));
             
+            //The login method of the ProfileBean class is used to check the 
+            //User eligiblity to enter the profile change area!
             user = ProfileBean.login(user);
             if (user.getValid()) {
                 HttpSession session = request.getSession(true);
                 
                 user.populate(userName);
-                roles=user.getRoles();
+                roles = user.getRoles();
                 
                 session.setAttribute("roles", roles);
                 session.setAttribute("currentUser", userName);
