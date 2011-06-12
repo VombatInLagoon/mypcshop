@@ -20,7 +20,8 @@ import java.util.HashMap;
 
 
 /**
- *
+ * This servlet is used to control the administrative task done
+ * By the admin user in the administrator area of the application.
  * @author amin & soode
  */
 public class AdminServlet extends HttpServlet {

@@ -7,7 +7,8 @@ package business;
 import java.util.*;
 import java.sql.*;
 /**
- *
+ * This been is responsible to return a list of components based on some
+ * criteria!
  * @author  Amin khorsandi
  */
 public class CompListBean {
