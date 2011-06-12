@@ -1,0 +1,260 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fullpage}
+\usepackage[british]{babel}
+\usepackage[latin1]{inputenc}
+
+\usepackage[boxed]{algorithm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm} \newtheorem{theorem}{Theorem}
+\usepackage{color}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{grffile} % allows spaces in filenames
+\usepackage{rotating}
+\usepackage{tikz} \usetikzlibrary{trees}
+\usepackage{hyperref} % should always be the last package
+\hypersetup{colorlinks=true,urlcolor=blue}
+
+
+\title{PcShop 2011 User Guide \\
+    Software Architucture With Java Course \\ Uppsala University \\
+    Spring Semester 2011} % replace n by 1, 2, or 3
+
+\author{  Amin Khorsandiaghai [820125-3278]\and Soode Gholamzadeh [830322-7204]} % replace by your name(s)
+
+%\date{Month Day, Year}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+This Text is a step-by-step guide for the users of the pcshop online application.
+ 
+
+\section*{Installation}
+
+\subsection*{Deployment}
+
+To deploy the application you need to have appache tomcat installed on your system.
+Put the pcShop2011.war file into the webapps directory of your tomcat installation forlder.
+By Starting the tomcat the project will be automatically deployed into the tomcat container.
+The next step is to change the tomcat server.xml descriptor file to force it to use the JDBC Realm instead of defualt relam.
+To do so you need to copy the lines from the file context.xml under the folder web/META-INF to the server.xml file of the tomcat config folder.
+Or you can use the file server.xml in the folder web/META-INF and replace the tomcat sercer.xml file with this one!
+The next step is to setup the database needed for the application.
+
+
+
+\subsection*{DataBase Installation}
+
+You must have mysql server installed on your system with the user name {\bf root} and password {\bf sesame}.
+To setup the database required by the application you should run the script {\it setup.sh} which resides under the folder web/dbSql 
+and when prompted for password you enter {\bf sesame} as password.
+If you dont have the Connector/J Api on your java path you should copy the file {\it mysql-connector-java-5.1.16-bin.jar} from folder
+web/WEB-INF/lib to your tomcat library folder.
+Now you are ready to use the application.
+
+
+\section*{Start}
+
+To start the application first you need to run your tomcat container.
+Then open your browser and type in the address bar the following address:
+
+{\it http://localhost:tomcat port/pcShop2011}}
+
+
+
+\section*{Main Menu}
+
+Under the left panel you can find main sections of the application which are as followe:
+
+\begin{itemize}
+
+\item Home
+
+\item List of Products
+
+\item Edit Your Profile
+
+\item Contact Customer Service
+
+\item Admin Application
+
+\end{itemize}
+
+
+
+
+\section*{Home}
+
+This is the homr page of the application which shows the user a welcome page. 
+
+
+
+\section*{List of Products}
+
+In this sub section you can choose the product that you will buy. Pc or Laptop computer.
+Currently this is only valid to shop a pc from this site!
+
+
+\subsection*{Product List}
+
+By clicking on the Pc icon you reach to this page which shows you a list of products that are offered currently  
+by the shop. The amount column shows the quantity of each product currently available by the shop.You can buy an availbale
+number of one or more than one products. Clicking the select button will add the quantity of each product into the 
+shopping cart.Then to go on with shopping process you need to use the {\bf Checkout } link of the shopping cart.
+Then you will forward to the log-in page that will ask you for your user name and password. If you are a new user
+you should register yourself in the shop by following the {\it registerhere} link. Otherwise Enter your user name 
+and password to lig in to the site to continue shopping process.
+After logging in to the site your profile will be shown beside your shopping cart. you can edit your profile data.
+And then click on the Buy button.Then you will be directed to the {\it Thank You} page.Then by Clicking
+on the {\it by more product} you will be directed to the Product list page to buy more project.
+The shopped quantities has been removed from the product list.
+In this page there is also a link with name {\it Detail} which will show you the list of components of each product.
+ 
+
+\section*{Edit Your Profile}
+Using this part you can edit your profile information (in case you are a registered user in the system!).
+You will be asked to enter your user name and password then you will reach to the update profile page.
+Here you see your current profile information which you can change. You can also change your roles in the system.
+If you are a user with admin role all of roles will be shown to you.Other wise just the tomcat and manager role will 
+be shown to you. (Security purpose!)
+Click on Go to save your changes.
+
+\section*{Contact Customer Service}
+
+In this section you can contact the site customer service and give your feed back or ask your questions and so on.
+You must enter the necessary fields which are marked with astrics.
+And then click on submit button.
+
+
+
+\section*{Administrator Area}
+
+This part is the Admin section of the application, which is designed to support the administrative tasks on the
+web site such as adding new product and ordering new components.
+to enter this area you need to be a member of admin users and have a valid user name and password.
+
+
+
+
+\subsection*{Welcome to Admin Pae}
+
+In this page you have two optins available.
+
+\begin{itemize}
+
+\item Go to the Components Page
+
+\item Add new products!
+
+\end{itemize}
+
+
+
+
+\subsection*{Go to the Components Page}
+
+Choosing this option will show you the list of all components available in the shop.
+(This set is predefined which means that you cannot add new component in the shop)
+Then you can order amount of component in this section.The effect will be added in the database.
+
+
+\subsection*{Add New Product Page}
+In this part you will see a list of current product available in the shop. And you can also add a new product by
+clicking on the {\it Add New Product} button.
+
+
+
+
+\subsection*{Please Enter The New Product}
+
+
+
+
+\subsection*{Question 14}
+\textit{What swarm size gave you the best results? For the remaining
+parameters, did settings similar to those that performed best in 2-D also work
+well in 20-D, or did you have to change them?}
+
+A swarm size of 26 gave the best results. For the remaining parameter, the same
+parameters as that of 2-D worked well for 20-D. However, $OnOff\_RegPSO = on$ improved
+the $fg = 6.2588$ to $fg = 0.8686$.
+
+\subsection*{Question 15}
+\textit{How does the best minimum you located compare with the results
+from the same function using GA? How does it feel like the speed of the two
+algorithms compares (you don't need to give a specific time value, just a general
+impression)?}
+
+The minimum location with PSO is better than that found by GA. However, when it comes
+to speed(execution time) GA is faster than PSO.
+
+\section*{Task 5: Training a Neural Network}
+
+\subsection*{Question 16}
+\textit{Did you find a set of parameters that consistently avoided the
+high error solutions we sometimes found in lab 1?}
+
+The following parameters seems to be helpful avoiding the high error solutions
+
+
+\texttt{net.trainParam}
+
+\texttt{ans = }
+          \\\texttt{     show: 1000}
+             \\\texttt{epochs: 4000}
+               \\\texttt{time: Inf}
+               \\\texttt{goal: 1.0000e-03}
+           \\\texttt{max\_fail: 20}
+       \\\texttt{max\_perf\_inc: 1.0400e+00}
+    \\\texttt{showCommandLine: 1}
+         \\\texttt{showWindow: 0}
+            \\\texttt{plotPSO: 1}
+
+
+\section*{Task 6: Wrapping up}
+
+\subsection*{Question 17}
+\textit{GA and PSO are both population methods, and they can be used
+to solve the same type of problems. What characterizes a problem that would
+be easier to solve using GA? What about a problem that is easier to solve with
+PSO?}
+
+The PSO algorithm is normally useful when dealing with problems which are consists
+of particles that are too much alike. Their acts and behaviors as a whole is the 
+matter of importance, but not each of their individual separately. The system does 
+not evolve in its inner characteristics during the time, but in case of GA, the 
+system must have some mutations during solving the problem to achieve better results.
+Example of such system would be some smart virii which mutate their DNA and RNA to 
+overcome the body's immune system.
+
+
+\subsection*{Question 18}
+\textit{Propose a real-world problem that you consider interesting and
+that you believe can be solved using what you just learned. Explain in a few
+sentences how that would work.}
+
+There are many interesting real world problems which could be solved using swarm 
+intelligence technique. For example in film production, to simulate the movement of 
+a large number of similar entities (birds, fishes, cattle) the swarm intelligence 
+can be used ( and it is used indeed).
+
+It has been used in many well known films such as ``Lord of the Rings" during battle 
+scenes and ``Batman Returns" for showing the movements of a group of bats.
+
+It has also been used in the industry to simulate autonomous robots that are ``dumb"
+when considered individually, but rather smart as a group. They can be used in applications
+such as exploring the ocean floor, rescue earthquake victims from under debris etc.
+
+\subsection*{Question 19}
+\textit{What would you have liked to see in today's lab? Were there
+tasks that you feel need improvement?}
+
+The lab was comprehensive in its treatment of Evolutionary computation and Swarm intelligence.
+Improvement can perhaps be made with respect to Swarm intelligence by including ant colony
+optimization and its applications such as solving TSP.
+
+\end{document}

@@ -9,6 +9,7 @@
 -->
 
 <Context path="/pcShop2011">
+
     <!-- This part should be added to the server.xml file instead of default realm
     
     <Realm className="org.apache.catalina.realm.JDBCRealm" debug ="99"
