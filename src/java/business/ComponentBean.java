@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.sql.*;
 
 /**
- *
+ * This is a been used to deal with business operation related to the components
  * @author  Amin Khorsandi 
  */
 public class ComponentBean implements Serializable{

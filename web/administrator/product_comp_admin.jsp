@@ -1,7 +1,7 @@
 <%--
     Document   : product
     Created on : May 7, 2011, 4:43:33 PM
-    Author     : amin
+    Author     : amin & soode
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" import="business.*, tags.*" %>
@@ -35,7 +35,7 @@
 
     <jsp:useBean id="compList" class="business.CompListBean"  scope="application">
 
-        Error aaaaaaa, the bean should have been created in the servlet!
+        Error , the bean should have been created in the servlet!
     </jsp:useBean>
 
 

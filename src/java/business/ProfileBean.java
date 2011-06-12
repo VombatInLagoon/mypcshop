@@ -10,6 +10,7 @@ import java.sql.*;
 /**
  *
  * @author  Olle Eriksson
+ * (Borrowed from the bookshop application)
  */
 public class ProfileBean {
     
@@ -307,7 +308,14 @@ public class ProfileBean {
     }
     
     
-    
+    /**
+     * This method is supposed to get the user name and password of the 
+     * User who is trying to enter the web site. And will check to see if the
+     * User is eligible to enter the site or not!
+     * (Used to control the log-in in the Admin Area)
+     * @param bean
+     * @return 
+     */
     
     
     public  static ProfileBean loginAdmin(ProfileBean bean) { 
@@ -386,6 +394,16 @@ public class ProfileBean {
         return bean; 
     
     }
+    
+     /**
+     * This method is supposed to get the user name and password of the 
+     * User who is trying to enter the web site. And will check to see if the
+     * User is eligible to enter the site or not!
+     * (Used to control the log-in in the Change Profile Area)
+     * @param bean 
+     * @return 
+     */
+    
     
     public  static ProfileBean login(ProfileBean bean) { 
         //preparing some objects for connection 

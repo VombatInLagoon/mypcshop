@@ -1,7 +1,11 @@
 <%-- 
     Document   : admin
     Created on : May 11, 2011, 10:19:39 PM
-    Author     : amin
+    Author     : amin & soode
+    This page is used to make the admin of the application 
+    able to choose to add new products to the system or to 
+    order new amount of components.
+
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

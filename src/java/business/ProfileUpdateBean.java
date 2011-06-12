@@ -10,6 +10,7 @@ import java.io.*;
 /**
  *
  * @author  Olle Eriksson
+ * (Borrowed from the bookshop application)
  */
 
 // update an existing user or create a new one
