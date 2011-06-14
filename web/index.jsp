@@ -1,4 +1,4 @@
-<% if (request.getRemoteUser() != null){ %>
+<% if (request.getAttribute("currentUser") != null){ %>
 <jsp:include page="includes/headerlogout.html" />
 <%}else {%>
 <jsp:include page="includes/header.html" />
