@@ -1,7 +1,7 @@
 <%-- 
     Document   : display_email_entry
     Created on : Jun 6, 2011, 1:01:21 AM
-    Author     : amin
+    Author     : Amin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

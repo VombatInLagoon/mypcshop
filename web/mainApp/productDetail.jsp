@@ -1,7 +1,7 @@
 <%-- 
     Document   : product
     Created on : May 7, 2011, 4:43:33 PM
-    Author     : amin
+    Author     : Amin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" import="business.*, tags.*" %>

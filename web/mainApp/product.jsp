@@ -1,7 +1,7 @@
 <%-- 
     Document   : product
     Created on : May 7, 2011, 4:43:33 PM
-    Author     : amin
+    Author     : Amin
 --%>
 <% if (request.getRemoteUser() != null){ %>
 <jsp:include page="../includes/headerlogout.html" />
