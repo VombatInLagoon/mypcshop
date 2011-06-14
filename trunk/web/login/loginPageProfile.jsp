@@ -1,7 +1,7 @@
 <%-- 
     Document   : loginPage
     Created on : Jun 7, 2011, 10:54:36 AM
-    Author     : amin
+    Author     : Amin
 --%>
 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>

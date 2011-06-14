@@ -1,7 +1,7 @@
 <%-- 
     Document   : admin
     Created on : May 11, 2011, 10:19:39 PM
-    Author     : amin & soode
+    Author     : Amin 
     This page is used to make the admin of the application 
     able to choose to add new products to the system or to 
     order new amount of components.

@@ -1,7 +1,7 @@
 <%-- 
     Document   : addProduct
     Created on : May 25, 2011, 8:35:34 PM
-    Author     : amin & soode
+    Author     : Amin 
     This page is supposed to produce a interface to make the admin able to add new 
     Products into the pcshop data-base by selecting its components from
     availabel set of components.
