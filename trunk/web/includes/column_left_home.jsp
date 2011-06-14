@@ -1,3 +1,6 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
+
 <td width="160"  valign="top" bgcolor="#FFFFCC">
   <p>
   <br><br>
@@ -19,9 +22,14 @@
     <%-- The Admin link is for testing only
          and should be deleted for production environements --%>
     <br><br>
+    
+    <c:if test = "${pageContext.request.remoteUser == null}">
     <a href="http://localhost:8080/pcShop2011/administrator/login?action=login">
         Administrator Area
     </a>
+        
+    </c:if>
+   
     
     </p>
 </td>
