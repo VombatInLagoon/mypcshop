@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : context.xml
+    Created on : May 11, 2011, 9:17 PM
+    Author     : amin
+    Description:
+        Purpose of the document follows.
+-->
+
+<Context path="/pcShop2011">
+
+    <!-- This part should be added to the server.xml file instead of default realm
+    
+    <Realm className="org.apache.catalina.realm.JDBCRealm" debug ="99"
+             driverName="com.mysql.jdbc.Driver"
+	     connectionURL="jdbc:mysql://localhost/pcshop?user=root&amp;password=sesame"
+	     userTable="USERS" userNameCol="USER_NAME" userCredCol="USER_PASS"
+	     userRoleTable="USER_ROLES" roleNameCol="ROLE_NAME"/>   
+    -->         
+             
+</Context>  
