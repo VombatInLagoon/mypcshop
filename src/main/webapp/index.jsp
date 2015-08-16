@@ -6,7 +6,6 @@
 
 <jsp:include page="/includes/column_left_home.jsp" />
 
-
 <!-- start the middle column -->
 
 <td valign="top"   width="40%">
@@ -22,14 +21,8 @@
 <td valign="top" class ="onlineshop" width="40%">
 
 </td>
-      
-      
-    
 
 <!-- end the middle column -->
-
-
-
 
 <%-- <jsp:include page="/includes/column_right_news.jsp" flush="true" /> --%>
 <jsp:include page="/includes/footer.jsp" />
