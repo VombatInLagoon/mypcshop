@@ -1,4 +1,4 @@
-package business;
+package domain;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * @author amin
  */
-public class ProductBean {
+public class Product {
     // describe a Pc
 
     private int id;
@@ -30,8 +30,8 @@ public class ProductBean {
     
     
     
-    /** Creates a new instance of ProductBean */
-    public ProductBean() throws Exception {
+    /** Creates a new instance of Product */
+    public Product() throws Exception {
         
         
         

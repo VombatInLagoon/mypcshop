@@ -1,11 +1,11 @@
-package business;
+package domain;
 
 import java.sql.*;
 import java.util.*;
 
 // save an order in the database
 
-public class OrderBean  {
+public class Order {
 
   private Connection con;
   private PreparedStatement orderPstmt;
@@ -19,7 +19,7 @@ public class OrderBean  {
   private ResultSet rs=null;
 
   private String url;
-  private ShoppingBean sb;
+  private ShoppingCart sb;
   private String buyerName;
   private String shippingAddress;
   private String shippingZipcode;
@@ -32,9 +32,9 @@ public class OrderBean  {
     private static String updateCompSQL;
     private static String productAmountUpdateSQL;
     
-  public OrderBean(String _url, ShoppingBean _sb, String _buyerName, 
-		   String _shippingAddress, String _shippingZipcode, 
-		   String _shippingCity){
+  public Order(String _url, ShoppingCart _sb, String _buyerName,
+               String _shippingAddress, String _shippingZipcode,
+               String _shippingCity){
     url = _url;
     sb = _sb;
     buyerName=_buyerName;
@@ -143,7 +143,7 @@ public class OrderBean  {
       int orderId=rs.getInt(1);
 
       Iterator iter = ((Collection)sb.getCart()).iterator();
-      ProductBean pb = null;
+      Product pb = null;
       Object tmpArr[];
 
       //Loop over the entire collection, i.e the entire shopping cart
@@ -157,7 +157,7 @@ public class OrderBean  {
       while(iter.hasNext()){
           
 	  tmpArr = (Object[])iter.next();
-	  pb = (ProductBean)tmpArr[0];
+	  pb = (Product)tmpArr[0];
           orderItemPstmt.setInt(1,orderId);
           orderItemPstmt.setInt(2,pb.getId());
           orderItemPstmt.setInt(3,((Integer)tmpArr[1]).intValue());  

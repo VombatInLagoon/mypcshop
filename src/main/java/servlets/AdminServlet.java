@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import java.io.IOException;
@@ -11,13 +7,12 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import business.*;
-import business.ProductBean;
+import domain.*;
+import domain.Product;
 import javax.servlet.*;
 import java.sql.*;
 import java.util.Collection;
 import java.util.HashMap;
-
 
 /**
  * This servlet is used to control the administrative task done
@@ -30,18 +25,16 @@ public class AdminServlet extends HttpServlet {
     private static String productAdminPage = null;
     private static String compPage = null ;
     private static String jdbcURL = null;
-    private static CompListBean compFullList = null;
+    private static ComponentList compFullList = null;
     private static Integer tmp = null;
-    private static ProductListBean productList = null;
-    private static CompListBean compList = null;
+    private static ProductList productList = null;
+    private static ComponentList compList = null;
     private static String addProductPage = null;
     private static String thankPage = null;
    
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-
-
 
         wareHousePage = config.getInitParameter("ADMIN_WARE_HOUSE_PAGE");
         productAdminPage = config.getInitParameter("ADMIN_PRODUCT_PAGE");
@@ -50,38 +43,30 @@ public class AdminServlet extends HttpServlet {
         jdbcURL = config.getInitParameter("JDBC_URL");
         thankPage = config.getInitParameter("THANK_YOU_PAGE");
 
-
-
         try {
-            compFullList = new CompListBean(jdbcURL, tmp);
+            compFullList = new ComponentList(jdbcURL, tmp);
         } catch (Exception e) {
             throw new ServletException(e);
         }
 
          try{
-            productList = new ProductListBean(jdbcURL);
+            productList = new ProductList(jdbcURL);
         }
         catch(Exception e){
             throw new ServletException(e);
         }
 
-         
          try{
-                compList = new CompListBean(jdbcURL);
+                compList = new ComponentList(jdbcURL);
              }
             catch(Exception e){
             throw new ServletException(e);
         }
          
-         
-         
-         
         ServletContext sc = getServletContext();
         sc.setAttribute("compFullList", compFullList);
         sc.setAttribute("productList", productList);
         sc.setAttribute("compList",compList);
-       
-
     }
 
     /**
@@ -92,33 +77,33 @@ public class AdminServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
+            throws Exception {
         response.setContentType("text/html;charset=UTF-8");
 
-        RequestDispatcher rd = null;
+        RequestDispatcher requestDispatcher;
 
         if (request.getParameter("action").equals("adminPageComponent")) {
 
-            rd = request.getRequestDispatcher(wareHousePage);
-            rd.forward(request, response);
+            requestDispatcher = request.getRequestDispatcher(wareHousePage);
+            requestDispatcher.forward(request, response);
        
         }
         else if(request.getParameter("action").equals("adminPageProduct")){
            
-            rd = request.getRequestDispatcher(productAdminPage);
-            rd.forward(request, response);
+            requestDispatcher = request.getRequestDispatcher(productAdminPage);
+            requestDispatcher.forward(request, response);
            
         }
                
         else if(request.getParameter("action").equals("addProduct")){
            
-            CompListBean cpuListb = new CompListBean(jdbcURL, "CPU");
-            CompListBean hddListb = new CompListBean(jdbcURL, "HDD");
-            CompListBean vgaListb = new CompListBean(jdbcURL, "VGA");
-            CompListBean ramListb = new CompListBean(jdbcURL, "RAM");
-            CompListBean mbListb = new CompListBean(jdbcURL, "MB");
-            CompListBean monitorListb = new CompListBean(jdbcURL, "MONITOR");
-            CompListBean opticListb = new CompListBean(jdbcURL, "OPTIC");
+            ComponentList cpuListb = new ComponentList(jdbcURL, "CPU");
+            ComponentList hddListb = new ComponentList(jdbcURL, "HDD");
+            ComponentList vgaListb = new ComponentList(jdbcURL, "VGA");
+            ComponentList ramListb = new ComponentList(jdbcURL, "RAM");
+            ComponentList mbListb = new ComponentList(jdbcURL, "MB");
+            ComponentList monitorListb = new ComponentList(jdbcURL, "MONITOR");
+            ComponentList opticListb = new ComponentList(jdbcURL, "OPTIC");
            
            
             // These Collections have been defined to keep the list of
@@ -143,8 +128,8 @@ public class AdminServlet extends HttpServlet {
             request.setAttribute("complistvga", collVga);
            
            
-            rd = request.getRequestDispatcher(addProductPage);
-            rd.forward(request,response);
+            requestDispatcher = request.getRequestDispatcher(addProductPage);
+            requestDispatcher.forward(request,response);
            
         }
                
@@ -160,7 +145,7 @@ public class AdminServlet extends HttpServlet {
             HashMap compId = new HashMap();
            
            
-            ProductBean pb = new ProductBean();
+            Product pb = new Product();
            
             pb.setName(request.getParameter("brand").trim());
             pb.setDescription(request.getParameter("name").trim());
@@ -193,15 +178,9 @@ public class AdminServlet extends HttpServlet {
             //out.println("The action has been reached succesfully!");
             pb.addProduct(jdbcURL,compId);
             //out.println("The action has been reached succesfully!");
-           
-   
-           
-           
-           
-           
-           
+
             try{
-            productList = new ProductListBean(jdbcURL);
+            productList = new ProductList(jdbcURL);
             }
                 catch(Exception e){
                 throw new ServletException(e);
@@ -209,14 +188,14 @@ public class AdminServlet extends HttpServlet {
 
             ServletContext sc = getServletContext();
             sc.setAttribute("productList", productList);
-            rd = request.getRequestDispatcher(productAdminPage);
-            rd.forward(request,response);
+            requestDispatcher = request.getRequestDispatcher(productAdminPage);
+            requestDispatcher.forward(request,response);
            
         }
                
         else if (request.getParameter("action").equals("detail")){
             if(request.getParameter("productid")!= null){
-                ProductBean pb = productList.getById(
+                Product pb = productList.getById(
                         Integer.parseInt(request.getParameter("productid")));
                 request.setAttribute("productid", pb);
             }
@@ -229,7 +208,7 @@ public class AdminServlet extends HttpServlet {
              * list of components of the product
              */
             try {
-                compList = new CompListBean(jdbcURL);
+                compList = new ComponentList(jdbcURL);
             } catch (Exception e) {
                 throw new ServletException(e);
             }
@@ -237,8 +216,8 @@ public class AdminServlet extends HttpServlet {
             sc.setAttribute("compList",compList);
            
            
-            rd = request.getRequestDispatcher(compPage);
-            rd.forward(request,response);
+            requestDispatcher = request.getRequestDispatcher(compPage);
+            requestDispatcher.forward(request,response);
         }
        
         else if (request.getParameter("action").equals("addStock")) {
@@ -266,10 +245,10 @@ public class AdminServlet extends HttpServlet {
                    
 
                     con.commit();
-                    out.println("Order successful!Thanks for your business!");
+                    out.println("Order successful!Thanks for your domain!");
                    
-                    rd = request.getRequestDispatcher(wareHousePage);
-                    rd.forward(request, response);
+                    requestDispatcher = request.getRequestDispatcher(wareHousePage);
+                    requestDispatcher.forward(request, response);
                    
                 } catch (Exception e) {
                     // Any error is grounds for rollback

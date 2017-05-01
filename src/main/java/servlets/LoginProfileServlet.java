@@ -1,7 +1,7 @@
 package servlets;
 
 
-import business.ProfileBean;
+import domain.Profile;
 
 
 import java.util.HashMap;
@@ -27,7 +27,7 @@ public class LoginProfileServlet extends HttpServlet {
             throws ServletException, java.io.IOException {
 
         try {
-            ProfileBean user = new ProfileBean();
+            Profile user = new Profile();
             String userName = request.getParameter("un");
             HashMap<String, Boolean> roles = null;
             
@@ -35,9 +35,9 @@ public class LoginProfileServlet extends HttpServlet {
             user.setUser(userName);
             user.setPassword(request.getParameter("pw"));
             
-            //The login method of the ProfileBean class is used to check the 
+            //The login method of the Profile class is used to check the
             //User eligiblity to enter the profile change area!
-            user = ProfileBean.login(user);
+            user = Profile.login(user);
             if (user.getValid()) {
                 HttpSession session = request.getSession(true);
                 

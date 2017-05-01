@@ -102,9 +102,7 @@
         <servlet-name>LoginProfileServlet</servlet-name>
         <servlet-class>servlets.LoginProfileServlet</servlet-class>
     </servlet>
-    
-    
-    
+
      <!-- servlet mappings -->
     <servlet-mapping>
         <servlet-name>Shop</servlet-name>
@@ -170,5 +168,7 @@
             <form-error-page>/login/login_error.jsp</form-error-page>
         </form-login-config>
     </login-config>
-    
+    <security-role>
+        <role-name>tomcat</role-name>
+    </security-role>
 </web-app>

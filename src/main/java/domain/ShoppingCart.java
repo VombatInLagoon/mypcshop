@@ -1,7 +1,7 @@
-package business;
+package domain;
 
 /*
- * ShoppingBean.java
+ * ShoppingCart.java
  *
  * Created on den 12 december 2002, 09:49
  */
@@ -13,21 +13,21 @@ import java.util.*;
  * 
  * (Borrowed from the bookshop application)
  */
-public class ShoppingBean {
+public class ShoppingCart {
     private Collection cart;
     
-    /** Creates a new instance of ShoppingBean */
+    /** Creates a new instance of ShoppingCart */
 
-    public ShoppingBean() {
+    public ShoppingCart() {
         cart = new ArrayList();
     }
     
     // add some products to the shopping cart
 
-    public void addProduct(ProductBean pb, int quantity) {
+    public void addProduct(Product pb, int quantity) {
         
         Object newItem[] = null;
-        ProductBean tmpBean = null;
+        Product tmpBean = null;
 
 	// if the cart is empty just add the book
 
@@ -50,7 +50,7 @@ public class ShoppingBean {
 
 		// check if we found the pc
 
-		if(((ProductBean)tmpArr[0]).getId()==pb.getId()){ 
+		if(((Product)tmpArr[0]).getId()==pb.getId()){
 
 		    // yes, increase the quantity
 
@@ -88,7 +88,7 @@ public class ShoppingBean {
 
             while(iter.hasNext()){
                 tmpArr=(Object[])iter.next();
-                if(((ProductBean)tmpArr[0]).getId()==id){
+                if(((Product)tmpArr[0]).getId()==id){
 
 		    // found
 
@@ -129,12 +129,12 @@ public class ShoppingBean {
         while(iter.hasNext()){
             objBuff =(Object[])iter.next();
             buff.append("<order>");
-            buff.append(((ProductBean)objBuff[0]).getXml());
+            buff.append(((Product)objBuff[0]).getXml());
             buff.append("<id>");
-            buff.append(((ProductBean)objBuff[0]).getId());
+            buff.append(((Product)objBuff[0]).getId());
             buff.append("</id>");
             buff.append("<brand>");
-            buff.append(((ProductBean)objBuff[0]).getName());
+            buff.append(((Product)objBuff[0]).getName());
             buff.append("</brand>");
             
             buff.append("<quantity>");

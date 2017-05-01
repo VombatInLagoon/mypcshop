@@ -2,7 +2,7 @@
  * ProfileBean.java
  *
  */
-package business;
+package domain;
 
 import java.util.*;
 import java.sql.*;
@@ -12,7 +12,7 @@ import java.sql.*;
  * @author  Olle Eriksson
  * (Borrowed from the bookshop application)
  */
-public class ProfileBean {
+public class Profile {
     
     // create a profile bean
 
@@ -31,14 +31,14 @@ public class ProfileBean {
     private boolean valid;
 
     
-    public ProfileBean() {
+    public Profile() {
         this("jdbc:mysql://localhost/pcshop?user=root&password=sesame");
         
     }
 
     
     // constructor, set the database URL
-    public ProfileBean(String _url) {
+    public Profile(String _url) {
         url=_url;
     }
 
@@ -256,7 +256,7 @@ public class ProfileBean {
     
     
     
-    public ProfileBean selectUser(String _name) 
+    public Profile selectUser(String _name)
             throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection(url);
@@ -271,10 +271,10 @@ public class ProfileBean {
             ps = connection.prepareStatement(query);
             ps.setString(1, userName);
             rs = ps.executeQuery();
-            ProfileBean up = null;
+            Profile up = null;
             if (rs.next())
             {
-                up = new ProfileBean();
+                up = new Profile();
                 
                 up.setUser(rs.getString("USER_NAME"));
                 up.setName(rs.getString("NAME"));
@@ -318,7 +318,7 @@ public class ProfileBean {
      */
     
     
-    public  static ProfileBean loginAdmin(ProfileBean bean) { 
+    public  static Profile loginAdmin(Profile bean) {
         //preparing some objects for connection 
         Statement stmtLogin = null;
         ResultSet rsLogin = null;
@@ -333,9 +333,9 @@ public class ProfileBean {
                 + "USERS.USER_PASS ='"+password+"'";
         
         // "System.out.println" prints in the console; Normally used to trace the process 
-        System.out.println("Your user name is " + username); 
+/*        System.out.println("Your user name is " + username);
         System.out.println("Your password is " + password); 
-        System.out.println("Query: "+searchQuery); 
+        System.out.println("Query: "+searchQuery); */
         try { 
             //connect to DB
             Class.forName("com.mysql.jdbc.Driver");
@@ -405,7 +405,7 @@ public class ProfileBean {
      */
     
     
-    public  static ProfileBean login(ProfileBean bean) { 
+    public  static Profile login(Profile bean) {
         //preparing some objects for connection 
         Statement stmtLogin = null;
         ResultSet rsLogin = null;
@@ -477,10 +477,6 @@ public class ProfileBean {
         } 
         
         return bean; 
-    
     }
-    
-    
-    
 }
 

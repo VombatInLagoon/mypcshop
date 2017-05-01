@@ -4,19 +4,15 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-
 /**
  * This class acts as a helper to send email in the COntactUs section of the 
  * Web site.
  * @author amin
  */
+public class MailUtilGmail {
 
-public class MailUtilGmail
-{
     public static void sendMail(String to, String from,
-        String subject, String body, boolean bodyIsHTML) 
-        throws MessagingException
-    {       
+                                String subject, String body, boolean bodyIsHTML) throws MessagingException {
         // 1 - get a mail session
         Properties props = new Properties();
         props.put("mail.transport.protocol", "smtps");
@@ -30,6 +26,7 @@ public class MailUtilGmail
         // 2 - create a message
         Message message = new MimeMessage(session);
         message.setSubject(subject);
+
         if (bodyIsHTML)
             message.setContent(body, "text/html");
         else
@@ -43,7 +40,7 @@ public class MailUtilGmail
 
         // 4 - send the message
         Transport transport = session.getTransport();
-        transport.connect("amin.khorsandi@gmail.com", "helloworld");
+        transport.connect("aminrock2000@gmail.com", "hvudnxqeonxsenas");
         transport.sendMessage(message, message.getAllRecipients());
         transport.close();
     }

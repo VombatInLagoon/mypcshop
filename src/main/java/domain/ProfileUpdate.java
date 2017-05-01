@@ -2,11 +2,11 @@
  * ProfileUpdateBean.java
  *
  */
-package business;
+package domain;
 
 import java.util.*;
 import java.sql.*;
-import java.io.*;
+
 /**
  *
  * @author  Olle Eriksson
@@ -15,17 +15,17 @@ import java.io.*;
 
 // update an existing user or create a new one
 
-public class ProfileUpdateBean {
+public class ProfileUpdate {
     
     private String url=null;
 
-    public ProfileUpdateBean(String _url) {
+    public ProfileUpdate(String _url) {
         url=_url;
     }
 
     // store a profile in the database
 
-    public void setProfile(ProfileBean pb)  throws Exception{
+    public void setProfile(Profile pb)  throws Exception{
         Connection conn =null;
         Statement stmt = null;
         int rs;
@@ -80,7 +80,7 @@ public class ProfileUpdateBean {
     
     // store a new user
  
-    public void setUser(ProfileBean pb)  throws Exception{
+    public void setUser(Profile pb)  throws Exception{
         Connection conn =null;
         Statement stmt = null;
         int rs;

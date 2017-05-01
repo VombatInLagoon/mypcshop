@@ -4,7 +4,7 @@
     Author     : Amin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" import="business.*, tags.*" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="domain.*, tags.*" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
@@ -30,7 +30,7 @@
 
 <h2> The Current List of Products </h2>
 
-<jsp:useBean id="productList" class="business.ProductListBean"  scope="application">
+<jsp:useBean id="productList" class="domain.ProductList" scope="application">
     Error, the Bean is not created!
 </jsp:useBean>
 

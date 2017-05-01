@@ -4,7 +4,7 @@
     Author     : Amin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" import="business.*, tags.*" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="domain.*, tags.*" %>
 
 
 
@@ -31,7 +31,7 @@
 <td width = "840" valign="top">    
 
 <h2> List of Products </h2>
-<jsp:useBean id="productList" class="business.ProductListBean"  scope="application">
+<jsp:useBean id="productList" class="domain.ProductList" scope="application">
     Error, the Bean is not created!
 </jsp:useBean>
 

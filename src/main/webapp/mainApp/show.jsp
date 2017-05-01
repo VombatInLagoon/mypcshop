@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="business.*, tags.*" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="domain.*, tags.*" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
@@ -21,7 +21,7 @@
 <td width = "840" valign="top">
 
 <h2> Available Set of Components </h2>
-<jsp:useBean id="compList" class="business.CompListBean"  scope="application">
+<jsp:useBean id="compList" class="domain.ComponentList" scope="application">
     Error, the bean should have been created in the servlet!
 </jsp:useBean>
 

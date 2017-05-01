@@ -4,7 +4,7 @@
     Author     : Amin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" import="business.* , tags.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="domain.* , tags.*"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
@@ -28,7 +28,7 @@
 
 <td width ="840" valign="top"> 
     <%--
-    <jsp:useBean id="compFullList" class="business.CompListBean"  scope="application">
+    <jsp:useBean id="compFullList" class="domain.ComponentListt"  scope="application">
 
         Error, the bean should have been created in the servlet!
     </jsp:useBean>
@@ -39,7 +39,7 @@
     --%>
     
     <% 
-        CompListBean compFullList = new CompListBean(
+        ComponentList compFullList = new ComponentList(
                 "jdbc:mysql://localhost/pcshop?user=root&password=sesame", 0);
         request.setAttribute("compFullList", compFullList);
     %>

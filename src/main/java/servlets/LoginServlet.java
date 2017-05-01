@@ -1,9 +1,7 @@
 package servlets;
 
-import business.*;
+import domain.*;
 
-import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,12 +37,12 @@ public class LoginServlet extends HttpServlet {
         else
         {
             try {
-                ProfileBean user = new ProfileBean();
+                Profile user = new Profile();
 
                 user.setUser(request.getParameter("un"));
                 user.setPassword(request.getParameter("pw"));
 
-                user = ProfileBean.loginAdmin(user);
+                user = Profile.loginAdmin(user);
                 if (user.getValid()) {
                     //session = request.getSession(true);
                     session.setAttribute("logedinUser", user);

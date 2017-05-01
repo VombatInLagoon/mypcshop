@@ -9,7 +9,7 @@
 
 --%>
 <%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" import="business.*,java.util.*" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="domain.*,java.util.*" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
@@ -54,8 +54,8 @@
 
                         <%
                             ArrayList clmb = (ArrayList) request.getAttribute("complistmb");
-                            ArrayList<ComponentBean> itemsmb = clmb;
-                            for (ComponentBean item : itemsmb) {
+                            ArrayList<Component> itemsmb = clmb;
+                            for (Component item : itemsmb) {
                         %>
                         
                         <option value="<%=item.getId()%>" name="Mb" >
@@ -79,8 +79,8 @@
 
                         <%
                             ArrayList clram = (ArrayList) request.getAttribute("complistram");
-                            ArrayList<ComponentBean> itemsram = clram;
-                            for (ComponentBean item : itemsram) {
+                            ArrayList<Component> itemsram = clram;
+                            for (Component item : itemsram) {
                         %>
 
                         <option value="<%=item.getId() %>" name="Ram" >
@@ -103,8 +103,8 @@
 
                         <%
                             ArrayList clvga = (ArrayList) request.getAttribute("complistvga");
-                            ArrayList<ComponentBean> itemsvga = clvga;
-                            for (ComponentBean item : itemsvga) {
+                            ArrayList<Component> itemsvga = clvga;
+                            for (Component item : itemsvga) {
                         %>
 
                         <option value="<%=item.getId()%>" name="Vga" >
@@ -127,8 +127,8 @@
 
                         <%
                             ArrayList clcpu = (ArrayList) request.getAttribute("complistcpu");
-                            ArrayList<ComponentBean> itemscpu = clcpu;
-                            for (ComponentBean item : itemscpu) {
+                            ArrayList<Component> itemscpu = clcpu;
+                            for (Component item : itemscpu) {
                         %>
 
                         <option value="<%=item.getId()%>" name="Cpu" >
@@ -151,8 +151,8 @@
 
                         <%
                             ArrayList clhdd = (ArrayList) request.getAttribute("complisthdd");
-                            ArrayList<ComponentBean> itemshdd = clhdd;
-                            for (ComponentBean item : itemshdd) {
+                            ArrayList<Component> itemshdd = clhdd;
+                            for (Component item : itemshdd) {
                         %>
 
                         <option value="<%=item.getId()%>" name="HDD" >
@@ -175,8 +175,8 @@
 
                         <%
                             ArrayList clmonitor = (ArrayList) request.getAttribute("complistmonitor");
-                            ArrayList<ComponentBean> itemsmonitor = clmonitor;
-                            for (ComponentBean item : itemsmonitor) {
+                            ArrayList<Component> itemsmonitor = clmonitor;
+                            for (Component item : itemsmonitor) {
                         %>
 
                         <option value="<%=item.getId()%>" name="Monitor" >
@@ -199,8 +199,8 @@
 
                         <%
                             ArrayList cloptic = (ArrayList) request.getAttribute("complistoptic");
-                            ArrayList<ComponentBean> itemsoptic = cloptic;
-                            for (ComponentBean item : itemsoptic) {
+                            ArrayList<Component> itemsoptic = cloptic;
+                            for (Component item : itemsoptic) {
                         %>
 
                         <option value="<%=item.getId() %>" name="Optic" >

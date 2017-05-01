@@ -2,7 +2,7 @@
  * ProductListBean.java
  *
  */
-package business;
+package domain;
 
 import java.util.*;
 import java.sql.*;
@@ -10,7 +10,7 @@ import java.sql.*;
  *
  * @author  Amin khorsandi
  */
-public class ProductListBean {
+public class ProductList {
     
     private Collection productList;
     private String url=null;
@@ -18,14 +18,14 @@ public class ProductListBean {
     // this constructor is not really used in the application
     // but is here for testing purpose
 
-    public ProductListBean() throws Exception{
+    public ProductList() throws Exception{
       this(
           "jdbc:mysql://localhost/pcshop?user=root&password=sesame");
     }
     
-    /** Creates a new instance of ProductListBean */
+    /** Creates a new instance of ProductList */
 
-    public ProductListBean(String _url) throws Exception {
+    public ProductList(String _url) throws Exception {
         url=_url;
         Connection conn = null;
         Statement stmt = null;
@@ -50,7 +50,7 @@ public class ProductListBean {
 
             while(rs.next()){
                 
-                ProductBean pb = new ProductBean();
+                Product pb = new Product();
                 
                 pb.setId(rs.getInt("PRODUCT_ID"));
                 pb.setName(rs.getString("BRAND"));
@@ -102,13 +102,13 @@ public class ProductListBean {
 
     public String getXml() {
         
-        ProductBean pb=null;
+        Product pb=null;
         Iterator iter = productList.iterator();
         StringBuffer buff = new StringBuffer();
         
         buff.append("<productlist>");
         while(iter.hasNext()){
-            pb=(ProductBean)iter.next();
+            pb=(Product)iter.next();
             buff.append(pb.getXml());
         }
         buff.append("</productlist>");        
@@ -119,12 +119,12 @@ public class ProductListBean {
 
     // search for a component by component ID
 
-    public ProductBean getById(int id) {
-	ProductBean pb = null;
+    public Product getById(int id) {
+	Product pb = null;
 	Iterator iter = productList.iterator();
         
 	while(iter.hasNext()){
-	    pb=(ProductBean)iter.next();
+	    pb=(Product)iter.next();
 	    if(pb.getId()== id){
                 return pb;
 	    }
@@ -133,11 +133,11 @@ public class ProductListBean {
     }
     
     public String getNameById(String id) {
-	ProductBean pb = null;
+	Product pb = null;
 	Iterator iter = productList.iterator();
         
 	while(iter.hasNext()){
-	    pb=(ProductBean)iter.next();
+	    pb=(Product)iter.next();
 	    if(pb.getId()== Integer.parseInt(id))
                 {
                 return pb.getName();
@@ -154,7 +154,7 @@ public class ProductListBean {
 
     public static void main(String[] args){
         try{
-	    ProductListBean plb = new ProductListBean();
+	    ProductList plb = new ProductList();
 	    System.out.println(plb.getXml());
         }
         catch(Exception e){

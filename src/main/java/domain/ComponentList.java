@@ -1,4 +1,4 @@
-package business;
+package domain;
 
 import java.util.*;
 import java.sql.*;
@@ -7,9 +7,8 @@ import java.sql.*;
  * criteria!
  * @author  Amin khorsandi
  */
-public class CompListBean {
-   
-   
+public class ComponentList {
+
     private Collection compList;
     private String url=null;
     private int productID = 0;
@@ -17,14 +16,14 @@ public class CompListBean {
     // this constructor is not really used in the application
     // but is here for testing purpose
 
-    public CompListBean() throws Exception{
+    public ComponentList() throws Exception{
       this(
           "jdbc:mysql://localhost/pcshop?user=root&password=sesame");
     }
    
     /** Creates a new instance of BookListBean */
 
-    public CompListBean(String _url) throws Exception {
+    public ComponentList(String _url) throws Exception {
         url=_url;
         Connection conn = null;
         Statement stmt = null;
@@ -39,7 +38,7 @@ public class CompListBean {
             conn=DriverManager.getConnection(url);
            
             // create SQL statements to load the components into the list
-            // each component is a ComponentBean object
+            // each component is a Component object
 
             stmt = conn.createStatement();
             String sql="SELECT PRODUCT_ID, COMPONENT.COMPONENT_ID, NAME ,";
@@ -56,7 +55,7 @@ public class CompListBean {
 
             while(rs.next()){
                
-                ComponentBean cb = new ComponentBean();
+                Component cb = new Component();
                
                 cb.setId(rs.getInt("COMPONENT_ID"));
                 cb.setPid(rs.getInt("PRODUCT_ID"));
@@ -95,7 +94,7 @@ public class CompListBean {
    
    
    
-    public CompListBean(String _url,Integer _int) throws Exception {
+    public ComponentList(String _url, Integer _int) throws Exception {
         url=_url;
         Connection conn = null;
         Statement stmt = null;
@@ -111,7 +110,7 @@ public class CompListBean {
             conn=DriverManager.getConnection(url);
            
             // create SQL statements to load the components into the list
-            // each component is a ComponentBean object
+            // each component is a Component object
 
             stmt = conn.createStatement();
             String sql="SELECT COMPONENT.COMPONENT_ID, NAME ,";
@@ -128,7 +127,7 @@ public class CompListBean {
 
             while(rs.next()){
                
-                ComponentBean cb = new ComponentBean();
+                Component cb = new Component();
                
                 cb.setId(rs.getInt("COMPONENT_ID"));
                 cb.setPid(tmp);
@@ -175,7 +174,7 @@ public class CompListBean {
      * @throws Exception 
      */
     
-    public CompListBean(String _url,String comp) throws Exception {
+    public ComponentList(String _url, String comp) throws Exception {
        
         url=_url;
         Connection conn = null;
@@ -191,7 +190,7 @@ public class CompListBean {
             conn=DriverManager.getConnection(url);
            
             // create SQL statements to load the components into the list
-            // each component is a ComponentBean object
+            // each component is a Component object
 
             stmt = conn.createStatement();
             String sql="SELECT COMPONENT_ID, DESCRIPTION,"
@@ -207,7 +206,7 @@ public class CompListBean {
 
             while(rs.next()){
                
-                ComponentBean cb = new ComponentBean();
+                Component cb = new Component();
                
                 cb.setId(rs.getInt("COMPONENT_ID"));
                 //cb.setPId(rs.getInt("PRODUCT_ID"));
@@ -264,13 +263,13 @@ public class CompListBean {
    
     public String getXml() {
        
-        ComponentBean cb=null;
+        Component cb=null;
         Iterator iter = compList.iterator();
         StringBuffer buff = new StringBuffer();
        
         buff.append("<complist>");
         while(iter.hasNext()){
-            cb=(ComponentBean)iter.next();
+            cb=(Component)iter.next();
             buff.append(cb.getXml());
         }
         buff.append("</complist>");        
@@ -281,12 +280,12 @@ public class CompListBean {
 
     // search for a component by component ID
 
-    public ComponentBean getById(int id) {
-        ComponentBean cb = null;
+    public Component getById(int id) {
+        Component cb = null;
         Iterator iter = compList.iterator();
        
         while(iter.hasNext()){
-            cb=(ComponentBean)iter.next();
+            cb=(Component)iter.next();
             if(cb.getId()== id){
                 return cb;
             }
@@ -295,12 +294,12 @@ public class CompListBean {
     }
    
      public String getXMLByProductID(String pid) {
-        ComponentBean cb = null;
+        Component cb = null;
         Iterator iter = compList.iterator();
         StringBuffer bufftmp = new StringBuffer();
         bufftmp.append("<complist>");
         while(iter.hasNext()){
-            cb=(ComponentBean)iter.next();
+            cb=(Component)iter.next();
             if(cb.getPid()== Integer.parseInt(pid)){
                  bufftmp.append(cb.getXml());
             }
@@ -334,7 +333,7 @@ public class CompListBean {
             conn=DriverManager.getConnection("jdbc:mysql://localhost/pcshop?user=root&password=sesame");
            
             // create SQL statements to load the components into the list
-            // each component is a ComponentBean object
+            // each component is a Component object
 
            
             // first we get the current amount of the component
@@ -361,7 +360,7 @@ public class CompListBean {
 
            
           conn.commit();
-      //out.println("Order successful!  Thanks for your business!");
+      //out.println("Order successful!  Thanks for your domain!");
     }
     catch (Exception e) {
       // Any error is grounds for rollback
@@ -388,7 +387,7 @@ public class CompListBean {
 
  /*   public static void main(String[] args){
         try{
-            CompListBean clb = new CompListBean();
+            ComponentList clb = new ComponentList();
             System.out.println(clb.getXml());
         }
         catch(Exception e){

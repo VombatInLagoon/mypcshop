@@ -1,81 +1,74 @@
-package business;
+package domain;
 
 import java.io.Serializable;
 import java.sql.*;
 
 /**
- * This is a been used to deal with business operation related to the components
+ * This is a been used to deal with domain operation related to the components
  * @author  Amin Khorsandi 
  */
-public class ComponentBean implements Serializable{
+public class Component implements Serializable{
 
-    //Describe a component
     private int id;
     private String name;
     private int price;
-    private int stock_num;
+    private int stockNum;
     private String description;
     private int pid;
 
-    /** Creates a new instance of ComponentBean */
-    public ComponentBean() {
+    public Component() {
+
     }
 
     public int getPrice() {
         return price;
     }
 
-    public void setPrice(Integer _price) {
-        price = _price;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String _name) {
-        name = _name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getStockNum() {
-        return stock_num;
+        return stockNum;
     }
 
-    public void setStockNum(Integer _stockNum) {
-        stock_num = _stockNum;
+    public void setStockNum(int stockNum) {
+        this.stockNum = stockNum;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(Integer _id) {
-        id = _id;
-
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getPid() {
         return pid;
     }
 
-    public void setPid(Integer _pid) {
-        pid = _pid;
-
+    public void setPid(int pid) {
+        this.pid = pid;
     }
 
-    public void setDescription(String _description) {
-        description = _description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDescription() {
         return description;
     }
 
-    // create an XML document describing the book
     public String getXml() {
-
-        // use a Stringbuffer (not String) to avoid multiple
-        // object creation
 
         StringBuffer xmlOut = new StringBuffer();
 
@@ -93,13 +86,11 @@ public class ComponentBean implements Serializable{
         xmlOut.append(description);
         xmlOut.append("]]></description>");
         xmlOut.append("<amount>");
-        xmlOut.append(stock_num);
+        xmlOut.append(stockNum);
         xmlOut.append("</amount>");
         xmlOut.append("</component>");
 
         return xmlOut.toString();
-
-
     }
 
     /**
@@ -132,12 +123,8 @@ public class ComponentBean implements Serializable{
                     + ") WHERE COMPONENT.COMPONENT_ID = '" + comId + "'";
 
             stmt.executeUpdate(sql);
-
-
             con.commit();
-            //out.println("Order successful!Thanks for your business!");
-
-
+            //out.println("Order successful!Thanks for your domain!");
 
         } catch (Exception e) {
             // Any error is grounds for rollback

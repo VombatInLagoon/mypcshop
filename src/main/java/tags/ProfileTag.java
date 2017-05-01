@@ -1,7 +1,7 @@
 package tags;
 
-import business.*;
-import javax.servlet.*;
+import domain.*;
+
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import javax.servlet.jsp.tagext.*;
@@ -38,7 +38,7 @@ public class ProfileTag extends TagSupport {
 		// create a profile bean and start populate it
 		// store it in the request
 
-		ProfileBean pb = new ProfileBean(url);
+		Profile pb = new Profile(url);
 		pb.populate(user);
 		request.setAttribute("profile", pb);
 	    } catch (Exception e) {

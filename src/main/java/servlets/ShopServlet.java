@@ -6,7 +6,7 @@ package servlets;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import business.*;
+import domain.*;
 
 
 
@@ -36,8 +36,8 @@ public class ShopServlet extends HttpServlet {
     private static String homePage = null;
     
     
-    private CompListBean compList = null;
-    private ProductListBean productList = null;
+    private ComponentList compList = null;
+    private ProductList productList = null;
    
    /////////////////////////////////////
    
@@ -66,7 +66,7 @@ public class ShopServlet extends HttpServlet {
         // get the component list from the database using a bean
 
           try{
-                compList = new CompListBean(jdbcURL);
+                compList = new ComponentList(jdbcURL);
              }
             catch(Exception e){
             throw new ServletException(e);
@@ -76,7 +76,7 @@ public class ShopServlet extends HttpServlet {
        // get the product list from the database using a bean
                
         try{
-            productList = new ProductListBean(jdbcURL);
+            productList = new ProductList(jdbcURL);
         }
         catch(Exception e){
             throw new ServletException(e);
@@ -119,7 +119,7 @@ public class ShopServlet extends HttpServlet {
 
         HttpSession sess = request.getSession();
         RequestDispatcher rd = null;
-        ShoppingBean shoppingCart = getCart(request);
+        ShoppingCart shoppingCart = getCart(request);
         sess.setAttribute("currentUser", request.getRemoteUser());
         sess.setAttribute("jdbcURL",jdbcURL);
 
@@ -141,7 +141,7 @@ public class ShopServlet extends HttpServlet {
             // A request dispatcher that's connected to the page.
            
             try {
-                productList = new ProductListBean(jdbcURL);
+                productList = new ProductList(jdbcURL);
             } catch (Exception e) {
                 throw new ServletException(e);
             }
@@ -162,7 +162,7 @@ public class ShopServlet extends HttpServlet {
             if (request.getParameter("productid") != null &&
                 request.getParameter("quantity")!=null ){
                
-                ProductBean pb = null;
+                Product pb = null;
                
                 // search the component in our shop
 
@@ -242,7 +242,7 @@ public class ShopServlet extends HttpServlet {
                     // Here we add the quantity of the product which is removed
                     // From shopping cart by the user to the amount of the current product
                     //
-                    ProductBean pb = null;
+                    Product pb = null;
                
                 // search the component in our shop
 
@@ -286,7 +286,7 @@ public class ShopServlet extends HttpServlet {
 
                 // find the product, store a reference in our request
 
-                ProductBean pb = productList.getById(
+                Product pb = productList.getById(
                            Integer.parseInt(request.getParameter("productid")));
                 request.setAttribute("productid", pb);
             }
@@ -299,7 +299,7 @@ public class ShopServlet extends HttpServlet {
              * list of components of the product
              */
             try {
-                compList = new CompListBean(jdbcURL);
+                compList = new ComponentList(jdbcURL);
             } catch (Exception e) {
                 throw new ServletException(e);
             }
@@ -324,7 +324,7 @@ public class ShopServlet extends HttpServlet {
                 request.getParameter("shipping_city") != null &&
                 request.getParameter("shipping_zipcode") != null &&
                 request.getParameter("shipping_address") != null){
-                OrderBean ob = new OrderBean(jdbcURL, shoppingCart,
+                Order ob = new Order(jdbcURL, shoppingCart,
                               request.getParameter("shipping_name").trim(),
                               request.getParameter("shipping_address").trim(),
                               request.getParameter("shipping_zipcode").trim(),
@@ -370,7 +370,7 @@ public class ShopServlet extends HttpServlet {
                    // create a profile and populate it from the
                    // database
 
-               ProfileBean p = new ProfileBean(jdbcURL);
+               Profile p = new Profile(jdbcURL);
                try {
                   p.populate((String)sess.getAttribute("currentUser"));
                }
@@ -404,7 +404,7 @@ public class ShopServlet extends HttpServlet {
             // create a profile object, fill it in from the database
             // also store all user roles in the map "role"
 
-            ProfileBean p = new ProfileBean(jdbcURL);
+            Profile p = new Profile(jdbcURL);
             try {
                 p.populate((String)sess.getAttribute("currentUser"));
                 role = p.getRoles();
@@ -434,7 +434,7 @@ public class ShopServlet extends HttpServlet {
 
         else if(request.getParameter("action").equals("profilechange") ||
                 request.getParameter("action").equals("usercreate")){
-            ProfileBean pb = (ProfileBean)sess.getAttribute("profile");
+            Profile pb = (Profile)sess.getAttribute("profile");
             String u;
             if (request.getParameter("action").equals("profilechange"))
                 //u = (String)sess.getAttribute("currentUser");
@@ -515,7 +515,7 @@ public class ShopServlet extends HttpServlet {
 
             else {
                
-                ProfileUpdateBean pu = new ProfileUpdateBean(jdbcURL);
+                ProfileUpdate pu = new ProfileUpdate(jdbcURL);
                 if (request.getParameter("action").equals("profilechange")) {
                     try {
                         pu.setProfile(pb);
@@ -542,7 +542,7 @@ public class ShopServlet extends HttpServlet {
         // with all available roles
 
         else if(request.getParameter("action").equals("newuser")) {
-            ProfileBean p = new ProfileBean(jdbcURL);
+            Profile p = new Profile(jdbcURL);
             try {
               HashMap<String,Boolean> role = p.getRoles();
                 sess.setAttribute("roles",role);
@@ -687,13 +687,13 @@ public class ShopServlet extends HttpServlet {
 
     // get the shoppingcart, create it if needed
 
-    private ShoppingBean getCart(HttpServletRequest request){
+    private ShoppingCart getCart(HttpServletRequest request){
         HttpSession se = null;
         se=request.getSession();
-        ShoppingBean sb =null;
-        sb = (ShoppingBean)se.getAttribute("shoppingCart");
+        ShoppingCart sb =null;
+        sb = (ShoppingCart)se.getAttribute("shoppingCart");
         if(sb==null){
-            sb = new ShoppingBean();
+            sb = new ShoppingCart();
             se.setAttribute("shoppingCart",sb);
         }
 

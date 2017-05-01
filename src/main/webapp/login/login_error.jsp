@@ -10,4 +10,4 @@
 <td valign="top" class ="onlineshop">
     Invalid username and/or password, please try
     <a href='<%= response.encodeURL("checkout.jsp")%>'>again</a>.
-    <jsp:include page="/includes/footer.jsp" />
+<jsp:include page="/includes/footer.jsp" />

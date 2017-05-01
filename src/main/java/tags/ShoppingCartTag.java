@@ -2,9 +2,8 @@ package tags;
 
 import javax.servlet.jsp.tagext.*;
 import javax.servlet.jsp.*;
-import javax.servlet.*;
-import java.io.*;
-import business.*;
+
+import domain.*;
 
 /**
  *  Generated tag class.
@@ -51,7 +50,7 @@ public class ShoppingCartTag extends TagSupport {
 	    
 	    JspWriter out = pageContext.getOut();
 	    javax.servlet.http.HttpSession sess = pageContext.getSession();
-	    ShoppingBean sb = (ShoppingBean)sess.getAttribute("shoppingCart");
+	    ShoppingCart sb = (ShoppingCart)sess.getAttribute("shoppingCart");
 	    out.println(sb.getXml());
 	}
 	catch(Exception e){
