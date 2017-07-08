@@ -6,16 +6,14 @@
 
 <html>
 <head>
-<title>Thank you for your shopping</title>
-<link rel="stylesheet" href="/pcShop2011/pcshop.css">
-<center>
+    <title>Thank you for your shopping</title>
+    <link rel="stylesheet" href="../css/pcshop.css">
+    <center>
 <body>
+<h1>Thank you</h1>
+Your order has been saved to the database and will be shipped shortly<br /><br />
+<a href="shop?action=show">Buy more Products</a>
 
-
-	<h1>Thank you</h1>
-  Your order has been saved to the database and will be shipped shortly<br /><br />
-  <a href="shop?action=show">Buy more Products</a>
-  
 </body>
 </center>
 </html>

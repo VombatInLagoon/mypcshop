@@ -6,8 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<jsp:include page="/includes/header.html" />
-<jsp:include page="/includes/column_left_home.jsp" />
+<jsp:include page="../includes/header.html" />
+<jsp:include page="../includes/column_left_home.jsp" />
 
 <td valign="top" class="contact">
     <form action=contactUs method="post">

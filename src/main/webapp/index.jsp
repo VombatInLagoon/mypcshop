@@ -1,7 +1,7 @@
 <% if (request.getAttribute("currentUser") != null){ %>
-<jsp:include page="includes/headerlogout.html" />
+<jsp:include page="/includes/headerlogout.html" />
 <%}else {%>
-<jsp:include page="includes/header.html" />
+<jsp:include page="/includes/header.html" />
 <%}%>
 
 <jsp:include page="/includes/column_left_home.jsp" />
@@ -17,7 +17,7 @@
         We offer up-scale solutions for Gamers and also ordinary home and office 
         uses.Feel free and navigate trough our list of products.
     </p>
-</td> 
+</td>
 <td valign="top" class ="onlineshop" width="40%">
 
 </td>

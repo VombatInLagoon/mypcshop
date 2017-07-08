@@ -7,7 +7,7 @@
 <html>
     <head>
         <title>Good Bye, We hope you get back soon!</title>
-        <link rel="stylesheet" href="/pcShop2011/pcshop.css">
+        <link rel="stylesheet" href="../css/pcshop.css">
     <center>
         <body>
             <h1>Good Bye, We hope you get back soon!</h1>

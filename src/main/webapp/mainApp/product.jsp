@@ -10,8 +10,6 @@
 <%}%>
 <jsp:include page="../includes/column_left_home.jsp" />
 
-
-
 <td align ="center"> 
     
     <h2>Please select the product type!</h2>
