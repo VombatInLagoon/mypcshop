@@ -28,18 +28,14 @@
 <td width = "840" valign="top">
 
     <jsp:useBean id="productList" class="domain.ProductList" scope="application">
-
         Error, the bean should have been created in the servlet!
     </jsp:useBean>
         
 
     <jsp:useBean id="compList" class="domain.ComponentList" scope="application">
-
         Error, the bean should have been created in the servlet!
     </jsp:useBean>
 
-
-   
     <h2> List of Products </h2>
 
     <c:set var="productlist_xslt">
@@ -51,27 +47,19 @@
         <jsp:getProperty name="productList" property="xml"/>
     </x:transform>
 
-
     <h2> Configuration of the  : <%= productList.getNameById(request.getParameter("productid")) %> </h2>
     <form method="post" action="productDetail.jsp">
         <input type="submit" name="hide" value="Hide" />
     </form>
 
-
     <c:set var="complist_xslt_brif">
         <c:import url="complist_xslt_brif.xsl"/>
     </c:set>
 
-
-
     <x:transform xslt="${complist_xslt_brif}">
-
         <%= compList.getXMLByProductID(request.getParameter("productid"))%>
-
     </x:transform>
-    
-    
-    
+
     <c:set var="shoppingcart_xslt">
         <c:import url="shoppingcart_xslt.xsl"/>
     </c:set>

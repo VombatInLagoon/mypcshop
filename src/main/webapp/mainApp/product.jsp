@@ -10,16 +10,13 @@
 <%}%>
 <jsp:include page="../includes/column_left_home.jsp" />
 
-<td align ="center"> 
-    
+<td align ="center">
+
     <h2>Please select the product type!</h2>
     <p></p>
     <p></p>
-    
     <a href="shop?action=show"> <img src="../images/pc.jpeg" /></a>
-
-
-     <img src="../images/laptop.jpg" />
+    <img src="../images/laptop.jpg" />
 </td>
 
 

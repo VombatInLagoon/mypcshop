@@ -1,256 +1,183 @@
 package domain;
 
+import ca.krasnay.sqlbuilder.SelectBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 import java.sql.*;
+import java.util.stream.Collectors;
+
 /**
  * This been is responsible to return a list of components based on some
  * criteria!
  * @author  Amin khorsandi
  */
+
 public class ComponentList {
 
-    private Collection compList;
-    private String url=null;
+    public static final Logger log = LoggerFactory.getLogger(Component.class);
+
     private int productID = 0;
 
-    // this constructor is not really used in the application
-    // but is here for testing purpose
 
-    public ComponentList() throws Exception{
-      this(
-          "jdbc:mysql://localhost/pcshop?user=root&password=sesame");
+    public ComponentList() {}
+
+    public ComponentList(String jdbcUrl) {
+
     }
-   
-    /** Creates a new instance of BookListBean */
 
-    public ComponentList(String _url) throws Exception {
-        url=_url;
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        //ResultSet ts = null;
-        compList = new ArrayList();    // a list
-        try{
+    public List<Component> componentList (final String url) throws ClassNotFoundException, SQLException {
+        Statement statement = null;
+        ResultSet resultSet = null;
+        Connection connection = null;
+        List<Component> componentList = new ArrayList();
+
+        try {
            
             // get a database connection and load the JDBC-driver
-
             Class.forName("com.mysql.jdbc.Driver");
-            conn=DriverManager.getConnection(url);
+            connection = DriverManager.getConnection(url);
            
-            // create SQL statements to load the components into the list
-            // each component is a Component object
+            statement = connection.createStatement();
 
-            stmt = conn.createStatement();
-            String sql="SELECT PRODUCT_ID, COMPONENT.COMPONENT_ID, NAME ,";
-            sql += "PRICE, DESCRIPTION  FROM COMPONENT,";
-            sql += "COMP_PROD WHERE COMPONENT.COMPONENT_ID = COMP_PROD.COMPONENT_ID ";
-           
-            //String sql = "select brand from PRODUCT where PRODUCT_ID = " + sp ;
-           
-           
-           
-            rs= stmt.executeQuery(sql);
-       
-            // analyze the result set
+            resultSet = statement.executeQuery(new SelectBuilder()
+                    .column("PRODUCT_ID")
+                    .column("COMPONENT.COMPONENT_ID")
+                    .column("NAME")
+                    .column("PRICE")
+                    .column("DESCRIPTION")
+                    .from("COMPONENT")
+                    .join("COMP_PROD on COMPONENT.COMPONENT_ID = COMP_PROD.COMPONENT_ID").toString());
 
-            while(rs.next()){
+            while(resultSet.next()){
                
-                Component cb = new Component();
+                Component component = new Component();
                
-                cb.setId(rs.getInt("COMPONENT_ID"));
-                cb.setPid(rs.getInt("PRODUCT_ID"));
-                cb.setName(rs.getString("NAME"));
-               
-                cb.setPrice(rs.getInt("PRICE"));
-                cb.setDescription(rs.getString("DESCRIPTION"));
-                compList.add(cb);
-               
+                component.setId(resultSet.getInt("COMPONENT_ID"));
+                component.setPid(resultSet.getInt("PRODUCT_ID"));
+                component.setName(resultSet.getString("NAME"));
+                component.setPrice(resultSet.getInt("PRICE"));
+                component.setDescription(resultSet.getString("DESCRIPTION"));
+
+                componentList.add(component);
             }
-       
         }
         catch(SQLException sqle){
-            throw new Exception(sqle);
+            log.error("SQL exception thrown!");
+            sqle.printStackTrace();
         }
 
-        // note the we always try to close all services
-        // even if one or more fail to close
-       
         finally{
-            try{
-              rs.close();
-              //ts.close();
-            }
-            catch(Exception e) {}
-            try{
-              stmt.close();
-            }
-            catch(Exception e) {}
-            try {
-              conn.close();
-            }
-            catch(Exception e){}
+              resultSet.close();
+              statement.close();
+              connection.close();
         }
+        return componentList;
     }
-   
-   
-   
-    public ComponentList(String _url, Integer _int) throws Exception {
-        url=_url;
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        //ResultSet ts = null;
-        int tmp = 0;
-        compList = new ArrayList();    // a list
-        try{
+
+    public List<Component> componentFullList(String url) throws ClassNotFoundException, SQLException {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        List<Component> componentList = new ArrayList();
+
+        try {
            
             // get a database connection and load the JDBC-driver
-
             Class.forName("com.mysql.jdbc.Driver");
-            conn=DriverManager.getConnection(url);
+            connection = DriverManager.getConnection(url);
            
-            // create SQL statements to load the components into the list
-            // each component is a Component object
+            statement = connection.createStatement();
 
-            stmt = conn.createStatement();
-            String sql="SELECT COMPONENT.COMPONENT_ID, NAME ,";
-            sql += "PRICE, DESCRIPTION,STOCK_NUM  FROM COMPONENT";
-           
-           
-            //String sql = "select brand from PRODUCT where PRODUCT_ID = " + sp ;
-           
-           
-           
-            rs= stmt.executeQuery(sql);
-       
-            // analyze the result set
+            resultSet = statement.executeQuery(new SelectBuilder()
+            .column("COMPONENT_ID")
+            .column("NAME")
+            .column("PRICE")
+            .column("DESCRIPTION")
+            .column("STOCK_NUM")
+            .from("COMPONENT").toString());
 
-            while(rs.next()){
-               
-                Component cb = new Component();
-               
-                cb.setId(rs.getInt("COMPONENT_ID"));
-                cb.setPid(tmp);
-                cb.setName(rs.getString("NAME"));
-                cb.setStockNum(rs.getInt("STOCK_NUM"));
-                cb.setPrice(rs.getInt("PRICE"));
-                cb.setDescription(rs.getString("DESCRIPTION"));
-                compList.add(cb);
-               
+            while(resultSet.next()){
+                Component component = new Component();
+
+                component.setId(resultSet.getInt("COMPONENT_ID"));
+                component.setPid(0);
+                component.setName(resultSet.getString("NAME"));
+                component.setStockNum(resultSet.getInt("STOCK_NUM"));
+                component.setPrice(resultSet.getInt("PRICE"));
+                component.setDescription(resultSet.getString("DESCRIPTION"));
+                componentList.add(component);
             }
-       
         }
         catch(SQLException sqle){
-            throw new Exception(sqle);
+            log.error("Sql exception!");
+            sqle.printStackTrace();
         }
 
-        // note the we always try to close all services
-        // even if one or more fail to close
-       
-        finally{
-            try{
-              rs.close();
-              //ts.close();
-            }
-            catch(Exception e) {}
-            try{
-              stmt.close();
-            }
-            catch(Exception e) {}
-            try {
-              conn.close();
-            }
-            catch(Exception e){}
+        finally {
+            resultSet.close();
+            statement.close();
+            connection.close();
         }
+        return componentList;
     }
-   
-    
+
     /**
      * This constructor is used to produce a list of all available component from
      * the same category, for example if comp = "MB" then all the motherboards 
      * in the components stock will be returned and so on!
-     * @param _url
+     * @param url
      * @param comp
      * @throws Exception 
      */
-    
-    public ComponentList(String _url, String comp) throws Exception {
-       
-        url=_url;
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        //ResultSet ts = null;
-        compList = new ArrayList();    // a list
+    public List<Component> componentListSameCategory(String url, String comp) throws ClassNotFoundException, SQLException {
+
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        List<Component> componentList = new ArrayList();
         try{
            
             // get a database connection and load the JDBC-driver
 
             Class.forName("com.mysql.jdbc.Driver");
-            conn=DriverManager.getConnection(url);
+            connection = DriverManager.getConnection(url);
            
-            // create SQL statements to load the components into the list
-            // each component is a Component object
+            resultSet = statement.executeQuery(new SelectBuilder()
+                    .column("COMPONENT_ID")
+                    .column("DESCRIPTION")
+                    .from("COMPONENT")
+                    .where("COMPONENT.NAME = 'comp'")
+                    .toString());
 
-            stmt = conn.createStatement();
-            String sql="SELECT COMPONENT_ID, DESCRIPTION,"
-                    + "PRICE FROM COMPONENT WHERE COMPONENT.NAME ='"+comp+"'";
-           
-            //String sql = "select brand from PRODUCT where PRODUCT_ID = " + sp ;
-           
-           
-           
-            rs= stmt.executeQuery(sql);
-       
-            // analyze the result set
+            while(resultSet.next()){
+               
+                Component component = new Component();
 
-            while(rs.next()){
-               
-                Component cb = new Component();
-               
-                cb.setId(rs.getInt("COMPONENT_ID"));
-                //cb.setPId(rs.getInt("PRODUCT_ID"));
-                //cb.setName(rs.getString("NAME"));
-               
-                cb.setPrice(rs.getInt("PRICE"));
-                cb.setDescription(rs.getString("DESCRIPTION"));
-                compList.add(cb);
+                component.setId(resultSet.getInt("COMPONENT_ID"));
+                component.setPrice(resultSet.getInt("PRICE"));
+                component.setDescription(resultSet.getString("DESCRIPTION"));
+                componentList.add(component);
                
             }
        
         }
+
         catch(SQLException sqle){
-            throw new Exception(sqle);
+            log.error("Sql exception!");
+            sqle.printStackTrace();
         }
 
-        // note the we always try to close all services
-        // even if one or more fail to close
-       
         finally{
-            try{
-              rs.close();
-              //ts.close();
-            }
-            catch(Exception e) {}
-            try{
-              stmt.close();
-            }
-            catch(Exception e) {}
-            try {
-              conn.close();
-            }
-            catch(Exception e){}
+              resultSet.close();
+              statement.close();
+              connection.close();
         }
+        return componentList;
     }
-   
-   
-    // return the booklist
-   
-    public java.util.Collection getComponentList() {
-        return compList;
-    }
-   
-   
+
     public int getProductID() {
         return productID;
     }
@@ -260,54 +187,31 @@ public class ComponentList {
     }
    
     // create an XML document from the complist
-   
-    public String getXml() {
+    public static String getXml(List<Component> components) {
        
-        Component cb=null;
-        Iterator iter = compList.iterator();
-        StringBuffer buff = new StringBuffer();
+        StringBuffer stringBuffer = new StringBuffer();
        
-        buff.append("<complist>");
-        while(iter.hasNext()){
-            cb=(Component)iter.next();
-            buff.append(cb.getXml());
-        }
-        buff.append("</complist>");        
+        stringBuffer.append("<complist>");
+        components.stream().map(e -> stringBuffer.append(e.getXml()));
+        stringBuffer.append("</complist>");
        
-        return buff.toString();
+        return stringBuffer.toString();
     }
-   
 
     // search for a component by component ID
-
-    public Component getById(int id) {
-        Component cb = null;
-        Iterator iter = compList.iterator();
-       
-        while(iter.hasNext()){
-            cb=(Component)iter.next();
-            if(cb.getId()== id){
-                return cb;
-            }
-        }
-        return null;
+    public Optional<Component> getById(int id, List<Component> components) {
+        List<Component> componentWithId = components.stream().filter(e-> e.getId() == id).collect(Collectors.toList());
+        return componentWithId.size() == 0 ? Optional.empty() : Optional.of(componentWithId.get(0));
     }
    
-     public String getXMLByProductID(String pid) {
-        Component cb = null;
-        Iterator iter = compList.iterator();
-        StringBuffer bufftmp = new StringBuffer();
-        bufftmp.append("<complist>");
-        while(iter.hasNext()){
-            cb=(Component)iter.next();
-            if(cb.getPid()== Integer.parseInt(pid)){
-                 bufftmp.append(cb.getXml());
-            }
-           
-        }
-        bufftmp.append("</complist>");        
+     public String getXMLByProductID(String pid, List<Component> components) {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("<complist>");
+
+        components.stream().filter(e-> e.getPid() == Integer.parseInt(pid)).map(e -> stringBuffer.append(e.getXml()));
+        stringBuffer.append("</complist>");
        
-        return bufftmp.toString();
+        return stringBuffer.toString();
        
     }
    
@@ -379,20 +283,5 @@ public class ComponentList {
     }
          
      }
-   
-   
-   
-    // a main used for testing, remember that a bean can be run
-    // without a container
-
- /*   public static void main(String[] args){
-        try{
-            ComponentList clb = new ComponentList();
-            System.out.println(clb.getXml());
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    } */
 }
 

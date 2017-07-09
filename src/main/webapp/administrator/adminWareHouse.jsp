@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" import="domain.* , tags.*"%>
+<%@ page import="java.util.List" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
@@ -24,9 +25,7 @@
 
 <jsp:include page="../includes/column_left_home.jsp" />
 
-
-
-<td width ="840" valign="top"> 
+<td width ="840" valign="top">
     <%--
     <jsp:useBean id="compFullList" class="domain.ComponentListt"  scope="application">
 
@@ -39,8 +38,8 @@
     --%>
     
     <% 
-        ComponentList compFullList = new ComponentList(
-                "jdbc:mysql://localhost/pcshop?user=root&password=sesame", 0);
+        List<Component> compFullList =
+                new ComponentList().componentFullList("jdbc:mysql://localhost/pcshop?user=root&password=sesame");
         request.setAttribute("compFullList", compFullList);
     %>
     <h2>The list of available components in the warehouse!</h2>
@@ -59,7 +58,7 @@
 
     <x:transform xslt="${compfulllist_xslt}">
         
-       <%= compFullList.getXml() %>
+       <%= ComponentList.getXml(compFullList) %>
 
     </x:transform>
     
