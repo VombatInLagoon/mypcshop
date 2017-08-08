@@ -118,48 +118,32 @@ public class ProductList {
     
 
     // search for a component by component ID
-
     public Product getById(int id) {
-	Product pb = null;
-	Iterator iter = productList.iterator();
-        
-	while(iter.hasNext()){
-	    pb=(Product)iter.next();
-	    if(pb.getId()== id){
-                return pb;
-	    }
-	}
-	return null;
-    }
-    
-    public String getNameById(String id) {
-	Product pb = null;
-	Iterator iter = productList.iterator();
-        
-	while(iter.hasNext()){
-	    pb=(Product)iter.next();
-	    if(pb.getId()== Integer.parseInt(id))
-                {
-                return pb.getName();
-	    }
-	}
-	return null;
-    }
-    
-    
-    
-    
-    // a main used for testing, remember that a bean can be run
-    // without a container
+        Product product;
+        Iterator iter = productList.iterator();
 
-    public static void main(String[] args){
-        try{
-	    ProductList plb = new ProductList();
-	    System.out.println(plb.getXml());
+        while(iter.hasNext()){
+            product=(Product)iter.next();
+            if(product.getId()== id){
+                return product;
+            }
         }
-        catch(Exception e){
-	    System.out.println(e.getMessage());
-        }
+        return null;
     }
+
+    public String getNameById(String id) {
+        Product product;
+        Iterator iter = productList.iterator();
+
+        while(iter.hasNext()){
+            product=(Product)iter.next();
+            if(product.getId() == Integer.parseInt(id))
+            {
+                return product.getName();
+            }
+        }
+        return null;
+    }
+    
 }
 

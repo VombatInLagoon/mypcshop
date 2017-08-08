@@ -23,35 +23,26 @@
 
 <jsp:include page="../includes/column_left_home.jsp" />
 
-
-
 <td width = "840" valign="top">
-    
-    
-     <jsp:useBean id="productList" class="domain.ProductList" scope="application">
 
+     <jsp:useBean id="productList" class="domain.ProductList" scope="application">
         Error, the bean should have been created in the servlet!
     </jsp:useBean>
 
     <jsp:useBean id="compList" class="domain.ComponentList" scope="application">
-
         Error , the bean should have been created in the servlet!
     </jsp:useBean>
 
 
     <h2> The List of Components of : <%= productList.getNameById(request.getParameter("productid")) %> </h2>
-    
 
     <form method="post" action="adminProduct.jsp">
         <input type="submit" name="back" value="Back" />
     </form>
-    
-    
+
     <c:set var="complist_xslt">
         <c:import url="complist_xslt_admin.xsl"/>
     </c:set>
-
-
 
     <x:transform xslt="${complist_xslt}">
 

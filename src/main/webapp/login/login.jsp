@@ -1,8 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 
 
-<jsp:include page="/includes/header.html" />
-<jsp:include page="/includes/column_left_home.jsp" />
+<jsp:include page="../includes/header.html" />
+<jsp:include page="../includes/column_left_home.jsp" />
 
 
 <!-- start the middle column -->
@@ -15,11 +15,11 @@
             </tr>
             <tr>
                 <th align="left">Username:</th>
-                <td align="left"><input type="text" name="j_username"></td>
+                <td align="left"><input type="text" name="j_username" required></td>
             </tr>
             <tr>
                 <th align="left">Password:</th>
-                <td align="left"><input type="password" name="j_password"></td>
+                <td align="left"><input type="password" name="j_password" required></td>
             </tr>
             <tr>
                 <th align="left"><input type="submit" value="Log In"></th>

@@ -1,0 +1,61 @@
+a:link    {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #663300}
+a:visited {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #333333}
+a:hover   {text-decoration: underline; color: #FFCC00}
+
+h1 {font-family: Courier ,Arial, sans-serif; font-size: 36px; color: #342D7E;
+    vertical-align: top; margin-top: 0px; margin-bottom: 9px}
+h2 {font-family: Arial, sans-serif; font-size: 24px; color: #663300;
+    vertical-align: top; margin-top: 0px; margin-bottom: 3px}
+h3 {font-family: Arial, sans-serif; font-size: 12px; color: #663300;
+    vertical-align: top; margin-top: 0px; margin-bottom: 3px}
+h4 {font-family: Arial, sans-serif; font-size: 12px; color: #663300;
+    vertical-align: top; margin-top: 3px; margin-bottom: 3px}
+
+p {font-family: Arial, sans-serif; font-size: 12px;
+    margin-top: 0px; margin-bottom: 9px; margin-right: 5px;}
+
+td {font-family: Arial, sans-serif; font-size: 12px;
+    margin-top: 0px; margin-bottom: 9px; margin-right: 5px}
+
+img { margin-top: 0px; margin-bottom: 3px; margin-right: 0px; margin-left: 0px; border: 0}
+
+ul {font-family: Arial, sans-serif; font-size: 12px}
+ol {font-family: Arial, sans-serif; font-size: 12px}
+li {font-family: Arial, sans-serif; font-size: 12px; margin-bottom: 3px}
+
+.copyright   {font-family: Arial, sans-serif; font-size: 11px}
+.normal      {font-family: Arial, sans-serif; margin-left: 0px}
+.times       {font-family: "Times New Roman", Times, serif}
+.identlevel  {margin-top: -12px; margin-bottom: -12px; margin-left: 18px}
+
+.tablebg { background: url('../images/baner.png') no-repeat right top;}
+
+
+.onlineshop{background:url('../images/mouse.jpg') no-repeat right bottom;}
+
+.admin {background: url('../images/manager.jpg') no-repeat right bottom;}
+
+.contact {background: url('../images/contactus.png') no-repeat right bottom;}
+
+.mainstyle {background-color: #FFF380}
+
+#columns {
+    width: 600px;
+}
+
+#columns .column {
+    position: relative;
+    width: 46%;
+    padding: 1%;
+    border: solid 1px #000;
+}
+
+#columns .left {
+    float: left;
+}
+
+#columns .right {
+    float: right;
+}
+
+.center {text-align: center;}

@@ -14,10 +14,6 @@
 <jsp:include page="../includes/column_left_home.jsp" />
 
 <td valign="top" >
-
     <h3>Your Profile has been updated successfully!</h3>
-
-    
-  
 </td>
 <jsp:include page="../includes/footer.jsp" />
