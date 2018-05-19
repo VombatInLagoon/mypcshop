@@ -1,36 +1,45 @@
-package helper;
+package org.amin.pcshop.helper;
+
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Message;
+import javax.mail.Address;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import java.util.Properties;
-import javax.mail.*;
-import javax.mail.internet.*;
+
 
 /**
- * This class acts as a helper to send email in the COntactUs section of the 
+ * This class acts as a helper to send email in the ContactUs section of the
  * Web site.
  * @author amin
  */
 public class MailUtilGmail {
 
-    public static void sendMail(String to, String from,
-                                String subject, String body, boolean bodyIsHTML) throws MessagingException {
+    public static void sendMail(final String to, final String from,
+                                final String subject, final String body,
+                                final boolean bodyIsHTML) throws MessagingException {
         // 1 - get a mail session
-        Properties props = new Properties();
-        props.put("mail.transport.protocol", "smtps");
-        props.put("mail.smtps.host", "smtp.gmail.com");
-        props.put("mail.smtps.port", 465);
-        props.put("mail.smtps.auth", "true");
-        props.put("mail.smtps.quitwait", "false");
-        Session session = Session.getDefaultInstance(props);
+        Properties properties = new Properties();
+        properties.put("mail.transport.protocol", "smtps");
+        properties.put("mail.smtps.host", "smtp.gmail.com");
+        properties.put("mail.smtps.port", 465);
+        properties.put("mail.smtps.auth", "true");
+        properties.put("mail.smtps.quitwait", "false");
+        Session session = Session.getDefaultInstance(properties);
         session.setDebug(true);
 
         // 2 - create a message
         Message message = new MimeMessage(session);
         message.setSubject(subject);
 
-        if (bodyIsHTML)
+        if (bodyIsHTML) {
             message.setContent(body, "text/html");
-        else
+        } else {
             message.setText(body);
+        }
 
         // 3 - address the message
         Address fromAddress = new InternetAddress(from);

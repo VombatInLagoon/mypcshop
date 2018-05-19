@@ -1,4 +1,4 @@
-package servlets;
+package org.amin.pcshop.servlets;
 
 import org.amin.pcshop.domain.Profile;
 

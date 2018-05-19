@@ -1,4 +1,4 @@
-package servlets;
+package org.amin.pcshop.servlets;
 /*
  * Shop.java
  *

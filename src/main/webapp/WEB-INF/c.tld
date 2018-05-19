@@ -13,7 +13,7 @@
 
   <validator>
     <description>
-        Provides core validation features for JSTL tags.
+        Provides core validation features for JSTL org.amin.pcshop.tags.
     </description>
     <validator-class>
         org.apache.taglibs.standard.tlv.JstlCoreTLV
@@ -358,7 +358,7 @@ true.
 
   <tag>
     <description>
-        Subtag of &lt;choose&gt; that follows &lt;when&gt; tags
+        Subtag of &lt;choose&gt; that follows &lt;when&gt; org.amin.pcshop.tags
         and runs only if all of the prior conditions evaluated to
         'false'
     </description>

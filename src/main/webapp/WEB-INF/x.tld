@@ -13,7 +13,7 @@
 
   <validator>
     <description>
-        Provides validation features for JSTL XML tags.
+        Provides validation features for JSTL XML org.amin.pcshop.tags.
     </description>
     <validator-class>
 	org.apache.taglibs.standard.tlv.JstlXmlTLV
@@ -168,7 +168,7 @@ javax.servlet.jsp.jstl.core.LoopTagStatus. This scoped variable has nested visib
 
   <tag>
     <description>
-	Subtag of &lt;choose&gt; that follows &lt;when&gt; tags
+	Subtag of &lt;choose&gt; that follows &lt;when&gt; org.amin.pcshop.tags
 	and runs only if all of the prior conditions evaluated to
 	'false'
     </description>

@@ -1,4 +1,4 @@
-package servlets;
+package org.amin.pcshop.servlets;
 
 
 import org.amin.pcshop.domain.Profile;
@@ -36,7 +36,7 @@ public class LoginProfileServlet extends HttpServlet {
             user.setPassword(request.getParameter("pw"));
             
             //The login method of the Profile class is used to check the
-            //User eligiblity to enter the profile change area!
+            //User eligibility to enter the profile change area!
             user = Profile.login(user);
             if (user.getValid()) {
                 HttpSession session = request.getSession(true);

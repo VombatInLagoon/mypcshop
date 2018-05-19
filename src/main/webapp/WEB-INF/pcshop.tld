@@ -9,7 +9,7 @@
     <tag>
         <name>shoppingcart</name>
         <tag-class>
-            tags.ShoppingCartTag
+            org.amin.pcshop.tags.ShoppingCartTag
         </tag-class>
         <body-content>empty</body-content>
         <small-icon/>
@@ -20,7 +20,7 @@
     <tag>
         <name>profile</name>
         <tag-class>
-            tags.ProfileTag
+            org.amin.pcshop.tags.ProfileTag
         </tag-class>
         <body-content>empty</body-content>
         <attribute>

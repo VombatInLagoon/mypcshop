@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package org.amin.pcshop.servlets;
 
 import org.amin.pcshop.helper.MailUtilGmail;
 import java.io.IOException;
@@ -36,10 +36,10 @@ public class ContactUsServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
                 // get parameters from the request
-        String firstName = request.getParameter("first_name");
+        final String firstName = request.getParameter("first_name");
         //String lastName = request.getParameter("last_name");
-        String emailAddress = request.getParameter("email");
-        String comments = request.getParameter("comments"); 
+        final String emailAddress = request.getParameter("email");
+        final String comments = request.getParameter("comments");
 
         
         
@@ -47,7 +47,7 @@ public class ContactUsServlet extends HttpServlet {
         String toUser = emailAddress;
         String fromPcShop = "email_list@murach.com";
         String subject = "Welcome to our email list";
-        String body = "Dear " + firstName+ ",\n\n" +
+        String body = "Dear " + firstName + ",\n\n" +
             "Thanks for your comment. We'll make sure to send " +
             "you announcements about new products and promotions.\n" +
             "Have a great day and thanks again!\n\n" +

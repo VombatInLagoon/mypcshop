@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>Shop</servlet-name>
-        <servlet-class>servlets.ShopServlet</servlet-class>
+        <servlet-class>org.amin.pcshop.servlets.ShopServlet</servlet-class>
         <!-- This init vale has been added to support the Administartor servlet -->
         <init-param>
             <param-name>CHECKOUT_PAGE</param-name>
@@ -67,7 +67,7 @@
     <!-- The Admin servlet is defined here -->
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
-        <servlet-class>servlets.AdminServlet</servlet-class>
+        <servlet-class>org.amin.pcshop.servlets.AdminServlet</servlet-class>
         <init-param>
             <param-name>ADMIN_WARE_HOUSE_PAGE</param-name>
             <param-value>adminWareHouse.jsp</param-value>
@@ -92,15 +92,15 @@
     </servlet>
     <servlet>
         <servlet-name>ContactUsServlet</servlet-name>
-        <servlet-class>servlets.ContactUsServlet</servlet-class>
+        <servlet-class>org.amin.pcshop.servlets.ContactUsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>servlets.LoginServlet</servlet-class>
+        <servlet-class>org.amin.pcshop.servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginProfileServlet</servlet-name>
-        <servlet-class>servlets.LoginProfileServlet</servlet-class>
+        <servlet-class>org.amin.pcshop.servlets.LoginProfileServlet</servlet-class>
     </servlet>
 
      <!-- servlet mappings -->

@@ -1,4 +1,4 @@
-package tags;
+package org.amin.pcshop.tags;
 
 import org.amin.pcshop.domain.Profile;
 

@@ -1,10 +1,18 @@
-package servlets;
+package org.amin.pcshop.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +22,6 @@ import org.amin.pcshop.domain.ComponentList;
 import org.amin.pcshop.domain.Product;
 import org.amin.pcshop.domain.ProductList;
 
-import javax.servlet.*;
-import java.sql.*;
 import java.util.HashMap;
 
 /**
@@ -36,7 +42,7 @@ public class AdminServlet extends HttpServlet {
     private static String addProductPage = null;
     private static String thankPage = null;
 
-    public void init(ServletConfig config) throws ServletException {
+    public void init(final ServletConfig config) throws ServletException {
         super.init(config);
 
         wareHousePage = config.getInitParameter("ADMIN_WARE_HOUSE_PAGE");
@@ -65,12 +71,9 @@ public class AdminServlet extends HttpServlet {
 
         try{
             compList = new ComponentList().componentList(jdbcURL);
-        }
-        catch(ClassNotFoundException e){
+        } catch(ClassNotFoundException e){
             throw new ServletException(e);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
+        } catch (SQLException e){
             e.printStackTrace();
         }
 

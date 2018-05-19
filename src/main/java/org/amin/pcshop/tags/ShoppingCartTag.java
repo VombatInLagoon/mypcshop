@@ -1,4 +1,4 @@
-package tags;
+package org.amin.pcshop.tags;
 
 import javax.servlet.jsp.tagext.*;
 import javax.servlet.jsp.*;
