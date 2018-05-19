@@ -6,7 +6,8 @@ package servlets;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import domain.*;
+
+import org.amin.pcshop.domain.*;
 
 /**
  * This is the main servlet of the application which controls almost 

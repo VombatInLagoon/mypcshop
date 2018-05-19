@@ -1,7 +1,7 @@
 package servlets;
 
 
-import domain.Profile;
+import org.amin.pcshop.domain.Profile;
 
 
 import java.util.HashMap;

@@ -4,7 +4,7 @@
  */
 package servlets;
 
-import helper.MailUtilGmail;
+import org.amin.pcshop.helper.MailUtilGmail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;

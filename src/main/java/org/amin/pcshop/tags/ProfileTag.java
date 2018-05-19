@@ -1,6 +1,6 @@
 package tags;
 
-import domain.*;
+import org.amin.pcshop.domain.Profile;
 
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;

@@ -1,6 +1,6 @@
 package servlets;
 
-import domain.*;
+import org.amin.pcshop.domain.Profile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

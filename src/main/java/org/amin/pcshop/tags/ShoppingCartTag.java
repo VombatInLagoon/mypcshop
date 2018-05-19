@@ -3,7 +3,7 @@ package tags;
 import javax.servlet.jsp.tagext.*;
 import javax.servlet.jsp.*;
 
-import domain.*;
+import org.amin.pcshop.domain.ShoppingCart;
 
 /**
  *  Generated tag class.

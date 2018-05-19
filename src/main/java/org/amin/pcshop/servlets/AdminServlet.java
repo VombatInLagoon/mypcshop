@@ -8,11 +8,14 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import domain.*;
-import domain.Product;
+
+import org.amin.pcshop.domain.Component;
+import org.amin.pcshop.domain.ComponentList;
+import org.amin.pcshop.domain.Product;
+import org.amin.pcshop.domain.ProductList;
+
 import javax.servlet.*;
 import java.sql.*;
-import java.util.Collection;
 import java.util.HashMap;
 
 /**
